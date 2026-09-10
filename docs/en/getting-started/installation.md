@@ -4,9 +4,26 @@
 pip install visualmetrics
 ```
 
-The base install is deliberately light - NumPy and SciPy - because every lab
-runs its own numerics. A regression, a HAC covariance matrix or a Monte Carlo
-size study all work without a heavier scientific stack.
+The base install pulls only NumPy, SciPy and `platformdirs`. With it you get
+the catalogue, search, the glossary, the proofs, the teaching material and the
+entire numeric engine - a regression, a HAC covariance matrix or a Monte Carlo
+size study all run without a heavier scientific stack, and even pandas is
+optional.
+
+Drawing a figure needs the `viz` extra. Ask for one without it and the error
+names the package and the exact install command:
+
+```pycon
+>>> vm.lab("inference.power")
+MissingDependencyError: 'plotly' is required for interactive figures but is not
+installed. Install the 'viz' extra:  pip install "visualmetrics[viz]"
+```
+
+Most people want the application, which brings the figures with it:
+
+```bash
+pip install "visualmetrics[gui]"
+```
 
 ## Extras
 
@@ -25,7 +42,7 @@ pip install "visualmetrics[all]"    # everything
 | `ai` | scikit-learn, SHAP |
 | `proofs` | Manim, for exported proof animations |
 | `notebook` | ipywidgets controls |
-| `data` | openpyxl, pyarrow loaders |
+| `data` | pandas, openpyxl, pyarrow loaders |
 | `export` | kaleido, for static image export |
 
 A missing extra disables only what needs it. The error names the package and

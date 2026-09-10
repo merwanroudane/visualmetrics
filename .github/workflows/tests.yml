@@ -40,17 +40,35 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev,gui,viz]"
 
-      - name: Base install works without the optional extras
+      - name: Base install is usable, and names what it is missing
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.11'
         run: |
           python -m venv /tmp/bare
           /tmp/bare/bin/pip install --upgrade pip
           /tmp/bare/bin/pip install -e .
           /tmp/bare/bin/python -c "
+          import numpy as np
           import visualmetrics as vm
-          result = vm.lab('regression.simple_linear', seed=1)
-          assert result.panels and result.metrics
-          print('base install ran a lab with', len(result.metrics), 'metrics')
+          from visualmetrics.backends.linear import ols
+          from visualmetrics.core.exceptions import MissingDependencyError
+
+          # What a base install must still do.
+          assert len(vm.list_concepts()) > 40
+          assert vm.search('power')
+          assert vm.glossary()
+          assert vm.proof('regression.fwl.theorem').steps
+          X = np.column_stack([np.ones(50), np.arange(50.0)])
+          assert ols(X @ np.array([1.0, 2.0]), X).coefficients.shape == (2,)
+
+          # And what it must refuse to do, gracefully.
+          try:
+              vm.lab('inference.power')
+          except MissingDependencyError as error:
+              assert error.package == 'plotly' and error.extra == 'viz'
+              assert 'pip install' in error.install_command
+          else:
+              raise AssertionError('a figure was drawn without the viz extra')
+          print('base install works, and reports the viz extra by name')
           "
 
       - name: Import stays lazy

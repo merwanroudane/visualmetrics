@@ -101,13 +101,28 @@ falls back to English in Arabic and French. See
 pip install visualmetrics
 ```
 
-The base install is deliberately light - NumPy and SciPy - and every lab runs
-its own numerics, so the core works without heavier scientific stacks.
+The base install pulls only NumPy, SciPy and `platformdirs`. That gives you the
+catalogue, search in three languages, the glossary, the proofs, the learning
+objectives, the self-checks and the whole numeric engine - every estimator, test
+and covariance matrix.
+
+**Figures need the `viz` extra**, and asking for one without it raises an error
+naming the package and the install command rather than crashing. Most people
+want the application:
 
 ```bash
-pip install "visualmetrics[gui]"      # the interactive application
-pip install "visualmetrics[all]"      # everything, including optional backends
+pip install "visualmetrics[gui]"
 ```
+
+```bash
+pip install "visualmetrics[viz]"      # figures, from the API or a notebook
+pip install "visualmetrics[all]"      # every extra that installs from wheels
+```
+
+`all` deliberately excludes the `proofs` extra: Manim needs cairo and ffmpeg on
+the system, and folding it in would make `pip install visualmetrics[all]` fail
+on a clean machine. Install it separately if you want exported proof
+animations.
 
 From source:
 

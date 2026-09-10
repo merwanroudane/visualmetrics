@@ -87,7 +87,20 @@ class Dataset:
         return np.column_stack(cols)
 
     def to_frame(self):
-        import pandas as pd
+        """The generated columns as a pandas DataFrame.
+
+        pandas is not a hard dependency - one convenience method does not
+        justify putting it in every install - so this reports the extra to
+        install rather than failing with an import error.
+        """
+        try:
+            import pandas as pd
+        except ImportError as exc:
+            from ...core.exceptions import MissingDependencyError
+
+            raise MissingDependencyError(
+                "pandas", "data", feature="converting a dataset to a DataFrame"
+            ) from exc
 
         return pd.DataFrame(self.columns)
 

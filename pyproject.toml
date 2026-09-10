@@ -8,7 +8,8 @@ version = "0.1.0"
 description = "Multilingual interactive visual laboratory for statistics, econometrics, causal inference and AI"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Merwan Roudane", email = "merwanroudane920@gmail.com" }]
 maintainers = [{ name = "Merwan Roudane", email = "merwanroudane920@gmail.com" }]
 keywords = [
@@ -19,7 +20,6 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Education",
   "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: MIT License",
   "Natural Language :: Arabic",
   "Natural Language :: English",
   "Natural Language :: French",
@@ -31,10 +31,11 @@ classifiers = [
   "Topic :: Education",
   "Topic :: Scientific/Engineering :: Visualization",
 ]
+# Deliberately small: every lab computes its own numerics, so a base install
+# needs nothing beyond arrays, distributions and a place to put the config.
 dependencies = [
   "numpy>=1.24",
   "scipy>=1.10",
-  "pandas>=2.0",
   "platformdirs>=3.0",
 ]
 
@@ -47,25 +48,31 @@ causal = ["networkx>=3.0", "dowhy>=0.11", "econml>=0.14"]
 ai = ["scikit-learn>=1.3", "shap>=0.44", "interpret>=0.5"]
 proofs = ["manim>=0.18"]
 notebook = ["ipywidgets>=8.0", "plotly>=5.18"]
-data = ["openpyxl>=3.1", "pyarrow>=14.0", "pyreadstat>=1.2"]
+data = ["pandas>=2.0", "openpyxl>=3.1", "pyarrow>=14.0", "pyreadstat>=1.2"]
 export = ["kaleido>=0.2"]
 dev = [
   "pytest>=8.0", "pytest-cov>=4.1", "hypothesis>=6.90",
   "ruff>=0.4", "mypy>=1.8", "pre-commit>=3.6", "build>=1.0",
 ]
 docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.24", "mkdocs-static-i18n>=1.2", "pymdown-extensions>=10.0"]
+# Everything that installs from wheels without a system toolchain. Manim (the
+# `proofs` extra) needs cairo and ffmpeg, so it is deliberately left out of
+# `all` rather than making `pip install visualmetrics[all]` fail on a clean
+# machine.
 all = [
   "nicegui>=1.4", "plotly>=5.18", "matplotlib>=3.7", "sympy>=1.12",
   "statsmodels>=0.14", "linearmodels>=4.31", "arch>=6.0",
   "networkx>=3.0", "scikit-learn>=1.3", "shap>=0.44",
-  "ipywidgets>=8.0", "openpyxl>=3.1", "pyarrow>=14.0", "kaleido>=0.2",
+  "ipywidgets>=8.0", "pandas>=2.0", "openpyxl>=3.1", "pyarrow>=14.0",
+  "kaleido>=0.2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/merwanroudane/visualmetrics"
 Repository = "https://github.com/merwanroudane/visualmetrics"
 Issues = "https://github.com/merwanroudane/visualmetrics/issues"
-Documentation = "https://github.com/merwanroudane/visualmetrics/tree/main/docs"
+Documentation = "https://merwanroudane.github.io/visualmetrics/"
+Changelog = "https://github.com/merwanroudane/visualmetrics/blob/main/CHANGELOG.md"
 
 [project.scripts]
 visualmetrics = "visualmetrics.cli:main"
