@@ -35,7 +35,7 @@ YAML_SUFFIXES = frozenset({".yaml", ".yml"})
 def _yaml():
     try:
         import yaml
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         raise MissingDependencyError("pyyaml", "export", feature="YAML configurations") from exc
     return yaml
 

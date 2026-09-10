@@ -4,13 +4,30 @@ from __future__ import annotations
 
 from typing import Any
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...data.generators.ml import blobs
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "kmeans", "silhouette"]
 
@@ -320,7 +337,7 @@ class ClusteringLab(LabBase):
         return rows
 
     def _cluster_figure(self, ctx, X, model, truth, p):
-        go = P.require_plotly()
+        P.require_plotly()
         fig = ctx.figure(
             "labs.clu.figure.clusters",
             xaxis_title="x1", yaxis_title="x2", height=450,

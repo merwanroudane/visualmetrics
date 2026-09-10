@@ -1,0 +1,107 @@
+site_name: VisualMetrics
+site_description: >-
+  An interactive visual laboratory for statistics, econometrics, causal
+  inference and machine learning - in English, Arabic and French.
+site_url: https://merwanroudane.github.io/visualmetrics/
+repo_url: https://github.com/merwanroudane/visualmetrics
+repo_name: merwanroudane/visualmetrics
+copyright: MIT licensed. Built by Dr Merwan Roudane.
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  # The documentation is trilingual for the same reason the application is:
+  # a reader should not have to switch language to read about a tool that
+  # speaks theirs.
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: ar
+          name: العربية
+          build: true
+        - locale: fr
+          name: Français
+          build: true
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            docstring_style: numpy
+            members_order: source
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: getting-started/installation.md
+      - The GUI: getting-started/gui.md
+      - The Python API: getting-started/api.md
+      - Notebooks: getting-started/notebooks.md
+  - Principles:
+      - Evidence types: principles/evidence.md
+      - Animations must explain themselves: principles/animations.md
+      - What the catalogue promises: principles/catalogue.md
+      - Accessibility: principles/accessibility.md
+  - Catalogue:
+      - Concepts: catalogue/concepts.md
+      - Scenarios: catalogue/scenarios.md
+      - Proofs: catalogue/proofs.md
+      - Learning paths: catalogue/paths.md
+  - Languages:
+      - Working in three languages: languages/index.md
+      - Adding a translation: languages/contributing.md
+  - Reference:
+      - Public API: reference/api.md
+      - Writing a lab: reference/writing-a-lab.md
+      - Writing a proof: reference/writing-a-proof.md
+      - Exporting: reference/exporting.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+  - Design blueprint: BLUEPRINT.md

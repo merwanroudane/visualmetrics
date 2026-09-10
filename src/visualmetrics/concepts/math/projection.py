@@ -4,12 +4,28 @@ from __future__ import annotations
 
 from typing import Any
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...backends import linear as LM
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC"]
 
@@ -314,11 +330,9 @@ class ProjectionLab(LabBase):
         return fig
 
     def _gram_schmidt_figure(self, ctx, a, b):
-        go = P.require_plotly()
+        P.require_plotly()
         u1 = a / max(np.linalg.norm(a), 1e-12)
         proj = (b @ u1) * u1
-        w = b - proj
-        u2 = w / max(np.linalg.norm(w), 1e-12)
         fig = ctx.figure("labs.proj.figure.gram_schmidt", height=460)
         P.add_arrow3d(fig, [0, 0, 0], a, "a", "baseline", theme=ctx.theme)
         P.add_arrow3d(fig, [0, 0, 0], b, "b", "secondary", theme=ctx.theme)

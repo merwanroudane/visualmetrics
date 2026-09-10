@@ -1,0 +1,61 @@
+name: New concept
+description: Suggest a concept the catalogue should cover.
+title: "[concept] "
+labels: ["enhancement", "concept"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Canonical scientific name
+      description: >-
+        The universal name, not a local course label.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - Mathematical foundations
+        - Probability and random variables
+        - Descriptive statistics
+        - Inferential statistics
+        - Regression and linear models
+        - Econometrics
+        - Time series econometrics
+        - Panel data econometrics
+        - Causal inference
+        - Multivariate statistics
+        - Spatial econometrics
+        - Machine learning
+        - Deep learning
+        - Modern AI
+        - Explainable AI
+    validations:
+      required: true
+
+  - type: textarea
+    id: insight
+    attributes:
+      label: What should a reader see that a textbook cannot show them?
+      description: >-
+        The reason for a lab rather than a page. What moves, and what does the
+        movement reveal?
+    validations:
+      required: true
+
+  - type: textarea
+    id: failure
+    attributes:
+      label: How does the method fail?
+      description: >-
+        Every lab must show a violation or counterexample, not only the case
+        that works. Which one would this concept use?
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References

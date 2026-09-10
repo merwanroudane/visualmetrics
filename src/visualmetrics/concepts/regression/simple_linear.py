@@ -6,11 +6,6 @@ from typing import Any
 
 from scipy import stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...data.generators.regression import (
     ERROR_DISTRIBUTIONS,
@@ -20,6 +15,28 @@ from ...data.generators.regression import (
     simple_regression,
 )
 from ...simulation.monte_carlo import monte_carlo
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC"]
 
@@ -137,7 +154,7 @@ class SimpleRegressionLab(LabBase):
         res = LabResult()
         n = int(p["n"])
         data = self._generate(p, n, state.seed)
-        x, y = data["x"], data["y"]
+        y = data["y"]
         X = data.matrix("x")
         fit = LM.ols(y, X, names=("const", "x"), cov_type=str(p["cov_type"]))
         fit.metadata["X"] = X

@@ -10,7 +10,7 @@ from __future__ import annotations
 import importlib
 import importlib.util
 from dataclasses import dataclass
-from functools import lru_cache
+from functools import cache
 
 __all__ = [
     "Capability",
@@ -62,7 +62,7 @@ CAPABILITIES: dict[str, Capability] = {
 }
 
 
-@lru_cache(maxsize=None)
+@cache
 def probe(name: str) -> tuple[bool, str]:
     """Return ``(available, version_or_reason)`` for a capability.
 
@@ -74,7 +74,7 @@ def probe(name: str) -> tuple[bool, str]:
         return False, "not installed"
     try:
         module = importlib.import_module(module_name)
-    except Exception as exc:  # noqa: BLE001 - a broken build must not crash us
+    except Exception as exc:
         return False, f"installed but unusable: {type(exc).__name__}"
     return True, str(getattr(module, "__version__", "unknown"))
 

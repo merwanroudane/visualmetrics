@@ -6,12 +6,29 @@ from typing import Any
 
 from scipy import stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "SHAPES"]
 
@@ -239,7 +256,7 @@ class DescriptiveLab(LabBase):
         grid = np.linspace(float(np.min(x)), float(np.max(x)), 512)
         try:
             density = stats.gaussian_kde(x)(grid)
-        except Exception:  # noqa: BLE001 - a singular covariance means no structure
+        except Exception:
             return 1
         peaks = [
             i for i in range(1, len(grid) - 1)

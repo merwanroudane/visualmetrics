@@ -6,12 +6,30 @@ from typing import Any
 
 from scipy import stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, pct, ref, scenario,
-    seed_control, select, slider, toggle,
-)
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    pct,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "adjust"]
 
@@ -269,7 +287,7 @@ class MultipleTestingLab(LabBase):
         truth = np.zeros(m, dtype=bool)
         truth[:k] = True
         means = np.where(truth, d, 0.0)
-        fwer = {meth: 0 for meth in METHODS}
+        fwer = dict.fromkeys(METHODS, 0)
         fdr = {meth: [] for meth in METHODS}
         power = {meth: [] for meth in METHODS}
         for r in range(reps):

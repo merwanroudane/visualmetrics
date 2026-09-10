@@ -57,10 +57,9 @@ class TestFigureExport:
             export_result(result, tmp_path / "figure.tiff")
 
     def test_static_formats_report_the_missing_dependency_by_name(self, result, tmp_path):
-        pytest.importorskip
         try:
             import kaleido  # noqa: F401
-        except Exception:  # noqa: BLE001
+        except Exception:
             from visualmetrics.core.exceptions import MissingDependencyError
 
             with pytest.raises(MissingDependencyError) as excinfo:
@@ -174,7 +173,7 @@ class TestAnimationExport:
     def test_frame_export_always_writes_the_commentary_file(self, result, tmp_path):
         try:
             import kaleido  # noqa: F401
-        except Exception:  # noqa: BLE001
+        except Exception:
             pytest.skip("kaleido is not installed; static frames cannot be rendered")
         written = export_animation_frames(result.animations[0], tmp_path / "frames")
         assert any(p.name.endswith("-explanation.json") for p in written)

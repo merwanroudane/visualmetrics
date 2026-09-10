@@ -4,15 +4,30 @@ from __future__ import annotations
 
 from typing import Any
 
-from scipy import stats
-
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC"]
 
@@ -332,8 +347,8 @@ class SystemsLab(LabBase):
         XtX = np.zeros((k1 + k2, k1 + k2))
         Xty = np.zeros(k1 + k2)
         blocks = [(X1, y1), (X2, y2)]
-        for i, (Xi, yi) in enumerate(blocks):
-            for j, (Xj, yj) in enumerate(blocks):
+        for i, (Xi, _yi) in enumerate(blocks):
+            for j, (Xj, _yj) in enumerate(blocks):
                 r0 = 0 if i == 0 else k1
                 c0 = 0 if j == 0 else k1
                 XtX[r0:r0 + Xi.shape[1], c0:c0 + Xj.shape[1]] += sigma_inv[i, j] * (Xi.T @ Xj)

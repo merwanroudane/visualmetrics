@@ -1,0 +1,91 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.11", "3.12", "3.13"]
+        include:
+          # The GUI and the RTL handling are the parts most likely to differ by
+          # platform, so one Windows and one macOS job run the whole suite too.
+          - os: windows-latest
+            python: "3.11"
+          - os: macos-latest
+            python: "3.12"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,gui,viz]"
+
+      - name: Base install works without the optional extras
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.11'
+        run: |
+          python -m venv /tmp/bare
+          /tmp/bare/bin/pip install --upgrade pip
+          /tmp/bare/bin/pip install -e .
+          /tmp/bare/bin/python -c "
+          import visualmetrics as vm
+          result = vm.lab('regression.simple_linear', seed=1)
+          assert result.panels and result.metrics
+          print('base install ran a lab with', len(result.metrics), 'metrics')
+          "
+
+      - name: Import stays lazy
+        run: |
+          python -c "
+          import sys, visualmetrics
+          eager = [m for m in sys.modules if m.startswith('visualmetrics.concepts.')
+                   and not m.endswith('_kit')]
+          assert not eager, f'importing the package eagerly loaded {eager}'
+          print('no labs imported at package import time')
+          "
+
+      - name: Tests
+        run: pytest -m "not slow" --cov=visualmetrics --cov-report=xml -q
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage.xml
+
+  full-sweep:
+    name: every lab, every scenario
+    runs-on: ubuntu-latest
+    # The sweep runs about 500 scenarios, so it is kept off the per-push path
+    # and run on main and on demand.
+    if: github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,gui,viz]"
+      - run: pytest -m slow -q

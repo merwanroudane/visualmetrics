@@ -14,12 +14,12 @@ from scipy import stats
 
 from .._kit import (
     AnimationStep,
+    Domain,
     EvidenceType,
     LabBase,
     LabResult,
     LabState,
     P,
-    Domain,
     animation,
     build_frames,
     context,

@@ -70,7 +70,7 @@ def lab_page(concept_id: str, session: Session, rerender: Any) -> None:
                 view = build_lab_view(
                     result, translator=session.translator(), precision=session.precision
                 )
-            except Exception as exc:  # noqa: BLE001 - a failed run must stay on screen
+            except Exception as exc:
                 output.clear()
                 with output:
                     _render_failure(exc, tr)
@@ -179,7 +179,7 @@ def _render_comparison(session: Session, lab: Any, view: Any, tr: Any) -> None:
             lab.run(other_state), translator=session.translator(),
             precision=session.precision,
         )
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         _render_failure(exc, tr)
         return
 
@@ -303,7 +303,7 @@ def _export_dialog(session: Session, view: Any, tr: Any) -> None:
                 )
                 ui.notify(tr.t("export.written", "Written to {path}", path=str(path)))
                 dialog.close()
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 ui.notify(str(exc), type="negative")
 
         with ui.row().classes("justify-end gap-2 w-full"):

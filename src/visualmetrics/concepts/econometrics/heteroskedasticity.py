@@ -4,16 +4,32 @@ from __future__ import annotations
 
 from typing import Any
 
-from scipy import stats
-
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, pct, ref, scenario,
-    seed_control, select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...data.generators.regression import HETERO_TYPES, simple_regression
 from ...simulation.monte_carlo import monte_carlo
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    pct,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC"]
 
@@ -335,7 +351,7 @@ class HeteroskedasticityLab(LabBase):
                     w = self._wls(y, X, base)
                     if float(w.pvalues[1]) < alpha:
                         wls_count += 1
-                except Exception:  # noqa: BLE001
+                except Exception:
                     pass
         out = {k: v / reps for k, v in counts.items()}
         if p["show_wls"]:

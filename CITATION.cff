@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "VisualMetrics: an interactive visual laboratory for statistics, econometrics, causal inference and machine learning"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: Roudane
+    given-names: Merwan
+    email: merwanroudane920@gmail.com
+repository-code: "https://github.com/merwanroudane/visualmetrics"
+url: "https://github.com/merwanroudane/visualmetrics"
+abstract: >-
+  VisualMetrics is a trilingual (English, Arabic, French) interactive visual
+  laboratory for statistics, statistical inference, econometrics, causal
+  inference, machine learning and modern AI. Every figure and animation
+  declares the kind of evidence it provides, every animation explains itself
+  frame by frame, and every proof states what it does not establish.
+keywords:
+  - statistics
+  - econometrics
+  - causal inference
+  - machine learning
+  - statistical education
+  - data visualization
+  - Arabic
+  - French
+license: MIT
+version: 0.1.0

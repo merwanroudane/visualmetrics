@@ -21,5 +21,5 @@ def discover_plugins() -> Iterator[tuple[str, Any]]:
     for ep in eps:
         try:
             yield ep.name, ep.load()
-        except Exception:  # noqa: BLE001 - a broken plugin must not break startup
+        except Exception:
             continue

@@ -8,8 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from scipy import stats
-
+from ...simulation.random import rng
 from .._kit import (
     AnimationStep,
     Domain,
@@ -32,7 +31,6 @@ from .._kit import (
     slider,
     toggle,
 )
-from ...simulation.random import rng
 
 __all__ = ["LAB", "SPEC", "PARENTS", "draw_parent"]
 
@@ -79,6 +77,37 @@ def draw_parent(gen, parent: str, size, p: float = 0.3) -> np.ndarray:
     if parent == "cauchy":
         return gen.standard_cauchy(size)
     return gen.standard_normal(size)
+
+
+def parent_tail_probability(parent: str, threshold: float = 0.5, p: float = 0.3) -> float:
+    """P(X > threshold) for each population, computed exactly.
+
+    The law of large numbers is a statement about convergence to a *population*
+    constant, so the target line has to be that constant. Estimating it from the
+    same draws would quietly compare the sample with itself.
+    """
+    from scipy import stats
+
+    if parent == "normal":
+        return float(stats.norm.sf(threshold))
+    if parent == "uniform":
+        return float(min(max(1.0 - threshold, 0.0), 1.0))
+    if parent == "bernoulli":
+        # The draws are 0 or 1, so exceeding 0.5 means drawing a one.
+        return float(p) if threshold < 1.0 else 0.0
+    if parent == "exponential":
+        return float(stats.expon.sf(threshold))
+    if parent == "lognormal":
+        return float(stats.lognorm.sf(threshold, s=1.0, scale=1.0))
+    if parent == "student_t3":
+        return float(stats.t.sf(threshold, df=3.0))
+    if parent == "pareto":
+        # draw_parent returns gen.pareto(1.5) + 1, which is a Pareto with
+        # shape 1.5 and scale 1 supported on [1, inf).
+        return float(stats.pareto.sf(threshold, b=1.5)) if threshold >= 1.0 else 1.0
+    if parent == "cauchy":
+        return float(stats.cauchy.sf(threshold))
+    return float(stats.norm.sf(threshold))
 
 
 def parent_mean(parent: str, p: float = 0.3) -> float:
@@ -164,9 +193,8 @@ class LLNLab(LabBase):
             running = self._running_variance(draws)
             target = self._target_variance(parent, bp)
         elif stat == "proportion":
-            running = np.cumsum(draws > (0.5 if parent != "bernoulli" else 0.5), axis=1) / np.arange(
-                1, n_max + 1)
-            target = float(np.mean(draws > 0.5))
+            running = np.cumsum(draws > 0.5, axis=1) / np.arange(1, n_max + 1)
+            target = parent_tail_probability(parent, 0.5, bp)
         else:
             running = np.cumsum(draws, axis=1) / np.arange(1, n_max + 1)
             target = parent_mean(parent, bp)

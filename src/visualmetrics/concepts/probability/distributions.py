@@ -6,12 +6,29 @@ from typing import Any
 
 from scipy import stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "FAMILIES", "build_distribution"]
 
@@ -364,7 +381,7 @@ class DistributionLab(LabBase):
     def _animation(self, ctx, fam, p, seed):
         go = P.require_plotly()
         if not fam.params:
-            key, lo, hi = "sample_size", 10, 2000
+            lo, hi = 10, 2000
             values = np.unique(np.round(np.geomspace(lo, hi, 16)).astype(int))
             frames, steps = [], []
             _, dist = build_distribution(fam.name, p)

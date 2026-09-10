@@ -91,7 +91,7 @@ def _make_caller(concept_id: str) -> Any:
         spec = registry.get(concept_id)
         controls = ", ".join(c.id for c in spec.controls) or "(see vm.concept(...))"
         spec_doc = f"\n\nControls: {controls}"
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
     call.__name__ = concept_id.rsplit(".", 1)[-1]
     call.__doc__ = f"Run the {concept_id!r} lab.{spec_doc}"

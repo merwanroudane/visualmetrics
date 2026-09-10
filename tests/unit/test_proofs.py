@@ -22,15 +22,15 @@ WRITTEN = [e.id for e in list_proofs(written_only=True)]
 
 
 def make(**kw) -> ProofSpec:
-    base = dict(
-        id="t.proof",
-        kind=EvidenceType.FORMAL_PROOF,
-        title="t",
-        claim="c",
-        conclusion="c",
-        steps=(ProofStep("a", "statement"),),
-        limitations="does not establish anything else",
-    )
+    base = {
+        "id": "t.proof",
+        "kind": EvidenceType.FORMAL_PROOF,
+        "title": "t",
+        "claim": "c",
+        "conclusion": "c",
+        "steps": (ProofStep("a", "statement"),),
+        "limitations": "does not establish anything else",
+    }
     base.update(kw)
     return ProofSpec(**base)
 

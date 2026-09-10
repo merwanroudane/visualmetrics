@@ -192,7 +192,7 @@ def _render_references(view: Any, translator: Any) -> None:
 
     try:
         spec = registry.lab(view.concept_id).spec
-    except Exception:  # noqa: BLE001
+    except Exception:
         return
     for reference in spec.references:
         with ui.row().classes("items-baseline gap-2"):

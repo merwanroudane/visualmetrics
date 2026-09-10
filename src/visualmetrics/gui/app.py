@@ -19,7 +19,8 @@ from typing import Any
 from ..core.exceptions import MissingDependencyError
 
 try:  # pragma: no cover - exercised by the missing-dependency path
-    from nicegui import app as _nicegui_app, ui
+    from nicegui import app as _nicegui_app
+    from nicegui import ui
 except ImportError as exc:  # pragma: no cover
     raise MissingDependencyError("nicegui", "gui", feature="the interactive GUI") from exc
 
@@ -51,12 +52,12 @@ def _session_for_request() -> Session:
     stored: dict[str, Any] = {}
     try:
         stored = dict(_nicegui_app.storage.tab.get(SESSION_KEY) or {})
-    except Exception:  # noqa: BLE001 - storage is unavailable outside a client
+    except Exception:
         stored = {}
     session = Session.from_dict(stored) if stored else _session_from_config()
     try:
         query = dict(ui.context.client.request.query_params)
-    except Exception:  # noqa: BLE001 - no request context in tests
+    except Exception:
         query = {}
     if query:
         session = session_from_query(query, base=session)
@@ -79,7 +80,7 @@ def _session_from_config() -> Session:
 def _persist(session: Session) -> None:
     try:
         _nicegui_app.storage.tab[SESSION_KEY] = session.to_dict()
-    except Exception:  # noqa: BLE001 - nothing to persist to; not fatal
+    except Exception:
         pass
 
 

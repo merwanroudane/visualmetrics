@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import threading
-from functools import lru_cache
+from functools import cache
 from importlib import resources
 from typing import Any
 
@@ -47,7 +47,7 @@ _lock = threading.RLock()
 _current: Translator | None = None
 
 
-@lru_cache(maxsize=None)
+@cache
 def _load_bundle(language: str) -> dict[str, Any]:
     """Load and flatten every resource file for one language."""
     bundle: dict[str, Any] = {}

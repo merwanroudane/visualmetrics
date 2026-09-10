@@ -6,14 +6,30 @@ from typing import Any
 
 from scipy import stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, pct, ref, scenario,
-    seed_control, select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...data.generators.regression import iv_design
 from ...simulation.monte_carlo import monte_carlo
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC"]
 
@@ -253,14 +269,14 @@ class IVLab(LabBase):
                 i = LM.iv_2sls(d["y"], X, Z, endog_index=1, names=("const", "x"))
                 iv_val = i.second_stage.coef("x")
                 f_val = i.first_stage_f
-            except Exception:  # noqa: BLE001
+            except Exception:
                 iv_val, f_val = np.nan, np.nan
             return {"ols": o.coef("x"), "iv": iv_val, "first_stage_f": f_val}
 
         return monte_carlo(experiment, reps, seed).draws
 
     def _dag_figure(self, ctx, p):
-        go = P.require_plotly()
+        P.require_plotly()
         fig = ctx.figure("labs.iv.figure.dag", height=340, showlegend=False)
         nodes = {"Z": (0.0, 0.0), "X": (1.0, 0.0), "Y": (2.0, 0.0), "U": (1.5, 1.0)}
         for name, (nx, ny) in nodes.items():

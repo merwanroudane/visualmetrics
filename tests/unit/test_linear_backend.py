@@ -128,10 +128,10 @@ class TestProjection:
         _, X, _ = design
         P, M = projection_matrices(X)
         n = X.shape[0]
-        assert P @ P == pytest.approx(P, abs=1e-9)
-        assert M @ M == pytest.approx(M, abs=1e-9)
-        assert P + M == pytest.approx(np.eye(n), abs=1e-9)
-        assert P @ M == pytest.approx(np.zeros((n, n)), abs=1e-9)
+        assert pytest.approx(P, abs=1e-9) == P @ P
+        assert pytest.approx(M, abs=1e-9) == M @ M
+        assert pytest.approx(np.eye(n), abs=1e-9) == P + M
+        assert pytest.approx(np.zeros((n, n)), abs=1e-9) == P @ M
         assert np.trace(P) == pytest.approx(X.shape[1], abs=1e-9)
 
     def test_partial_out_reproduces_the_multiple_regression_slope(self, design):

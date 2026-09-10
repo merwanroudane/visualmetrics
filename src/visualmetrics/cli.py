@@ -52,7 +52,7 @@ def build_doctor_report() -> dict[str, Any]:
         try:
             module = __import__(name)
             core[name] = getattr(module, "__version__", "unknown")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             core[name] = f"MISSING ({type(exc).__name__})"
 
     return {
@@ -233,6 +233,7 @@ def _cmd_proof(args: argparse.Namespace) -> int:
 
 def _cmd_run(args: argparse.Namespace) -> int:
     import visualmetrics as vm
+
     from .core.controls import ControlKind
 
     spec = vm.concept(args.concept)
@@ -250,7 +251,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
                                                         ControlKind.MULTISELECT):
             try:
                 value = control.coerce(value)
-            except Exception:  # noqa: BLE001 - fall back to the raw string
+            except Exception:
                 pass
         params[key] = value
 
@@ -452,7 +453,7 @@ def main(argv: list[str] | None = None) -> int:
     except KeyboardInterrupt:  # pragma: no cover
         print("\ninterrupted", file=sys.stderr)
         return 130
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         from .core.exceptions import VisualMetricsError
 
         if isinstance(exc, VisualMetricsError):

@@ -345,7 +345,7 @@ def for_concept(concept_id: str) -> tuple[Misconception, ...]:
     try:
         spec = registry.lab(concept_id).spec
         ids.extend(spec.misconceptions)
-    except Exception:  # noqa: BLE001 - planned or unknown concepts simply have none
+    except Exception:
         pass
     for entry in MISCONCEPTIONS.values():
         if concept_id in entry.concept_ids and entry.id not in ids:

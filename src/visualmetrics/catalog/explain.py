@@ -58,7 +58,7 @@ def explain_concept(concept_id: str, *, level: str | None = None,
         for prereq in spec.prerequisites:
             try:
                 lines.append(f"  - {tr.t(registry.get(prereq).title_key)}  [{prereq}]")
-            except Exception:  # noqa: BLE001
+            except Exception:
                 lines.append(f"  - {prereq}")
         lines.append("")
 

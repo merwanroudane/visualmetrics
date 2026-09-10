@@ -243,7 +243,6 @@ def acf(x: np.ndarray, nlags: int = 20) -> np.ndarray:
     """Sample autocorrelation function (biased/standard estimator)."""
     x = np.asarray(x, dtype=float).ravel()
     x = x - x.mean()
-    n = x.size
     denom = float(x @ x)
     out = np.ones(nlags + 1)
     for lag in range(1, nlags + 1):

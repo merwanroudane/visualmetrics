@@ -85,7 +85,20 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
-ignore = ["E501", "B008", "RUF001", "RUF002", "RUF003", "SIM108"]
+ignore = [
+  "E501",      # line length is handled by the formatter
+  "B008",      # function calls in defaults are how the control constructors read
+  "RUF001",    # Arabic and French text legitimately contains "ambiguous" characters
+  "RUF002",
+  "RUF003",
+  "SIM108",    # an if/else is often clearer than a ternary in teaching code
+  "RUF022",    # __all__ is grouped by meaning here, not alphabetically
+  "UP042",     # str, Enum is deliberate: the values are serialised as strings
+  "RUF005",    # [a] + rest reads better than unpacking in numeric assembly code
+  "RUF046",    # int(round(x)) states the intent even where round already returns int
+  "RUF059",    # unpacking names every field, which documents the tuple being read
+  "SIM105",    # an explicit try/except/pass says more than contextlib.suppress here
+]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["B011"]

@@ -6,13 +6,31 @@ from typing import Any
 
 from scipy import optimize, stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, pct, ref, scenario,
-    seed_control, select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...simulation.random import rng
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    pct,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "fit_binary"]
 
@@ -281,7 +299,7 @@ class BinaryChoiceLab(LabBase):
             try:
                 out["ame_logit"].append(float(fit_binary(y, X, "logit")["ame"][1]))
                 out["ame_probit"].append(float(fit_binary(y, X, "probit")["ame"][1]))
-            except Exception:  # noqa: BLE001
+            except Exception:
                 out["ame_logit"].append(np.nan)
                 out["ame_probit"].append(np.nan)
         return {k: np.asarray(v) for k, v in out.items()}

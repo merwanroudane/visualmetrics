@@ -417,7 +417,9 @@ def breusch_godfrey(result: RegressionResult, X: Any | None = None, lags: int = 
     X = np.asarray(X, dtype=float)
     u = result.residuals
     n = u.size
-    lagged = np.column_stack([np.concatenate([np.zeros(l), u[:-l]]) for l in range(1, lags + 1)])
+    lagged = np.column_stack(
+        [np.concatenate([np.zeros(k), u[:-k]]) for k in range(1, lags + 1)]
+    )
     Z = np.column_stack([X, lagged])
     aux = ols(u, Z)
     lm = (n - lags) * aux.r_squared

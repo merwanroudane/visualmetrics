@@ -130,7 +130,8 @@ def proofs_page(session: Session, rerender: Any) -> None:
 
 
 def proof_page(proof_id: str, session: Session, rerender: Any) -> None:
-    from ...proofs import ProofNotFoundError, proof as load_proof
+    from ...proofs import ProofNotFoundError
+    from ...proofs import proof as load_proof
 
     tr = session.translator()
     with page_shell(session, rerender):

@@ -161,6 +161,6 @@ class TestFullSweep:
                     result = vm.lab(concept_id, scenario=scenario.id, seed=202)
                     assert result.panels
                     assert result.metrics
-                except Exception as exc:  # noqa: BLE001
+                except Exception as exc:
                     failures.append(f"{concept_id}:{scenario.id} -> {exc!r}")
         assert not failures, "\n".join(failures[:20])

@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from scipy import optimize, stats
+from scipy import stats
 
+from ...simulation.random import rng
 from .._kit import (
     AnimationStep,
     Domain,
@@ -28,7 +29,6 @@ from .._kit import (
     slider,
     toggle,
 )
-from ...simulation.random import rng
 
 __all__ = ["LAB", "SPEC", "MODELS", "MODEL_SPECS"]
 

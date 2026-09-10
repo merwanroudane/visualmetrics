@@ -86,7 +86,7 @@ def pct(value: float, digits: int = 1) -> str:
 class LabContext:
     """Per-run bundle of translator, theme and locale helpers."""
 
-    __slots__ = ("state", "tr", "theme", "locale", "level", "reduced_motion", "precision")
+    __slots__ = ("level", "locale", "precision", "reduced_motion", "state", "theme", "tr")
 
     def __init__(self, state: LabState) -> None:
         self.state = state

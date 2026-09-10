@@ -92,7 +92,7 @@ class LabState:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> LabState:
-        known = {f for f in cls.__dataclass_fields__}
+        known = set(cls.__dataclass_fields__)
         return cls(**{k: v for k, v in data.items() if k in known})
 
     @classmethod

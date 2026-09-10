@@ -1,0 +1,52 @@
+name: A number looks wrong
+description: A statistic, estimate or test result that does not match theory.
+title: "[wrong number] "
+labels: ["bug", "scientific"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A wrong number is the most serious kind of bug in this project. Please
+        report it even if you are not certain - being wrong about a suspicion
+        costs nothing here.
+
+  - type: input
+    id: concept
+    attributes:
+      label: Concept id
+      placeholder: econometrics.heteroskedasticity
+    validations:
+      required: true
+
+  - type: input
+    id: scenario
+    attributes:
+      label: Scenario and seed
+      placeholder: scenario=severe, seed=42
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect, and why?
+      description: >-
+        The theory, the closed form, or the published result you are comparing
+        against. A reference helps a lot.
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: What did you get?
+      description: Paste the metrics, or the output of the generated code.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Output of `visualmetrics doctor`.
+      render: text

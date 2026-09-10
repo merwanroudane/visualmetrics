@@ -48,7 +48,7 @@ def validate_plugin(plugin: Any, known_ids: set[str] | None = None) -> list[Conc
     requirement = getattr(plugin, "requires_visualmetrics", None)
     if requirement:
         required = _parse_version(str(requirement).lstrip(">=~^ "))
-        if VERSION_INFO < required:
+        if required > VERSION_INFO:
             raise PluginError(
                 f"plugin {name!r} requires visualmetrics >= {requirement}, "
                 f"this is {'.'.join(map(str, VERSION_INFO))}"

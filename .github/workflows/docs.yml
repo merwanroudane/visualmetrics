@@ -1,0 +1,67 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[docs,viz]"
+
+      # --strict so a broken link or an unknown nav entry fails the build
+      # rather than shipping quietly.
+      - name: Build the site in all three languages
+        run: mkdocs build --strict
+
+      - name: The catalogue pages match the registry
+        run: |
+          python - <<'PY'
+          import pathlib, warnings
+          warnings.filterwarnings("ignore")
+          import visualmetrics as vm
+          from visualmetrics.catalog.builtin import CATALOG
+
+          page = pathlib.Path("docs/en/catalogue/concepts.md").read_text(encoding="utf-8")
+          missing = [s.id for s in CATALOG if f"`{s.id}`" not in page]
+          assert not missing, f"the concepts page is stale: {missing}"
+          built = sum(1 for s in CATALOG if s.status.is_implemented)
+          assert f"{built} labs are built" in page, "the built count is stale"
+          print(f"catalogue page lists all {len(CATALOG)} concepts")
+          PY
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

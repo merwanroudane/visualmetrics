@@ -11,6 +11,7 @@ from typing import Any
 
 from scipy import stats
 
+from ...simulation.random import rng
 from .._kit import (
     AnimationStep,
     Domain,
@@ -33,7 +34,6 @@ from .._kit import (
     slider,
     toggle,
 )
-from ...simulation.random import rng
 
 __all__ = ["LAB", "SPEC", "STATISTICS"]
 

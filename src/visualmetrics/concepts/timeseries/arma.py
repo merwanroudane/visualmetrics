@@ -6,13 +6,29 @@ from typing import Any
 
 from scipy import optimize, stats
 
-from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
-)
 from ...backends import linear as LM
 from ...data.generators.timeseries import acf, arma_process, pacf
+from .._kit import (
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    slider,
+    toggle,
+)
 
 __all__ = ["LAB", "SPEC", "theoretical_acf", "fit_arma_css"]
 
@@ -317,7 +333,7 @@ class ARMALab(LabBase):
                     f = fit_arma_css(y, pp, qq, burn=2)
                     rows.append({"p": pp, "q": qq, "aic": f["aic"], "bic": f["bic"],
                                  "sigma2": f["sigma2"]})
-                except Exception:  # noqa: BLE001
+                except Exception:
                     continue
         return rows
 

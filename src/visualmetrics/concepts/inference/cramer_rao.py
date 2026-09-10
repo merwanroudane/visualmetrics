@@ -7,11 +7,27 @@ from typing import Any
 from scipy import stats
 
 from .._kit import (
-    AnimationStep, Domain, EvidenceType, LabBase, LabResult, LabState, P, animation,
-    build_frames, context, fmt, int_slider, make_spec, np, ref, scenario, seed_control,
-    select, slider, toggle,
+    AnimationStep,
+    Domain,
+    EvidenceType,
+    LabBase,
+    LabResult,
+    LabState,
+    P,
+    animation,
+    build_frames,
+    context,
+    fmt,
+    int_slider,
+    make_spec,
+    np,
+    ref,
+    scenario,
+    seed_control,
+    select,
+    slider,
+    toggle,
 )
-from ...simulation.random import rng
 from .mle import MODEL_SPECS
 
 __all__ = ["LAB", "SPEC"]
@@ -117,7 +133,6 @@ class CramerRaoLab(LabBase):
             res.metric(f"{name}_mse", ctx.t("labs.crlb.metric.mse", "{est}: MSE",
                                             est=name), var + bias**2)
 
-        unbiased_var = float(np.var(draws["mle"], ddof=1))
         res.assume("regularity", ctx.t("assumptions.regularity"), model.regular,
                    detail=ctx.t("labs.crlb.assume.regularity",
                                 "The bound requires that the support does not depend on the "

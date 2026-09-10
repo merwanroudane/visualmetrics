@@ -14,8 +14,7 @@ the text remains readable.
 from __future__ import annotations
 
 import html as _html
-import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -199,7 +198,7 @@ def render_html_report(
         parts.append(f"<h2>{_esc(tr.t('common.dgp', 'Data generating process'))}</h2>")
         parts.append(f"<pre><code>{_esc(result.dgp)}</code></pre>")
 
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    stamp = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     parts.append(
         f"<footer>VisualMetrics {_esc(__version__)} &middot; {_esc(result.concept_id)} "
         f"&middot; {stamp}</footer>"

@@ -152,7 +152,7 @@ def build_path(target: str, *, level: str | None = None) -> list[str]:
         for cid in ordered:
             try:
                 spec = registry.get(cid)
-            except Exception:  # noqa: BLE001
+            except Exception:
                 continue
             if any(lv.value == level for lv in spec.levels) or cid == target:
                 keep.append(cid)
@@ -170,7 +170,7 @@ def path_payload(path_id: str) -> dict[str, Any]:
     for cid in path.concepts:
         try:
             spec = registry.get(cid)
-        except Exception:  # noqa: BLE001
+        except Exception:
             continue
         steps.append(
             {

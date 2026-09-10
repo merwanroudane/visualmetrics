@@ -40,7 +40,7 @@ SUPPORTED_FORMATS = frozenset({".html", ".json"}) | STATIC_FORMATS
 def _require_kaleido(fmt: str) -> None:
     try:
         import kaleido  # noqa: F401
-    except Exception as exc:  # noqa: BLE001 - any import failure means unusable
+    except Exception as exc:
         raise MissingDependencyError(
             "kaleido", "export", feature=f"static {fmt.lstrip('.')} export"
         ) from exc
@@ -57,7 +57,7 @@ def json_dumps(payload: Any, *, indent: int | None = None) -> str:
         from plotly.utils import PlotlyJSONEncoder
 
         return json.dumps(payload, cls=PlotlyJSONEncoder, ensure_ascii=False, indent=indent)
-    except Exception:  # noqa: BLE001 - plotly missing or its encoder unusable
+    except Exception:
         return json.dumps(_plain(payload), ensure_ascii=False, indent=indent)
 
 

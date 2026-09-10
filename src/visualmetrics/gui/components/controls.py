@@ -45,7 +45,7 @@ def render_control(
         raw = getattr(event, "value", event)
         try:
             on_change(control.id, control.coerce(raw))
-        except Exception as exc:  # noqa: BLE001 - show the reason, never crash the page
+        except Exception as exc:
             ui.notify(str(exc), type="warning")
 
     element: Any

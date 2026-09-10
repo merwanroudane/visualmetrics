@@ -30,7 +30,7 @@ def prerequisite_chain(concept_id: str, *, depth: int = 3) -> list[str]:
         seen.add(cid)
         try:
             spec = registry.get(cid)
-        except Exception:  # noqa: BLE001
+        except Exception:
             return
         for prereq in spec.prerequisites:
             walk(prereq, level + 1)
@@ -47,7 +47,7 @@ def successors(concept_id: str) -> list[str]:
     out = [s.id for s in registry.specs() if concept_id in s.prerequisites]
     try:
         out.extend(registry.get(concept_id).next_concepts)
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
     return sorted(dict.fromkeys(out))
 
@@ -80,7 +80,7 @@ def topological_order(concept_ids: list[str] | None = None) -> list[str]:
         try:
             for prereq in registry.get(cid).prerequisites:
                 visit(prereq)
-        except Exception:  # noqa: BLE001
+        except Exception:
             pass
         stack.discard(cid)
         visited.add(cid)

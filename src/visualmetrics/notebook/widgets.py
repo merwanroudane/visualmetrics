@@ -165,7 +165,7 @@ class LabWidget:
         with self.output:
             try:
                 display_result(self.lab.run(self.state()), language=self.language)
-            except Exception as exc:  # noqa: BLE001 - a failed run must be visible
+            except Exception as exc:
                 print(f"This run did not complete: {exc}")
 
 

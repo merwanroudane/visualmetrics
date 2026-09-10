@@ -1,0 +1,43 @@
+name: Honesty problem
+description: >-
+  Something overstates its evidence, hides a limitation, or shows an
+  unexplained animation.
+title: "[honesty] "
+labels: ["honesty", "priority"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These rules are the reason the project exists, so this report goes to
+        the front of the queue.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Which rule?
+      options:
+        - A simulation is presented as a proof
+        - A proof does not state what it fails to establish
+        - An animation frame does not explain itself
+        - A planned concept behaves as though it were built
+        - A violation scenario reports nothing wrong
+        - A figure appears without its evidence badge
+        - A local course label leaked into the interface
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where?
+      placeholder: concept id, proof id, or the page
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: What is claimed, and what is actually established?
+    validations:
+      required: true

@@ -89,7 +89,7 @@ def search_concepts(query: str, limit: int = 12, *, include_planned: bool = True
     for cid, score in sorted(scores.items(), key=lambda kv: (-kv[1], kv[0])):
         try:
             spec = registry.get(cid)
-        except Exception:  # noqa: BLE001
+        except Exception:
             continue
         if not include_planned and not spec.status.is_implemented:
             continue
