@@ -1,0 +1,19 @@
+{
+  "errors": {
+    "generic": "Une erreur est survenue lors de la préparation de ce laboratoire.",
+    "configuration": "Le paramètre « {setting} » a une valeur non prise en charge.",
+    "concept_not_found": "Aucun concept ne correspond à « {concept} ». Utilisez la recherche ou vm.list_concepts().",
+    "concept_planned": "« {concept} » est catalogué comme « {status} ». Il est listé par transparence et n'est pas encore implémenté.",
+    "duplicate_concept": "Le concept « {concept} » est déjà enregistré.",
+    "invalid_parameter": "La valeur choisie pour « {control} » n'est pas valide.",
+    "unsupported_scenario": "Le concept « {concept} » n'a pas de scénario nommé « {scenario} ».",
+    "missing_dependency": "Cette fonction nécessite l'extra « {extra} ». Installez-le avec : {install}",
+    "data": "Les données n'ont pas pu être lues ou n'ont pas la forme attendue par ce laboratoire.",
+    "identification": "Le modèle n'est pas identifié avec les réglages actuels : aucune estimation unique n'existe.",
+    "numerical": "Le calcul a échoué numériquement. Essayez un échantillon plus petit, une autre graine ou des valeurs moins extrêmes.",
+    "proof_unavailable": "Aucune démonstration n'est implémentée pour ce concept ; seule l'intuition ou la simulation est disponible.",
+    "export": "L'export a échoué.",
+    "translation": "Une clé de traduction est manquante.",
+    "plugin": "Un plugin de concepts n'a pas pu être chargé."
+  }
+}

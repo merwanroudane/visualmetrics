@@ -1,0 +1,19 @@
+{
+  "errors": {
+    "generic": "Something went wrong while preparing this lab.",
+    "configuration": "The setting '{setting}' has an unsupported value.",
+    "concept_not_found": "No concept matches '{concept}'. Use the search box or vm.list_concepts().",
+    "concept_planned": "'{concept}' is catalogued as '{status}'. It is listed for transparency and has no implementation yet.",
+    "duplicate_concept": "The concept '{concept}' is already registered.",
+    "invalid_parameter": "The value chosen for '{control}' is not valid.",
+    "unsupported_scenario": "The concept '{concept}' has no scenario called '{scenario}'.",
+    "missing_dependency": "This feature needs the '{extra}' extra. Install it with: {install}",
+    "data": "The data could not be read or does not have the shape this lab needs.",
+    "identification": "The model is not identified with the current settings, so no unique estimate exists.",
+    "numerical": "The computation failed numerically. Try a smaller sample, a different seed or milder parameter values.",
+    "proof_unavailable": "No proof is implemented for this concept. Only intuition or simulation is available.",
+    "export": "The export failed.",
+    "translation": "A translation key is missing.",
+    "plugin": "A concept plugin could not be loaded."
+  }
+}

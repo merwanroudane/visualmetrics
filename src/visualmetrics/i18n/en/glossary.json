@@ -1,0 +1,368 @@
+{
+  "glossary": {
+    "attention_mechanism": {
+      "acronym": "",
+      "aliases": "attention|الانتباه|self-attention",
+      "concept": "ai.attention",
+      "definition": "A weighted lookup in which each position combines values according to query-key similarity.",
+      "term": "Attention"
+    },
+    "autocorrelation": {
+      "acronym": "",
+      "aliases": "serial correlation|الارتباط الذاتي|autocorrelation",
+      "concept": "econometrics.autocorrelation",
+      "definition": "Correlation between the errors or observations of a process at different times.",
+      "term": "Autocorrelation"
+    },
+    "backpropagation": {
+      "acronym": "",
+      "aliases": "retropropagation|الانتشار العكسي|chain rule",
+      "concept": "deep_learning.backpropagation",
+      "definition": "Applying the chain rule through a computational graph to obtain gradients for every parameter.",
+      "term": "Backpropagation"
+    },
+    "bias_variance_tradeoff": {
+      "acronym": "",
+      "aliases": "biais variance|المفاضلة بين التحيز والتباين|overfitting",
+      "concept": "ml.bias_variance",
+      "definition": "The decomposition of expected prediction error into squared bias, variance and irreducible noise.",
+      "term": "Bias-variance trade-off"
+    },
+    "bootstrap": {
+      "acronym": "",
+      "aliases": "bootstrap|reechantillonnage|إعادة المعاينة",
+      "concept": "inference.bootstrap",
+      "definition": "Estimating the sampling distribution of a statistic by resampling the observed sample with replacement.",
+      "term": "Bootstrap"
+    },
+    "calibration": {
+      "acronym": "",
+      "aliases": "calibration|المعايرة",
+      "concept": "ml.classification_threshold",
+      "definition": "The agreement between predicted probabilities and observed frequencies.",
+      "term": "Calibration"
+    },
+    "central_limit_theorem": {
+      "acronym": "CLT",
+      "aliases": "tcl|theoreme central limite|نظرية النهاية المركزية",
+      "concept": "inference.clt",
+      "definition": "Standardized sums of independent variables with finite variance converge in distribution to the normal law.",
+      "term": "Central limit theorem"
+    },
+    "cointegration": {
+      "acronym": "ECM",
+      "aliases": "cointegration|التكامل المشترك",
+      "concept": "timeseries.cointegration",
+      "definition": "Two or more integrated series sharing a stationary linear combination, i.e. a long-run equilibrium relation.",
+      "term": "Cointegration"
+    },
+    "collider": {
+      "acronym": "",
+      "aliases": "collisionneur|المُصادِم",
+      "concept": "causal.dag",
+      "definition": "A variable caused by two others; conditioning on it creates association between them.",
+      "term": "Collider"
+    },
+    "confidence_interval": {
+      "acronym": "CI",
+      "aliases": "interval estimate|intervalle de confiance|مجال الثقة",
+      "concept": "inference.confidence_intervals",
+      "definition": "A random interval whose construction captures the true parameter in a stated proportion of repeated samples.",
+      "term": "Confidence interval"
+    },
+    "confounder": {
+      "acronym": "",
+      "aliases": "facteur de confusion|المُربِك",
+      "concept": "causal.dag",
+      "definition": "A common cause of both treatment and outcome, which creates association without causation.",
+      "term": "Confounder"
+    },
+    "consistency": {
+      "acronym": "",
+      "aliases": "convergence|الاتساق",
+      "concept": "inference.lln",
+      "definition": "An estimator is consistent when it converges in probability to the true parameter as the sample grows.",
+      "term": "Consistency"
+    },
+    "cramer_rao_bound": {
+      "acronym": "CRLB",
+      "aliases": "borne de cramer-rao|حد كرامر-راو",
+      "concept": "inference.cramer_rao",
+      "definition": "The smallest variance any unbiased estimator can achieve, equal to the inverse of the Fisher information.",
+      "term": "Cramer-Rao lower bound"
+    },
+    "difference_in_differences": {
+      "acronym": "DiD",
+      "aliases": "differences en differences|الفروق في الفروق|twfe",
+      "concept": "causal.did",
+      "definition": "Comparing the change over time in a treated group with the change in an untreated group.",
+      "term": "Difference-in-differences"
+    },
+    "endogeneity": {
+      "acronym": "",
+      "aliases": "endogeneite|الداخلية",
+      "concept": "econometrics.endogeneity_iv",
+      "definition": "Correlation between a regressor and the error term, which makes least squares inconsistent.",
+      "term": "Endogeneity"
+    },
+    "exogeneity": {
+      "acronym": "",
+      "aliases": "exogeneite|الخارجية",
+      "concept": "econometrics.endogeneity_iv",
+      "definition": "The assumption that the error term has zero mean conditional on the regressors.",
+      "term": "Exogeneity"
+    },
+    "false_discovery_rate": {
+      "acronym": "FDR",
+      "aliases": "taux de fausses decouvertes|معدل الاكتشاف الكاذب|benjamini",
+      "concept": "inference.multiple_testing",
+      "definition": "The expected proportion of false positives among the rejected hypotheses.",
+      "term": "False discovery rate"
+    },
+    "fisher_information": {
+      "acronym": "",
+      "aliases": "information de fisher|معلومة فيشر",
+      "concept": "inference.cramer_rao",
+      "definition": "The expected curvature of the log-likelihood; it bounds how precisely a parameter can be estimated.",
+      "term": "Fisher information"
+    },
+    "fixed_effects": {
+      "acronym": "FE",
+      "aliases": "effets fixes|الآثار الثابتة|within",
+      "concept": "panel.fixed_vs_random",
+      "definition": "A panel estimator that removes every time-invariant unit characteristic by subtracting unit means.",
+      "term": "Fixed effects"
+    },
+    "gradient_descent": {
+      "acronym": "SGD",
+      "aliases": "descente de gradient|الانحدار التدريجي",
+      "concept": "ml.gradient_descent",
+      "definition": "An iterative optimizer that repeatedly steps against the gradient of the loss.",
+      "term": "Gradient descent"
+    },
+    "granger_causality": {
+      "acronym": "",
+      "aliases": "causalite de granger|السببية بمعنى غرانجر",
+      "concept": "timeseries.var",
+      "definition": "Predictive precedence: past values of one series improve the forecast of another. It is not causation.",
+      "term": "Granger causality"
+    },
+    "heteroskedasticity": {
+      "acronym": "",
+      "aliases": "heteroscedasticite|عدم تجانس التباين",
+      "concept": "econometrics.heteroskedasticity",
+      "definition": "Error variance that changes across observations, invalidating the classical standard-error formula.",
+      "term": "Heteroskedasticity"
+    },
+    "impulse_response": {
+      "acronym": "IRF",
+      "aliases": "reponse impulsionnelle|دالة الاستجابة",
+      "concept": "timeseries.var",
+      "definition": "The path of a variable's response over time to a one-off shock in a dynamic system.",
+      "term": "Impulse-response function"
+    },
+    "instrumental_variable": {
+      "acronym": "IV",
+      "aliases": "2sls|variable instrumentale|المتغير الأداتي",
+      "concept": "econometrics.endogeneity_iv",
+      "definition": "A variable that moves the endogenous regressor but affects the outcome only through it.",
+      "term": "Instrumental variable"
+    },
+    "law_of_large_numbers": {
+      "acronym": "LLN",
+      "aliases": "loi des grands nombres|قانون الأعداد الكبيرة",
+      "concept": "inference.lln",
+      "definition": "The sample mean of independent draws converges to the expectation as the sample grows.",
+      "term": "Law of large numbers"
+    },
+    "maximum_likelihood": {
+      "acronym": "MLE",
+      "aliases": "vraisemblance|الإمكان الأعظم",
+      "concept": "inference.mle",
+      "definition": "Choosing the parameter value that makes the observed sample most probable under the assumed model.",
+      "term": "Maximum likelihood estimation"
+    },
+    "mediator": {
+      "acronym": "",
+      "aliases": "mediateur|الوسيط",
+      "concept": "causal.dag",
+      "definition": "A variable lying on the causal path from treatment to outcome; controlling for it removes part of the effect.",
+      "term": "Mediator"
+    },
+    "multicollinearity": {
+      "acronym": "VIF",
+      "aliases": "multicolinearite|الازدواج الخطي",
+      "concept": "regression.multicollinearity",
+      "definition": "Near-linear dependence among regressors, which inflates coefficient variances without biasing them.",
+      "term": "Multicollinearity"
+    },
+    "omitted_variable_bias": {
+      "acronym": "OVB",
+      "aliases": "biais de variable omise|تحيز المتغير المحذوف",
+      "concept": "econometrics.omitted_variable_bias",
+      "definition": "The distortion of a coefficient caused by leaving out a variable that affects the outcome and correlates with the regressor.",
+      "term": "Omitted-variable bias"
+    },
+    "ordinary_least_squares": {
+      "acronym": "OLS",
+      "aliases": "mco|moindres carres|المربعات الصغرى",
+      "concept": "regression.simple_linear",
+      "definition": "The estimator that minimizes the sum of squared residuals in a linear model.",
+      "term": "Ordinary least squares"
+    },
+    "orthogonal_projection": {
+      "acronym": "",
+      "aliases": "projection orthogonale|الإسقاط المتعامد",
+      "concept": "math.projection",
+      "definition": "The closest point to a vector within a subspace; the residual is perpendicular to that subspace.",
+      "term": "Orthogonal projection"
+    },
+    "p_value": {
+      "acronym": "",
+      "aliases": "p|significance probability|valeur p|القيمة الاحتمالية",
+      "concept": "inference.hypothesis_testing",
+      "definition": "The probability, computed assuming the null hypothesis is true, of a test statistic at least as extreme as the one observed.",
+      "term": "p-value"
+    },
+    "parallel_trends": {
+      "acronym": "",
+      "aliases": "tendances paralleles|الاتجاهات المتوازية",
+      "concept": "causal.did",
+      "definition": "The identifying assumption that treated and control groups would have moved together absent treatment.",
+      "term": "Parallel trends"
+    },
+    "posterior_distribution": {
+      "acronym": "",
+      "aliases": "loi a posteriori|التوزيع البعدي|bayes",
+      "concept": "inference.bayesian_updating",
+      "definition": "The updated distribution of a parameter after combining a prior with the observed likelihood.",
+      "term": "Posterior distribution"
+    },
+    "potential_outcome": {
+      "acronym": "ATE",
+      "aliases": "resultat potentiel|الناتج المحتمل|counterfactual",
+      "concept": "causal.potential_outcomes",
+      "definition": "The outcome a unit would have under a given treatment, only one of which is ever observed.",
+      "term": "Potential outcome"
+    },
+    "principal_component": {
+      "acronym": "PCA",
+      "aliases": "acp|المكون الرئيسي",
+      "concept": "multivariate.pca",
+      "definition": "A direction of maximal variance in the data, given by an eigenvector of the covariance matrix.",
+      "term": "Principal component"
+    },
+    "r_squared": {
+      "acronym": "R2",
+      "aliases": "coefficient of determination|معامل التحديد|r carre",
+      "concept": "regression.simple_linear",
+      "definition": "The share of the variance of the dependent variable accounted for by the fitted model.",
+      "term": "R-squared"
+    },
+    "random_effects": {
+      "acronym": "RE",
+      "aliases": "effets aleatoires|الآثار العشوائية|hausman",
+      "concept": "panel.fixed_vs_random",
+      "definition": "A panel estimator that treats unit effects as random and uncorrelated with the regressors.",
+      "term": "Random effects"
+    },
+    "regression_discontinuity": {
+      "acronym": "RDD",
+      "aliases": "regression sur discontinuite|الانحدار عند الانقطاع",
+      "concept": "causal.rdd",
+      "definition": "Using a threshold rule that assigns treatment to compare units just above and just below the cutoff.",
+      "term": "Regression discontinuity"
+    },
+    "regularization": {
+      "acronym": "",
+      "aliases": "regularisation|التنظيم|ridge|lasso",
+      "concept": "ml.regularization",
+      "definition": "Adding a penalty on coefficient size to trade a little bias for a large reduction in variance.",
+      "term": "Regularization"
+    },
+    "residual": {
+      "acronym": "",
+      "aliases": "residu|البواقي",
+      "concept": "regression.ols_geometry",
+      "definition": "The difference between an observed value and the value fitted by the model.",
+      "term": "Residual"
+    },
+    "roc_curve": {
+      "acronym": "AUC",
+      "aliases": "courbe roc|منحنى روك",
+      "concept": "ml.classification_threshold",
+      "definition": "The set of true- and false-positive rate pairs traced as the classification threshold varies.",
+      "term": "ROC curve"
+    },
+    "sampling_distribution": {
+      "acronym": "",
+      "aliases": "distribution d'echantillonnage|توزيع المعاينة",
+      "concept": "inference.sampling_distributions",
+      "definition": "The distribution of a statistic across all samples that could have been drawn.",
+      "term": "Sampling distribution"
+    },
+    "shapley_value": {
+      "acronym": "SHAP",
+      "aliases": "valeur de shapley|قيمة شابلي",
+      "concept": "xai.shap",
+      "definition": "A feature's average marginal contribution to a prediction across all orderings of the features.",
+      "term": "Shapley value"
+    },
+    "standard_error": {
+      "acronym": "SE",
+      "aliases": "erreur type|الخطأ المعياري",
+      "concept": "inference.sampling_distributions",
+      "definition": "The standard deviation of the sampling distribution of a statistic.",
+      "term": "Standard error"
+    },
+    "stationarity": {
+      "acronym": "",
+      "aliases": "stationnarite|السكون",
+      "concept": "timeseries.stationarity",
+      "definition": "A series whose mean, variance and autocovariances do not change over time.",
+      "term": "Stationarity"
+    },
+    "statistical_power": {
+      "acronym": "",
+      "aliases": "power|1-beta|puissance|القدرة الإحصائية",
+      "concept": "inference.power",
+      "definition": "The probability that a test rejects the null hypothesis when a specified alternative is true.",
+      "term": "Statistical power"
+    },
+    "type_i_error": {
+      "acronym": "",
+      "aliases": "alpha|false positive|erreur de type I|خطأ النوع الأول",
+      "concept": "inference.hypothesis_testing",
+      "definition": "Rejecting a null hypothesis that is in fact true; its probability is the size of the test.",
+      "term": "Type I error"
+    },
+    "type_ii_error": {
+      "acronym": "",
+      "aliases": "beta|false negative|erreur de type II|خطأ النوع الثاني",
+      "concept": "inference.power",
+      "definition": "Failing to reject a null hypothesis that is false; its probability is one minus the power.",
+      "term": "Type II error"
+    },
+    "unbiasedness": {
+      "acronym": "",
+      "aliases": "sans biais|عدم التحيز",
+      "concept": "inference.mle",
+      "definition": "An estimator is unbiased when its expectation equals the parameter it estimates.",
+      "term": "Unbiasedness"
+    },
+    "unit_root": {
+      "acronym": "ADF",
+      "aliases": "racine unitaire|جذر الوحدة|random walk",
+      "concept": "timeseries.stationarity",
+      "definition": "An autoregressive root equal to one, so shocks accumulate permanently and the variance grows without bound.",
+      "term": "Unit root"
+    },
+    "volatility_clustering": {
+      "acronym": "GARCH",
+      "aliases": "regroupement de volatilite|تكتل التقلب",
+      "concept": "timeseries.garch",
+      "definition": "The tendency of large price changes to be followed by large changes of either sign.",
+      "term": "Volatility clustering"
+    }
+  }
+}

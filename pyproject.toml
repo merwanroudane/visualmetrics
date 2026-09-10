@@ -1,0 +1,111 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "visualmetrics"
+version = "0.1.0"
+description = "Multilingual interactive visual laboratory for statistics, econometrics, causal inference and AI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Merwan Roudane", email = "merwanroudane920@gmail.com" }]
+maintainers = [{ name = "Merwan Roudane", email = "merwanroudane920@gmail.com" }]
+keywords = [
+  "statistics", "econometrics", "causal-inference", "machine-learning",
+  "visualization", "education", "teaching", "arabic", "french", "multilingual",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Education",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: Arabic",
+  "Natural Language :: English",
+  "Natural Language :: French",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Education",
+  "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "pandas>=2.0",
+  "platformdirs>=3.0",
+]
+
+[project.optional-dependencies]
+gui = ["nicegui>=1.4", "plotly>=5.18"]
+viz = ["plotly>=5.18", "matplotlib>=3.7"]
+symbolic = ["sympy>=1.12"]
+econometrics = ["statsmodels>=0.14", "linearmodels>=4.31", "arch>=6.0", "pyfixest>=0.18"]
+causal = ["networkx>=3.0", "dowhy>=0.11", "econml>=0.14"]
+ai = ["scikit-learn>=1.3", "shap>=0.44", "interpret>=0.5"]
+proofs = ["manim>=0.18"]
+notebook = ["ipywidgets>=8.0", "plotly>=5.18"]
+data = ["openpyxl>=3.1", "pyarrow>=14.0", "pyreadstat>=1.2"]
+export = ["kaleido>=0.2"]
+dev = [
+  "pytest>=8.0", "pytest-cov>=4.1", "hypothesis>=6.90",
+  "ruff>=0.4", "mypy>=1.8", "pre-commit>=3.6", "build>=1.0",
+]
+docs = ["mkdocs-material>=9.5", "mkdocstrings[python]>=0.24", "mkdocs-static-i18n>=1.2", "pymdown-extensions>=10.0"]
+all = [
+  "nicegui>=1.4", "plotly>=5.18", "matplotlib>=3.7", "sympy>=1.12",
+  "statsmodels>=0.14", "linearmodels>=4.31", "arch>=6.0",
+  "networkx>=3.0", "scikit-learn>=1.3", "shap>=0.44",
+  "ipywidgets>=8.0", "openpyxl>=3.1", "pyarrow>=14.0", "kaleido>=0.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/merwanroudane/visualmetrics"
+Repository = "https://github.com/merwanroudane/visualmetrics"
+Issues = "https://github.com/merwanroudane/visualmetrics/issues"
+Documentation = "https://github.com/merwanroudane/visualmetrics/tree/main/docs"
+
+[project.scripts]
+visualmetrics = "visualmetrics.cli:main"
+
+[project.entry-points."visualmetrics.concepts"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/visualmetrics"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/visualmetrics", "tests", "docs", "examples", "README.md", "LICENSE", "CHANGELOG.md", "CITATION.cff"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
+ignore = ["E501", "B008", "RUF001", "RUF002", "RUF003", "SIM108"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+"src/visualmetrics/i18n/*" = ["RUF001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+  "gui: GUI smoke tests (require the gui extra)",
+  "slow: slower simulation-heavy tests",
+  "optional: requires an optional scientific extra",
+]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores = false
+files = ["src/visualmetrics/core", "src/visualmetrics/i18n", "src/visualmetrics/catalog"]
+
+[tool.coverage.run]
+source = ["src/visualmetrics"]

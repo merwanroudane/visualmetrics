@@ -1,0 +1,347 @@
+{
+  "app": {
+    "name": "VisualMetrics",
+    "tagline": "Voir la théorie. Changer les hypothèses. Comprendre le modèle.",
+    "subtitle": "Laboratoire visuel interactif de statistique, d'économétrie et d'IA",
+    "loading": "Chargement…"
+  },
+  "nav": {
+    "home": "Accueil",
+    "explore": "Explorer les concepts",
+    "paths": "Parcours d'apprentissage",
+    "proofs": "Démonstrations visuelles",
+    "labs_statistics": "Laboratoires statistiques",
+    "labs_econometrics": "Laboratoires d'économétrie",
+    "labs_causal": "Laboratoires causals",
+    "labs_ai": "Laboratoires d'IA",
+    "compare": "Comparer les méthodes",
+    "datasets": "Jeux de données",
+    "instructor": "Mode enseignant",
+    "favorites": "Favoris",
+    "recent": "Récents",
+    "glossary": "Glossaire",
+    "references": "Références",
+    "settings": "Paramètres",
+    "search_placeholder": "Rechercher un concept en français, anglais ou arabe…"
+  },
+  "domains": {
+    "mathematical_foundations": "Fondements mathématiques",
+    "probability_random_variables": "Probabilités et variables aléatoires",
+    "descriptive_statistics": "Statistique descriptive",
+    "inferential_statistics": "Statistique inférentielle",
+    "regression_linear_models": "Régression et modèles linéaires",
+    "econometrics": "Économétrie",
+    "time_series_econometrics": "Économétrie des séries temporelles",
+    "panel_data_econometrics": "Économétrie des données de panel",
+    "causal_inference": "Inférence causale",
+    "multivariate_statistics": "Statistique multivariée",
+    "spatial_econometrics": "Économétrie spatiale",
+    "machine_learning": "Apprentissage automatique",
+    "deep_learning": "Apprentissage profond",
+    "modern_ai": "IA moderne",
+    "explainable_ai": "IA explicable"
+  },
+  "tabs": {
+    "overview": "Aperçu",
+    "intuition": "Intuition",
+    "visualize": "Visualiser",
+    "animate": "Animer",
+    "experiment": "Expérimenter",
+    "compare": "Comparer",
+    "assumptions": "Hypothèses",
+    "math": "Mathématiques",
+    "proof": "Démonstration / dérivation",
+    "simulation": "Simulation",
+    "diagnostics": "Diagnostics",
+    "misconceptions": "Erreurs fréquentes",
+    "code": "Code",
+    "data": "Données",
+    "quiz": "Quiz",
+    "references": "Références",
+    "warning": "Attention"
+  },
+  "modes": {
+    "learn": "Apprendre",
+    "visualize": "Visualiser",
+    "animate": "Animer",
+    "experiment": "Expérimenter",
+    "compare": "Comparer",
+    "prove": "Démontrer",
+    "derive": "Dériver",
+    "simulate": "Simuler",
+    "diagnose": "Diagnostiquer",
+    "counterexample": "Contre-exemple",
+    "quiz": "Quiz",
+    "code": "Code",
+    "data": "Données",
+    "references": "Références"
+  },
+  "levels": {
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "phd": "Doctorat / chercheur",
+    "label": "Niveau"
+  },
+  "evidence": {
+    "label": "Type de preuve",
+    "formal_proof": {
+      "label": "Démonstration formelle",
+      "caveat": "Un argument mathématique complet, pas une image d'argument."
+    },
+    "symbolic_derivation": {
+      "label": "Dérivation symbolique",
+      "caveat": "Chaque étape algébrique est affichée et vérifiable."
+    },
+    "geometric_proof": {
+      "label": "Démonstration géométrique",
+      "caveat": "La géométrie est exacte : la relation dessinée est le théorème."
+    },
+    "visual_derivation": {
+      "label": "Dérivation visuelle",
+      "caveat": "Un rendu fidèle d'une dérivation valide, sans s'y substituer."
+    },
+    "visual_intuition": {
+      "label": "Intuition visuelle",
+      "caveat": "Intuition seulement. Cela suggère pourquoi un résultat est plausible ; cela ne démontre rien."
+    },
+    "simulation": {
+      "label": "Simulation",
+      "caveat": "Preuve de Monte-Carlo finie. Une simulation ne démontre jamais un théorème."
+    },
+    "numerical_demonstration": {
+      "label": "Démonstration numérique",
+      "caveat": "Calcul exact pour les valeurs de paramètres affichées uniquement."
+    },
+    "counterexample": {
+      "label": "Contre-exemple",
+      "caveat": "Un seul contre-exemple valide suffit à réfuter une affirmation universelle."
+    },
+    "empirical_example": {
+      "label": "Exemple empirique",
+      "caveat": "Les données réelles illustrent ; elles ne vérifient pas un théorème."
+    }
+  },
+  "themes": {
+    "label": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "high_contrast": "Contraste élevé",
+    "classroom": "Salle de classe",
+    "publication": "Publication",
+    "colorblind": "Adapté au daltonisme",
+    "custom": "Personnalisé"
+  },
+  "terminology": {
+    "label": "Terminologie",
+    "translated": "Traduite uniquement",
+    "bilingual": "Terminologie bilingue",
+    "english_technical": "Termes techniques en anglais"
+  },
+  "language": {
+    "label": "Langue",
+    "en": "Anglais",
+    "ar": "Arabe",
+    "fr": "Français"
+  },
+  "actions": {
+    "play": "Lecture",
+    "pause": "Pause",
+    "restart": "Recommencer",
+    "previous_step": "Étape précédente",
+    "next_step": "Étape suivante",
+    "step_mode": "Pas à pas",
+    "speed": "Vitesse",
+    "reset": "Réinitialiser",
+    "randomize": "Scénario aléatoire",
+    "apply": "Appliquer",
+    "export": "Exporter",
+    "show_code": "Afficher le code Python",
+    "copy": "Copier",
+    "download": "Télécharger",
+    "favourite": "Ajouter aux favoris",
+    "share": "Partager la configuration",
+    "open": "Ouvrir",
+    "close": "Fermer",
+    "run": "Exécuter",
+    "compare": "Comparer",
+    "presentation": "Mode présentation",
+    "fullscreen": "Plein écran",
+    "clear_cache": "Vider le cache"
+  },
+  "ui": {
+    "concept": "Concept",
+    "scenario": "Scénario",
+    "scenarios": "Scénarios",
+    "controls": "Contrôles",
+    "parameters": "Paramètres",
+    "results": "Résultats",
+    "metrics": "Lecture numérique",
+    "evidence": "Preuve",
+    "seed": "Graine aléatoire",
+    "backend": "Moteur de calcul",
+    "prerequisites": "À apprendre d'abord",
+    "next_concepts": "La suite",
+    "related": "Concepts liés",
+    "confused_with": "Souvent confondu avec",
+    "references": "Références",
+    "dgp": "Processus générateur des données",
+    "assumption_status": "État des hypothèses",
+    "holds": "vérifiée",
+    "violated": "violée",
+    "value": "Valeur",
+    "reference_value": "Référence",
+    "true_value": "Valeur vraie",
+    "estimate": "Estimation",
+    "no_results": "Aucun concept ne correspond à votre recherche.",
+    "planned_notice": "Ce concept est catalogué par transparence mais n'est pas encore implémenté.",
+    "planned_badge": "Prévu",
+    "experimental_badge": "Expérimental",
+    "stable_badge": "Stable",
+    "reduced_motion": "Mouvement réduit",
+    "advanced_controls": "Contrôles avancés",
+    "purpose": "Objectif",
+    "what_you_see": "Ce que vous voyez",
+    "what_changed": "Ce qui a changé",
+    "why": "Pourquoi cela change",
+    "interpretation": "Comment le lire",
+    "conclusion": "Ce que vous pouvez conclure",
+    "warning": "Attention",
+    "summary": "Synthèse",
+    "active_assumptions": "Hypothèses en vigueur",
+    "violated_assumptions": "Hypothèses volontairement violées",
+    "simulation_note": "Preuve de Monte-Carlo avec {reps} répétitions (erreur type de simulation affichée).",
+    "precision_preset": "Précision",
+    "catalogue_size": "{implemented} laboratoires implémentés sur {total} concepts catalogués"
+  },
+  "assumptions": {
+    "linearity": "Linéarité dans les paramètres",
+    "random_sampling": "Échantillonnage aléatoire",
+    "no_perfect_collinearity": "Absence de multicolinéarité parfaite",
+    "exogeneity": "Espérance conditionnelle nulle de l'erreur (exogénéité)",
+    "homoskedasticity": "Homoscédasticité",
+    "no_autocorrelation": "Absence d'autocorrélation",
+    "normal_errors": "Erreurs normalement distribuées",
+    "independence": "Observations indépendantes",
+    "identical_distribution": "Observations identiquement distribuées",
+    "finite_variance": "Variance de population finie",
+    "correct_functional_form": "Forme fonctionnelle correcte",
+    "instrument_relevance": "Pertinence de l'instrument",
+    "instrument_exogeneity": "Exogénéité de l'instrument (restriction d'exclusion)",
+    "parallel_trends": "Tendances parallèles",
+    "no_anticipation": "Absence d'anticipation du traitement",
+    "homogeneous_effects": "Effets de traitement homogènes",
+    "exchangeability": "Échangeabilité (absence de confusion non mesurée)",
+    "positivity": "Positivité / recouvrement",
+    "sutva": "SUTVA (absence d'interférence entre unités)",
+    "no_manipulation": "Absence de manipulation de la variable d'assignation",
+    "random_effects": "Effets non corrélés aux régresseurs",
+    "stationarity": "Stationnarité",
+    "regularity": "Conditions de régularité du résultat asymptotique"
+  },
+  "controls": {
+    "seed": { "label": "Graine aléatoire", "help": "Fixe les tirages aléatoires pour rendre l'image reproductible." },
+    "n": { "label": "Taille d'échantillon (n)", "help": "Nombre d'observations dans chaque échantillon." },
+    "alpha": { "label": "Seuil de signification (alpha)", "help": "Probabilité de rejeter une hypothèse nulle vraie." },
+    "effect_size": { "label": "Taille d'effet", "help": "Distance standardisée entre l'hypothèse nulle et l'alternative." },
+    "noise": { "label": "Bruit (écart-type de l'erreur)", "help": "Écart-type du terme d'erreur non observé." },
+    "reps": { "label": "Répétitions", "help": "Nombre de réplications de Monte-Carlo." },
+    "beta0": { "label": "Constante (beta0)", "help": "Valeur de y lorsque x vaut zéro." },
+    "beta1": { "label": "Pente (beta1)", "help": "Variation de y pour une variation d'une unité de x." },
+    "confidence_level": { "label": "Niveau de confiance", "help": "Couverture à long terme visée par la procédure." },
+    "distribution": { "label": "Distribution", "help": "Famille de la variable aléatoire." },
+    "functional_form": { "label": "Forme fonctionnelle", "help": "Forme de la vraie relation entre x et y." },
+    "correlation": { "label": "Corrélation", "help": "Dépendance linéaire entre les deux variables." }
+  },
+  "scenarios": {
+    "label": "Scénario",
+    "canonical": { "label": "Cas de référence" },
+    "categories": {
+      "canonical": "Cas de référence",
+      "positive": "Direction positive",
+      "negative": "Direction négative",
+      "null": "Aucun effet",
+      "weak": "Signal faible",
+      "strong": "Signal fort",
+      "boundary": "Cas limite",
+      "violation": "Hypothèse violée",
+      "counterexample": "Contre-exemple",
+      "sensitivity": "Sensibilité",
+      "small_sample": "Petit échantillon",
+      "large_sample": "Grand échantillon",
+      "high_noise": "Bruit élevé",
+      "low_noise": "Bruit faible",
+      "robustness": "Robuste vs non robuste",
+      "misspecification": "Mauvaise spécification",
+      "real_data": "Données réelles",
+      "compare_methods": "Comparer les méthodes"
+    }
+  },
+  "paths": {
+    "foundations_of_inference": {
+      "title": "Fondements de l'inférence statistique",
+      "summary": "D'une loi de probabilité à la variabilité d'échantillonnage, aux intervalles, aux tests et à la puissance."
+    },
+    "estimation_theory": {
+      "title": "Théorie de l'estimation",
+      "summary": "Méthode des moments, maximum de vraisemblance, information, bornes d'efficacité et rééchantillonnage."
+    },
+    "regression_from_scratch": {
+      "title": "La régression depuis le début",
+      "summary": "Géométrie de la projection, moindres carrés, élimination partielle et stabilité des coefficients."
+    },
+    "diagnostics_and_remedies": {
+      "title": "Diagnostics et remèdes",
+      "summary": "Détecter une hypothèse violée, mesurer les dégâts, appliquer le remède, voir ce qu'il ne corrige pas."
+    },
+    "identification_and_causality": {
+      "title": "Identification et causalité",
+      "summary": "Du biais de variable omise aux graphes causaux, aux instruments et aux designs quasi expérimentaux."
+    },
+    "time_series_econometrics": {
+      "title": "Économétrie des séries temporelles",
+      "summary": "Stationnarité, modélisation ARMA, cointégration, dynamique VAR et volatilité."
+    },
+    "machine_learning_essentials": {
+      "title": "Bases de l'apprentissage automatique",
+      "summary": "Généralisation, régularisation, seuils, optimisation et réduction de dimension."
+    },
+    "from_gradients_to_transformers": {
+      "title": "Des gradients aux transformeurs",
+      "summary": "Descente de gradient, rétropropagation, attention et explication a posteriori."
+    }
+  },
+  "quiz": {
+    "title": "Vérifiez votre compréhension",
+    "check": "Vérifier la réponse",
+    "correct": "Correct",
+    "incorrect": "Pas tout à fait",
+    "explanation": "Pourquoi",
+    "next_question": "Question suivante",
+    "score": "Score : {score} / {total}",
+    "no_grading": "Ce quiz est formatif uniquement, ce n'est pas une évaluation notée."
+  },
+  "export": {
+    "png": "Image PNG",
+    "svg": "Vecteur SVG",
+    "html": "HTML interactif",
+    "json": "État du laboratoire (JSON)",
+    "python": "Script Python",
+    "csv": "Résumé de simulation (CSV)",
+    "markdown": "Résumé Markdown",
+    "done": "Exporté vers {path}",
+    "metadata_note": "Les exports incluent le concept, les paramètres, la graine et la version du paquet."
+  },
+  "doctor": {
+    "title": "Vérification de l'environnement VisualMetrics",
+    "core": "Noyau",
+    "ok": "OK",
+    "missing": "Absent",
+    "install_hint": "Installer avec : {command}",
+    "optional_note": "L'absence d'extras optionnels ne désactive que les fonctions concernées."
+  },
+  "presentation": {
+    "title": "Mode présentation",
+    "hint": "Les flèches du clavier changent d'étape. Échap pour quitter."
+  }
+}

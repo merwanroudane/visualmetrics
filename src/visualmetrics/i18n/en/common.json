@@ -1,0 +1,347 @@
+{
+  "app": {
+    "name": "VisualMetrics",
+    "tagline": "See the theory. Change the assumptions. Understand the model.",
+    "subtitle": "Interactive visual laboratory for statistics, econometrics and AI",
+    "loading": "Loading…"
+  },
+  "nav": {
+    "home": "Home",
+    "explore": "Explore concepts",
+    "paths": "Learning paths",
+    "proofs": "Visual proofs",
+    "labs_statistics": "Statistical labs",
+    "labs_econometrics": "Econometrics labs",
+    "labs_causal": "Causal labs",
+    "labs_ai": "AI labs",
+    "compare": "Compare methods",
+    "datasets": "Datasets",
+    "instructor": "Instructor mode",
+    "favorites": "Favourites",
+    "recent": "Recent",
+    "glossary": "Glossary",
+    "references": "References",
+    "settings": "Settings",
+    "search_placeholder": "Search a concept in English, Arabic or French…"
+  },
+  "domains": {
+    "mathematical_foundations": "Mathematical foundations",
+    "probability_random_variables": "Probability & random variables",
+    "descriptive_statistics": "Descriptive statistics",
+    "inferential_statistics": "Inferential statistics",
+    "regression_linear_models": "Regression & linear models",
+    "econometrics": "Econometrics",
+    "time_series_econometrics": "Time-series econometrics",
+    "panel_data_econometrics": "Panel-data econometrics",
+    "causal_inference": "Causal inference",
+    "multivariate_statistics": "Multivariate statistics",
+    "spatial_econometrics": "Spatial econometrics",
+    "machine_learning": "Machine learning",
+    "deep_learning": "Deep learning",
+    "modern_ai": "Modern AI",
+    "explainable_ai": "Explainable AI"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "intuition": "Intuition",
+    "visualize": "Visualize",
+    "animate": "Animate",
+    "experiment": "Experiment",
+    "compare": "Compare",
+    "assumptions": "Assumptions",
+    "math": "Mathematics",
+    "proof": "Proof / derivation",
+    "simulation": "Simulation",
+    "diagnostics": "Diagnostics",
+    "misconceptions": "Common mistakes",
+    "code": "Code",
+    "data": "Data",
+    "quiz": "Quiz",
+    "references": "References",
+    "warning": "Warning"
+  },
+  "modes": {
+    "learn": "Learn",
+    "visualize": "Visualize",
+    "animate": "Animate",
+    "experiment": "Experiment",
+    "compare": "Compare",
+    "prove": "Prove",
+    "derive": "Derive",
+    "simulate": "Simulate",
+    "diagnose": "Diagnose",
+    "counterexample": "Counterexample",
+    "quiz": "Quiz",
+    "code": "Code",
+    "data": "Data",
+    "references": "References"
+  },
+  "levels": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "phd": "PhD / researcher",
+    "label": "Level"
+  },
+  "evidence": {
+    "label": "Evidence type",
+    "formal_proof": {
+      "label": "Formal proof",
+      "caveat": "A complete mathematical argument, not a picture of one."
+    },
+    "symbolic_derivation": {
+      "label": "Symbolic derivation",
+      "caveat": "Each algebraic step is shown and can be checked."
+    },
+    "geometric_proof": {
+      "label": "Geometric proof",
+      "caveat": "The geometry is exact: the drawn relation is the theorem."
+    },
+    "visual_derivation": {
+      "label": "Visual derivation",
+      "caveat": "A faithful visual account of a valid derivation, not a substitute for it."
+    },
+    "visual_intuition": {
+      "label": "Visual intuition",
+      "caveat": "Intuition only. It suggests why a result is plausible; it proves nothing."
+    },
+    "simulation": {
+      "label": "Simulation",
+      "caveat": "Finite Monte Carlo evidence. A simulation is never a proof of a theorem."
+    },
+    "numerical_demonstration": {
+      "label": "Numerical demonstration",
+      "caveat": "Exact computation for the displayed parameter values only."
+    },
+    "counterexample": {
+      "label": "Counterexample",
+      "caveat": "One valid counterexample is enough to refute a universal claim."
+    },
+    "empirical_example": {
+      "label": "Empirical example",
+      "caveat": "Real data illustrate; they do not verify a theorem."
+    }
+  },
+  "themes": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "high_contrast": "High contrast",
+    "classroom": "Classroom",
+    "publication": "Publication",
+    "colorblind": "Colour-blind friendly",
+    "custom": "Custom"
+  },
+  "terminology": {
+    "label": "Terminology",
+    "translated": "Translated only",
+    "bilingual": "Bilingual terminology",
+    "english_technical": "English technical terms"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ar": "Arabic",
+    "fr": "French"
+  },
+  "actions": {
+    "play": "Play",
+    "pause": "Pause",
+    "restart": "Restart",
+    "previous_step": "Previous step",
+    "next_step": "Next step",
+    "step_mode": "Step by step",
+    "speed": "Speed",
+    "reset": "Reset",
+    "randomize": "Randomize scenario",
+    "apply": "Apply",
+    "export": "Export",
+    "show_code": "Show Python",
+    "copy": "Copy",
+    "download": "Download",
+    "favourite": "Add to favourites",
+    "share": "Share configuration",
+    "open": "Open",
+    "close": "Close",
+    "run": "Run",
+    "compare": "Compare",
+    "presentation": "Presentation mode",
+    "fullscreen": "Full screen",
+    "clear_cache": "Clear cache"
+  },
+  "ui": {
+    "concept": "Concept",
+    "scenario": "Scenario",
+    "scenarios": "Scenarios",
+    "controls": "Controls",
+    "parameters": "Parameters",
+    "results": "Results",
+    "metrics": "Numeric read-out",
+    "evidence": "Evidence",
+    "seed": "Seed",
+    "backend": "Backend",
+    "prerequisites": "Learn first",
+    "next_concepts": "What comes next",
+    "related": "Related concepts",
+    "confused_with": "Often confused with",
+    "references": "References",
+    "dgp": "Data-generating process",
+    "assumption_status": "Assumption status",
+    "holds": "holds",
+    "violated": "violated",
+    "value": "Value",
+    "reference_value": "Reference",
+    "true_value": "True value",
+    "estimate": "Estimate",
+    "no_results": "No concept matched your search.",
+    "planned_notice": "This concept is catalogued for transparency but is not implemented yet.",
+    "planned_badge": "Planned",
+    "experimental_badge": "Experimental",
+    "stable_badge": "Stable",
+    "reduced_motion": "Reduced motion",
+    "advanced_controls": "Advanced controls",
+    "purpose": "Purpose",
+    "what_you_see": "What you are seeing",
+    "what_changed": "What changed",
+    "why": "Why it changed",
+    "interpretation": "How to read it",
+    "conclusion": "What you may conclude",
+    "warning": "Careful",
+    "summary": "Summary",
+    "active_assumptions": "Assumptions in force",
+    "violated_assumptions": "Assumptions deliberately violated",
+    "simulation_note": "Monte Carlo evidence with {reps} repetitions (simulation standard error shown).",
+    "precision_preset": "Precision",
+    "catalogue_size": "{implemented} implemented labs out of {total} catalogued concepts"
+  },
+  "assumptions": {
+    "linearity": "Linearity in parameters",
+    "random_sampling": "Random sampling",
+    "no_perfect_collinearity": "No perfect multicollinearity",
+    "exogeneity": "Zero conditional mean of the error (exogeneity)",
+    "homoskedasticity": "Homoskedasticity",
+    "no_autocorrelation": "No serial correlation",
+    "normal_errors": "Normally distributed errors",
+    "independence": "Independent observations",
+    "identical_distribution": "Identically distributed observations",
+    "finite_variance": "Finite population variance",
+    "correct_functional_form": "Correct functional form",
+    "instrument_relevance": "Instrument relevance",
+    "instrument_exogeneity": "Instrument exogeneity (exclusion restriction)",
+    "parallel_trends": "Parallel trends",
+    "no_anticipation": "No anticipation of treatment",
+    "homogeneous_effects": "Homogeneous treatment effects",
+    "exchangeability": "Exchangeability (no unmeasured confounding)",
+    "positivity": "Positivity / overlap",
+    "sutva": "SUTVA (no interference, one version of treatment)",
+    "no_manipulation": "No manipulation of the running variable",
+    "random_effects": "Effects uncorrelated with the regressors",
+    "stationarity": "Stationarity",
+    "regularity": "Regularity conditions for the asymptotic result"
+  },
+  "controls": {
+    "seed": { "label": "Seed", "help": "Fixes the random draws so the picture is reproducible." },
+    "n": { "label": "Sample size (n)", "help": "Number of observations in each sample." },
+    "alpha": { "label": "Significance level (alpha)", "help": "Probability of rejecting a true null hypothesis." },
+    "effect_size": { "label": "Effect size", "help": "Standardized distance between the null and the alternative." },
+    "noise": { "label": "Noise (sd of the error)", "help": "Standard deviation of the unobserved error term." },
+    "reps": { "label": "Repetitions", "help": "Number of Monte Carlo replications." },
+    "beta0": { "label": "Intercept (beta0)", "help": "Value of y when x equals zero." },
+    "beta1": { "label": "Slope (beta1)", "help": "Change in y for a one-unit change in x." },
+    "confidence_level": { "label": "Confidence level", "help": "Long-run coverage the procedure targets." },
+    "distribution": { "label": "Distribution", "help": "Family of the random variable." },
+    "functional_form": { "label": "Functional form", "help": "Shape of the true relationship between x and y." },
+    "correlation": { "label": "Correlation", "help": "Linear dependence between the two variables." }
+  },
+  "scenarios": {
+    "label": "Scenario",
+    "canonical": { "label": "Canonical case" },
+    "categories": {
+      "canonical": "Textbook baseline",
+      "positive": "Positive direction",
+      "negative": "Negative direction",
+      "null": "No effect",
+      "weak": "Weak signal",
+      "strong": "Strong signal",
+      "boundary": "Boundary case",
+      "violation": "Assumption violated",
+      "counterexample": "Counterexample",
+      "sensitivity": "Sensitivity",
+      "small_sample": "Small sample",
+      "large_sample": "Large sample",
+      "high_noise": "High noise",
+      "low_noise": "Low noise",
+      "robustness": "Robust vs non-robust",
+      "misspecification": "Misspecification",
+      "real_data": "Real data",
+      "compare_methods": "Compare methods"
+    }
+  },
+  "paths": {
+    "foundations_of_inference": {
+      "title": "Foundations of statistical inference",
+      "summary": "From a probability distribution to sampling variability, intervals, tests and power."
+    },
+    "estimation_theory": {
+      "title": "Estimation theory",
+      "summary": "Method of moments, maximum likelihood, information, efficiency bounds and resampling."
+    },
+    "regression_from_scratch": {
+      "title": "Regression from scratch",
+      "summary": "Projection geometry, least squares, partialling out and coefficient stability."
+    },
+    "diagnostics_and_remedies": {
+      "title": "Diagnostics and remedies",
+      "summary": "Detect a violated assumption, measure the damage, apply the remedy, see what it does not fix."
+    },
+    "identification_and_causality": {
+      "title": "Identification and causality",
+      "summary": "From omitted-variable bias to graphs, instruments and quasi-experimental designs."
+    },
+    "time_series_econometrics": {
+      "title": "Time-series econometrics",
+      "summary": "Stationarity, ARMA modelling, cointegration, VAR dynamics and volatility."
+    },
+    "machine_learning_essentials": {
+      "title": "Machine-learning essentials",
+      "summary": "Generalization, regularization, thresholds, optimization and dimension reduction."
+    },
+    "from_gradients_to_transformers": {
+      "title": "From gradients to transformers",
+      "summary": "Gradient descent, backpropagation, attention and post-hoc explanation."
+    }
+  },
+  "quiz": {
+    "title": "Check your understanding",
+    "check": "Check answer",
+    "correct": "Correct",
+    "incorrect": "Not quite",
+    "explanation": "Why",
+    "next_question": "Next question",
+    "score": "Score: {score} / {total}",
+    "no_grading": "This quiz is formative only. It is not a graded assessment."
+  },
+  "export": {
+    "png": "PNG image",
+    "svg": "SVG vector",
+    "html": "Interactive HTML",
+    "json": "Lab state (JSON)",
+    "python": "Python script",
+    "csv": "Simulation summary (CSV)",
+    "markdown": "Markdown summary",
+    "done": "Exported to {path}",
+    "metadata_note": "Exports include concept, parameters, seed and package version."
+  },
+  "doctor": {
+    "title": "VisualMetrics environment check",
+    "core": "Core",
+    "ok": "OK",
+    "missing": "Missing",
+    "install_hint": "Install with: {command}",
+    "optional_note": "Missing optional extras only disable the features that need them."
+  },
+  "presentation": {
+    "title": "Presentation mode",
+    "hint": "Arrow keys move between steps. Press Escape to leave."
+  }
+}

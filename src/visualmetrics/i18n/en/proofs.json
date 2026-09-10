@@ -1,0 +1,73 @@
+{
+  "proofs": {
+    "ui": {
+      "claim": "Claim",
+      "intuition": "In plain language",
+      "assumptions": "Assumptions in force",
+      "assumption_essential": "essential",
+      "assumption_relaxable": "can be relaxed",
+      "if_violated": "If this fails",
+      "steps": "Steps",
+      "why": "Why this step is allowed",
+      "uses": "Uses",
+      "conclusion": "Conclusion",
+      "limitations": "What this does NOT establish",
+      "qed": "Q.E.D.",
+      "prerequisites": "Prerequisites",
+      "references": "References",
+      "checks": "Numerical checks",
+      "checks_note": "These checks confirm that the code implements the proved identity. They are numerical demonstrations, not evidence for the theorem: the theorem is already proved, and no finite computation could establish it.",
+      "check_passed": "passed",
+      "check_failed": "failed",
+      "related_labs": "Explore this in the lab",
+      "step_of": "Step {current} of {total}",
+      "previous": "Previous step",
+      "next": "Next step",
+      "play": "Auto-play",
+      "pause": "Pause",
+      "reset": "Restart proof",
+      "show_algebra": "Show algebra",
+      "hide_algebra": "Hide algebra",
+      "show_geometry": "Show geometric annotations",
+      "hide_geometry": "Hide geometric annotations",
+      "explain_step": "Explain this step",
+      "export": "Export proof"
+    },
+    "step_kind": {
+      "setup": "Setup",
+      "assumption": "Assumption",
+      "definition": "Definition",
+      "algebra": "Algebra",
+      "geometry": "Geometry",
+      "calculus": "Calculus",
+      "probability": "Probability",
+      "substitution": "Substitution",
+      "key_insight": "Key insight",
+      "conclusion": "Conclusion"
+    },
+    "visual_action": {
+      "none": "No picture for this step",
+      "draw_vector": "Draw vector",
+      "draw_subspace": "Draw the subspace",
+      "project_onto_subspace": "Project onto the subspace",
+      "mark_right_angle": "Mark the right angle",
+      "decompose_vector": "Split the vector into two parts",
+      "highlight_triangle": "Highlight the right triangle",
+      "draw_constraint_set": "Draw the constraint set",
+      "draw_level_curves": "Draw the level curves",
+      "mark_tangency": "Mark the point of tangency",
+      "mark_corner": "Mark the corner",
+      "shade_region": "Shade the region",
+      "shade_tail": "Shade the tail",
+      "compare_regions": "Compare the two regions",
+      "rotate_axes": "Rotate to the new axes",
+      "trace_path": "Trace the path",
+      "highlight_term": "Highlight this term",
+      "unfold_chain": "Unfold the chain"
+    }
+  },
+  "errors": {
+    "proof_unknown": "No proof is registered under the identifier '{proof_id}'.",
+    "proof_planned": "The proof '{proof_id}' is listed in the catalogue but has not been written yet. It is shown as planned rather than hidden, so the catalogue never overstates what exists."
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "proofs": {
+    "ui": {
+      "claim": "Énoncé",
+      "intuition": "En langage courant",
+      "assumptions": "Hypothèses en vigueur",
+      "assumption_essential": "essentielle",
+      "assumption_relaxable": "peut être relâchée",
+      "if_violated": "Si elle tombe en défaut",
+      "steps": "Étapes",
+      "why": "Pourquoi cette étape est permise",
+      "uses": "Utilise",
+      "conclusion": "Conclusion",
+      "limitations": "Ce que cela n'établit PAS",
+      "qed": "C.Q.F.D.",
+      "prerequisites": "Prérequis",
+      "references": "Références",
+      "checks": "Vérifications numériques",
+      "checks_note": "Ces vérifications confirment que le code met bien en œuvre l'identité démontrée. Ce sont des démonstrations numériques, non des preuves du théorème : le théorème est déjà démontré, et aucun calcul fini ne saurait l'établir.",
+      "check_passed": "réussie",
+      "check_failed": "échouée",
+      "related_labs": "Explorer dans le laboratoire",
+      "step_of": "Étape {current} sur {total}",
+      "previous": "Étape précédente",
+      "next": "Étape suivante",
+      "play": "Lecture automatique",
+      "pause": "Pause",
+      "reset": "Recommencer la démonstration",
+      "show_algebra": "Afficher l'algèbre",
+      "hide_algebra": "Masquer l'algèbre",
+      "show_geometry": "Afficher les annotations géométriques",
+      "hide_geometry": "Masquer les annotations géométriques",
+      "explain_step": "Expliquer cette étape",
+      "export": "Exporter la démonstration"
+    },
+    "step_kind": {
+      "setup": "Mise en place",
+      "assumption": "Hypothèse",
+      "definition": "Définition",
+      "algebra": "Algèbre",
+      "geometry": "Géométrie",
+      "calculus": "Calcul différentiel",
+      "probability": "Probabilité",
+      "substitution": "Substitution",
+      "key_insight": "Idée clé",
+      "conclusion": "Conclusion"
+    },
+    "visual_action": {
+      "none": "Aucune illustration pour cette étape",
+      "draw_vector": "Tracer le vecteur",
+      "draw_subspace": "Tracer le sous-espace",
+      "project_onto_subspace": "Projeter sur le sous-espace",
+      "mark_right_angle": "Marquer l'angle droit",
+      "decompose_vector": "Décomposer le vecteur en deux parties",
+      "highlight_triangle": "Mettre en évidence le triangle rectangle",
+      "draw_constraint_set": "Tracer l'ensemble des contraintes",
+      "draw_level_curves": "Tracer les courbes de niveau",
+      "mark_tangency": "Marquer le point de tangence",
+      "mark_corner": "Marquer le sommet",
+      "shade_region": "Colorer la région",
+      "shade_tail": "Colorer la queue de distribution",
+      "compare_regions": "Comparer les deux régions",
+      "rotate_axes": "Pivoter vers les nouveaux axes",
+      "trace_path": "Tracer le chemin",
+      "highlight_term": "Mettre en évidence ce terme",
+      "unfold_chain": "Dérouler la chaîne"
+    }
+  },
+  "errors": {
+    "proof_unknown": "Aucune démonstration n'est enregistrée sous l'identifiant « {proof_id} ».",
+    "proof_planned": "La démonstration « {proof_id} » figure au catalogue mais n'a pas encore été rédigée. Elle est affichée comme prévue plutôt que masquée, afin que le catalogue ne surestime jamais ce qui existe réellement."
+  }
+}

@@ -1,0 +1,466 @@
+{
+  "concepts": {
+    "ai": {
+      "attention": {
+        "intuition": "L'attention est une recherche souple. Chaque position pose une question (sa requête), chaque position annonce ce qu'elle offre (sa clé), la correspondance décide de l'écoute, et la réponse est une moyenne pondérée de leurs contenus (leurs valeurs).",
+        "math": "Attention(Q, K, V) = softmax(QK' / sqrt(d_k)) V. La division par sqrt(d_k) empêche les produits scalaires de croître avec la dimension et de saturer le softmax.",
+        "misconceptions": "Les poids d'attention ne sont pas des explications : une attention forte sur un jeton n'établit pas qu'il a causé la sortie.",
+        "summary": "Une tête d'attention jouet et transparente : requêtes, clés et valeurs lisibles, matrice de similarité, softmax qui la transforme en poids, et le mélange pondéré qui en sort.",
+        "title": "Attention",
+        "warning": "Il s'agit d'une petite tête construite à la main, pas d'un modèle pré-entraîné : elle montre le mécanisme, pas ce qu'un grand modèle a appris."
+      },
+      "tokenization": {
+        "summary": "Comment le texte devient des vecteurs, et le coût d'une fenêtre de contexte. Catalogué, pas encore implémenté.",
+        "title": "Tokenisation et plongements"
+      }
+    },
+    "causal": {
+      "dag": {
+        "intuition": "Un chemin transmet l'association sauf s'il est bloqué. Une chaîne ou une fourche est ouverte jusqu'à ce qu'on conditionne sur le nœud central ; un collisionneur est fermé jusqu'à ce qu'on conditionne dessus, ce qui *crée* alors une association.",
+        "math": "Critère de la porte dérobée : un ensemble Z identifie l'effet de D sur Y s'il bloque tout chemin de D vers Y comportant une flèche entrant dans D, et ne contient aucun descendant de D.",
+        "misconceptions": "« Ajouter des contrôles » n'est pas une stratégie : conditionner sur un médiateur retire une partie de l'effet recherché ; conditionner sur un collisionneur fabrique un biais.",
+        "summary": "Construisez un graphe orienté, marquez traitement et résultat, conditionnez sur une variable et voyez les chemins s'ouvrir et se fermer - l'estimation par régression se mettant à jour en parallèle.",
+        "title": "Graphes causaux : confusion, collisionneurs et mauvais contrôles",
+        "warning": "Le graphe encode vos hypothèses. Il montre ce qui serait identifié *si* le graphe est correct, et aucune donnée ne peut vérifier le graphe lui-même."
+      },
+      "did": {
+        "intuition": "Le groupe témoin n'est pas là pour égaler le niveau du groupe traité, mais pour fournir l'évolution que les traités auraient connue de toute façon. Soustraire cette évolution commune laisse l'effet du traitement.",
+        "math": "Avec deux périodes et deux groupes, DiD = (moyenne traités après - avant) - (moyenne témoins après - avant). Cela égale l'ATT sous tendances parallèles et absence d'anticipation. L'étude d'événement estime un coefficient par période relative.",
+        "misconceptions": "Des tendances préalables parallèles ne sont ni nécessaires ni suffisantes : l'hypothèse porte sur les tendances contrefactuelles après traitement et n'est pas testable.",
+        "summary": "Trajectoires traitées et témoins, contrefactuel construit, coefficients d'étude d'événement - et les cas de tendance préalable, d'anticipation et d'adoption échelonnée où le design échoue.",
+        "title": "Différences de différences",
+        "warning": "Avec adoption échelonnée et effets hétérogènes, les effets fixes bidirectionnels utilisent des unités déjà traitées comme témoins et peuvent donner un signe erroné. Ce cas est inclus."
+      },
+      "dml": {
+        "summary": "Estimation orthogonalisée d'effets hétérogènes. Catalogué, pas encore implémenté.",
+        "title": "Double machine learning et forêts causales"
+      },
+      "potential_outcomes": {
+        "intuition": "Chaque unité a un résultat avec traitement et un sans ; on n'en voit qu'un. Le manquant est le contrefactuel, et toute méthode causale est une stratégie pour le combler de façon crédible.",
+        "math": "ATE = E[Y(1) - Y(0)] et ATT = E[Y(1) - Y(0) | D = 1]. La comparaison naïve se décompose en ATT + (E[Y(0) | D = 1] - E[Y(0) | D = 0]), ce second terme étant le biais de sélection, annulé par construction sous randomisation.",
+        "misconceptions": "Contrôler des covariables observées n'élimine le biais que si elles captent *toute* la confusion. Aucun test statistique ne peut le confirmer à partir des seules données.",
+        "summary": "Voyez les deux résultats potentiels de chaque unité, celui réellement observé, et comment la sélection transforme une différence de moyennes en autre chose que l'effet du traitement.",
+        "title": "Résultats potentiels",
+        "warning": "Le laboratoire montre les deux résultats potentiels parce qu'il les a générés. Cette vue n'existe jamais sur données réelles."
+      },
+      "rdd": {
+        "intuition": "Juste en dessous et juste au-dessus du seuil, les unités sont essentiellement semblables sauf que l'une des deux a reçu le traitement. Un saut du résultat exactement à la frontière est difficile à attribuer à autre chose.",
+        "math": "L'estimand net vaut lim(x -> c+) E[Y | X = x] - lim(x -> c-) E[Y | X = x], égal à l'effet moyen au seuil sous continuité des résultats potentiels en X. Le design flou divise ce saut par le saut de probabilité de traitement.",
+        "misconceptions": "L'estimation est locale au seuil : elle ne dit rien des unités éloignées, et un polynôme global qui semble étendre la conclusion est souvent un artefact.",
+        "summary": "Un seuil qui décide du traitement, deux ajustements locaux se rejoignant à la frontière, et les choix de fenêtre, de forme fonctionnelle et de manipulation qui décident si le saut est réel.",
+        "title": "Régression sur discontinuité",
+        "warning": "Un saut de densité au seuil signifie que les unités se sont triées : le design s'effondre. Le préréglage de manipulation le montre."
+      },
+      "synthetic_control": {
+        "summary": "Une combinaison pondérée de donneurs comme contrefactuel. Catalogué, pas encore implémenté.",
+        "title": "Contrôle synthétique"
+      }
+    },
+    "deep_learning": {
+      "backpropagation": {
+        "intuition": "La rétropropagation est la règle de la chaîne avec une comptabilité. Chaque arête sait seulement comment sa sortie répond à son entrée ; multiplier ces sensibilités le long d'un chemin donne la réponse de la perte à un poids enfoui.",
+        "math": "Pour L(f(g(w))), dL/dw = L'(f) * f'(g) * g'(w). Dans un réseau en couches : delta_l = (W_(l+1)' delta_(l+1)) * dérivée d'activation en z_l, et le gradient d'un poids vaut delta_l fois l'activation entrante.",
+        "misconceptions": "La rétropropagation n'est pas un algorithme d'apprentissage : elle calcule des gradients ; l'apprentissage est fait par l'optimiseur.",
+        "summary": "Un petit réseau dessiné en graphe de calcul : les valeurs avant s'allument de gauche à droite, les dérivées locales apparaissent sur chaque arête, et les gradients se multiplient en revenant.",
+        "title": "Rétropropagation",
+        "warning": "Multiplier beaucoup de dérivées inférieures à un fait disparaître les gradients, supérieures à un les fait exploser."
+      }
+    },
+    "descriptive": {
+      "explorer": {
+        "intuition": "Tout résumé jette de l'information. La moyenne et l'écart-type oublient la forme ; la médiane et l'écart interquartile oublient les queues mais résistent à la contamination. Cinq vues d'un même échantillon rendent l'arbitrage concret.",
+        "math": "L'asymétrie est le troisième moment standardisé et l'aplatissement le quatrième. Une seule observation extrême décale la moyenne de (x - moyenne) / n sans presque toucher la médiane.",
+        "misconceptions": "Un histogramme en cloche n'est pas une preuve de normalité, et une boîte symétrique peut cacher une bimodalité que la densité révèle aussitôt.",
+        "summary": "Histogramme, densité, fonction de répartition empirique, boîte à moustaches et violon du même échantillon côte à côte, avec des résumés robustes et non robustes réagissant aux valeurs aberrantes que vous ajoutez.",
+        "title": "Explorateur de données",
+        "warning": "La largeur des classes est un choix, pas une propriété des données : le même échantillon peut sembler unimodal ou bimodal."
+      }
+    },
+    "econometrics": {
+      "autocorrelation": {
+        "intuition": "Quand les erreurs sont corrélées dans le temps, les observations consécutives répètent l'information au lieu d'en ajouter. La régression se comporte comme si l'échantillon effectif était plus petit : l'erreur type classique est trop faible et les t trop grands.",
+        "math": "Avec des erreurs AR(1) de coefficient rho, la formule classique sous-estime la vraie variance d'environ (1 + rho)/(1 - rho) pour un régresseur persistant. Durbin-Watson vaut approximativement 2(1 - rho_chapeau) ; Newey-West ajoute des autocovariances pondérées.",
+        "misconceptions": "Un Durbin-Watson proche de 2 ne disculpe pas le modèle : il ne regarde que l'ordre un et devient invalide avec une variable dépendante retardée - d'où Breusch-Godfrey.",
+        "summary": "Réglez le coefficient AR(1) des erreurs, lisez Durbin-Watson et Breusch-Godfrey, puis comparez l'inférence classique, HAC de Newey-West et MCG réalisables.",
+        "title": "Autocorrélation : diagnostic et remède",
+        "warning": "L'autocorrélation combinée à une variable dépendante retardée biaise bien les coefficients, pas seulement les erreurs types. Ce cas est inclus et clairement distingué."
+      },
+      "endogeneity_iv": {
+        "intuition": "Les MCO attribuent à x toute co-variation partagée avec y, y compris celle causée par un facteur non observé. Un instrument isole la part de x poussée par quelque chose d'étranger à l'erreur, et cette part seule identifie l'effet.",
+        "math": "Pour les MCO, plim(b) = beta + Cov(x, u)/Var(x). Les doubles moindres carrés projettent x sur les instruments : plim = beta + Cov(z, u)/Cov(z, x). Le numérateur est nul si l'instrument est exogène, mais le dénominateur tend vers zéro s'il est faible.",
+        "misconceptions": "Une première étape significative ne suffit pas : des instruments faibles biaisent les 2SLS vers les MCO en échantillon fini et dégradent gravement la couverture des intervalles.",
+        "summary": "Corrélez le régresseur à l'erreur, observez les MCO s'éloigner de la vérité, puis réparez avec un instrument - et voyez ce qui arrive s'il est faible ou invalide.",
+        "title": "Endogénéité et variables instrumentales",
+        "warning": "L'exogénéité d'un instrument n'est pas testable dans un modèle juste identifié. Le test de suridentification n'existe qu'avec plus d'instruments que de régresseurs endogènes, et il teste la validité conjointe."
+      },
+      "gmm": {
+        "summary": "Conditions de moments, matrices de pondération et statistique J. Catalogué, pas encore implémenté.",
+        "title": "Méthode des moments généralisés"
+      },
+      "heteroskedasticity": {
+        "intuition": "Les MCO trouvent toujours la bonne droite quand la variance de l'erreur varie avec x : chaque point reste centré sur la vérité. Ce qui casse, c'est la formule de l'erreur type, qui supposait un bruit identique partout.",
+        "math": "Sous hétéroscédasticité, Var(b) = (X'X)^-1 X' Omega X (X'X)^-1 et non sigma^2 (X'X)^-1. L'estimateur de White remplace Omega par la diagonale des résidus au carré ; les moindres carrés pondérés divisent chaque observation par son écart-type et restaurent l'efficacité.",
+        "misconceptions": "L'hétéroscédasticité ne biaise pas les coefficients. Parler d'« estimations biaisées à cause de l'hétéroscédasticité » confond un problème de variance et un problème d'exogénéité.",
+        "summary": "Faites croître progressivement le résidu en éventail, appliquez Breusch-Pagan et White, puis comparez erreurs types classiques, robustes et pondérées sur les mêmes données.",
+        "title": "Hétéroscédasticité : diagnostic et remède",
+        "warning": "Les erreurs types robustes corrigent l'inférence, pas l'efficacité. Si vous connaissez la structure de variance, les MCP donnent des estimations plus serrées ; si vous vous trompez, elles peuvent être pires que rien."
+      },
+      "logit_probit": {
+        "intuition": "Le modèle de probabilité linéaire trace une droite parmi des zéros et des uns et finit par prédire hors de [0, 1]. Logit et probit font passer cette droite par une fonction en S, ce qui garde les prédictions dans l'intervalle et rend l'effet de x dépendant de la position sur la courbe.",
+        "math": "Logit suppose P(y = 1 | x) = 1/(1 + exp(-x'b)), probit utilise la fonction de répartition normale. L'effet marginal de x_j vaut b_j * f(x'b), maximal près d'une probabilité prédite de un demi. Les coefficients logit sont des log-rapports de cotes.",
+        "misconceptions": "Les coefficients logit et probit ne sont pas comparables entre modèles ou échantillons, car ils sont mis à l'échelle par une variance d'erreur normalisée différemment. Comparez les effets marginaux.",
+        "summary": "Ajustez les mêmes données binaires de trois façons, comparez les courbes de probabilité, et convertissez les coefficients en effets marginaux et rapports de cotes interprétables.",
+        "title": "Variables binaires : MPL, logit et probit",
+        "warning": "Le MPL n'est pas simplement faux : ses effets marginaux sont souvent proches des effets marginaux moyens du logit et il supporte mieux les effets fixes - mais ses prédictions et erreurs types demandent de la prudence."
+      },
+      "measurement_error": {
+        "summary": "Biais d'atténuation quand un régresseur est mesuré imparfaitement. Catalogué, pas encore implémenté.",
+        "title": "Erreur de mesure et erreurs dans les variables"
+      },
+      "omitted_variable_bias": {
+        "intuition": "Si une variable qui influence y bouge aussi avec x et reste hors du modèle, la pente estimée doit faire deux métiers à la fois : l'effet direct de x et le chemin indirect passant par la variable omise. L'estimation est la somme des deux.",
+        "math": "Si le vrai modèle est y = b0 + b1 x + b2 z + u et que z est omis, alors plim(b1_chapeau) = b1 + b2 * delta, où delta est la pente de la régression auxiliaire de z sur x. Le signe du biais est le produit de deux signes.",
+        "misconceptions": "Ajouter des contrôles n'est pas automatiquement plus prudent : contrôler une variable sur le chemin causal, ou un collisionneur, crée un biais là où il n'y en avait pas.",
+        "summary": "Observez un coefficient se déplacer lorsqu'un facteur de confusion est retiré du modèle, et comparez ce déplacement à la formule exacte du biais, terme à terme.",
+        "title": "Biais de variable omise",
+        "warning": "Le laboratoire calcule le biais exact parce qu'il connaît le vrai processus générateur. Sur données réelles, vous ne pouvez raisonner que sur son signe et son ordre de grandeur."
+      },
+      "quantile_regression": {
+        "summary": "Des effets qui varient le long de la distribution conditionnelle, via la fonction de perte asymétrique. Catalogué, pas encore implémenté.",
+        "title": "Régression quantile"
+      },
+      "simultaneous_equations": {
+        "intuition": "Quand deux variables se décident ensemble, aucune équation ne peut être estimée comme si l'autre côté était fixe. La forme réduite exprime chaque variable endogène en fonction des seules exogènes ; l'identification demande si les paramètres structurels peuvent en être extraits.",
+        "math": "La condition d'ordre exige au moins autant d'exogènes exclues que d'endogènes au membre de droite de chaque équation. Les 3SLS ajoutent la corrélation inter-équations aux 2SLS ; SUR est le cas sans régresseur endogène, où le gain vient uniquement des erreurs corrélées et de régresseurs différents.",
+        "misconceptions": "La condition d'ordre est nécessaire, pas suffisante : un modèle peut la satisfaire et échouer à la condition de rang, auquel cas rien n'est identifié.",
+        "summary": "Un système structurel où y et x se déterminent mutuellement : biais de simultanéité, condition d'ordre, forme réduite, et MCO face aux 2SLS, 3SLS et SUR.",
+        "title": "Équations simultanées et systèmes",
+        "warning": "Les estimateurs de système ne sont plus efficaces que si chaque équation est bien spécifiée. Une seule équation mal spécifiée contamine tout le système."
+      }
+    },
+    "inference": {
+      "bayesian_updating": {
+        "intuition": "La mise à jour bayésienne est une multiplication point par point suivie d'un rééchelonnement. Là où a priori et vraisemblance s'accordent, le produit reste élevé ; ailleurs il s'effondre. Les données s'accumulent en multiplications répétées, l'a priori s'efface.",
+        "math": "posterior(theta | x) proportionnel à vraisemblance(x | theta) * a priori(theta). Avec un a priori Beta(a, b) et s succès sur n essais, l'a posteriori est Beta(a + s, b + n - s) : l'a priori agit comme a + b - 2 pseudo-observations.",
+        "misconceptions": "Un intervalle de crédibilité n'est pas un intervalle de confiance. Un intervalle crédible à 95% porte bien une probabilité a posteriori de 95%, mais relativement à l'a priori choisi.",
+        "summary": "Ajoutez les observations une à une et regardez l'a priori se multiplier par la vraisemblance puis se renormaliser en a posteriori, avec des intervalles de crédibilité qui signifient ce qu'on croit à tort des intervalles de confiance.",
+        "title": "Mise à jour bayésienne",
+        "warning": "Avec peu d'observations l'a posteriori est dominé par l'a priori. Utilisez le contrôle de sensibilité avant toute conclusion de fond."
+      },
+      "bootstrap": {
+        "intuition": "On ne peut pas tirer de nouveaux échantillons de la population, mais l'échantillon en est la meilleure estimation disponible. Rééchantillonner avec remise imite le processus de sondage et reproduit remarquablement bien la variabilité de la statistique.",
+        "math": "L'intervalle des percentiles prend les quantiles alpha/2 et 1 - alpha/2 des réplications. L'intervalle de base les réfléchit autour de la statistique observée : [2*t_chapeau - q_(1-alpha/2), 2*t_chapeau - q_(alpha/2)].",
+        "misconceptions": "Le bootstrap ne crée pas d'information : il estime la loi d'échantillonnage à partir des données existantes ; avec n = 8 il hérite de toutes leurs faiblesses.",
+        "summary": "Rééchantillonnez l'échantillon, reconstruisez la statistique des milliers de fois, et comparez la loi bootstrap à la vraie loi d'échantillonnage visible seulement en simulation.",
+        "title": "Bootstrap",
+        "warning": "Le bootstrap échoue pour les statistiques dépendant des valeurs extrêmes, comme le maximum. Ce cas est inclus comme contre-exemple."
+      },
+      "clt": {
+        "intuition": "La loi des grands nombres dit où atterrit la moyenne. Le théorème central limite décrit la *forme* de l'erreur restante une fois grossie par la racine de n. La moyenne détruit les particularités de la loi parente et ne laisse que sa moyenne et sa variance.",
+        "math": "Si les observations sont indépendantes et identiquement distribuées de variance finie sigma^2, alors sqrt(n) (mean_n - mu) / sigma converge en loi vers une normale centrée réduite. La convergence est en loi seulement : elle porte sur les probabilités, pas sur la trajectoire réalisée.",
+        "misconceptions": "Le théorème ne dit pas que les données deviennent normales. La loi parente ne change pas ; c'est la loi d'échantillonnage de la moyenne standardisée qui s'approche de la normalité.",
+        "summary": "Les sommes standardisées de presque toute loi parente dérivent vers la même courbe en cloche - sauf lorsqu'une condition du théorème échoue discrètement.",
+        "title": "Théorème central limite",
+        "warning": "Avec une loi parente à queue lourde ou très asymétrique, n = 30 est très insuffisant. Essayez les préréglages lognormal et Cauchy."
+      },
+      "confidence_intervals": {
+        "intuition": "Un intervalle de confiance est un objet aléatoire construit à partir d'un échantillon aléatoire. Le niveau de confiance est une propriété de la *procédure* sur des échantillons répétés, pas une probabilité attachée à l'intervalle affiché.",
+        "math": "Pour une moyenne normale à variance inconnue, l'intervalle est xbar +/- t_(1 - alpha/2, n - 1) * s / sqrt(n). Sa couverture est exacte sous normalité et seulement approchée sinon ; le laboratoire affiche la couverture réalisée et son erreur type de simulation.",
+        "misconceptions": "« Il y a 95% de probabilité que mu soit dans [2.1, 4.7] » est faux au sens fréquentiste. Une fois calculé, l'intervalle contient mu ou non ; 95% décrit le taux de succès à long terme de la recette.",
+        "summary": "Générez des centaines d'échantillons, tracez l'intervalle produit par chacun et comptez combien de fois le vrai paramètre fixe est réellement capturé.",
+        "title": "Couverture des intervalles de confiance",
+        "warning": "La couverture peut tomber bien au-dessous du niveau nominal en petit échantillon, en population asymétrique ou avec l'intervalle naïf de proportion. Ces cas sont inclus volontairement."
+      },
+      "convergence_modes": {
+        "summary": "Convergence en probabilité, presque sûre et en loi, plus Slutsky et le théorème de l'application continue. Catalogué, pas encore implémenté.",
+        "title": "Modes de convergence"
+      },
+      "cramer_rao": {
+        "intuition": "L'information mesure la netteté avec laquelle la vraisemblance distingue des valeurs voisines du paramètre. Vraisemblance plate, peu d'information, loi d'échantillonnage large. L'information s'additionne, d'où une borne qui décroît en 1/n.",
+        "math": "I_n(theta) = n I_1(theta) pour un échantillon i.i.d., et tout estimateur sans biais vérifie Var(theta_chapeau) >= 1 / I_n(theta). Un estimateur atteignant la borne est efficace ; le maximum de vraisemblance l'atteint asymptotiquement.",
+        "misconceptions": "La borne contraint les estimateurs sans biais. Un estimateur biaisé peut avoir une erreur quadratique moyenne inférieure au plancher, ce qu'exploite le rétrécissement.",
+        "summary": "Accumulez l'information observation après observation, voyez le plancher de variance descendre, et comparez un estimateur efficace à un autre qui manque la borne.",
+        "title": "Information de Fisher et borne de Cramer-Rao",
+        "warning": "La borne suppose que le support ne dépend pas du paramètre. Elle échoue réellement pour une loi uniforme sur [0, theta]."
+      },
+      "hypothesis_testing": {
+        "intuition": "Un test pose une seule question : ce que j'observe est-il surprenant *si l'hypothèse nulle était vraie* ? La loi sous H0 décrit le comportement de la statistique, la valeur critique fixe le seuil de surprise, et la valeur-p mesure la position réelle de l'observation dans la queue.",
+        "math": "La valeur-p vaut P(|T| >= |t_obs| | H0), une probabilité calculée sous l'hypothèse nulle. La taille du test est la probabilité de rejeter quand H0 est vraie ; pour un test correctement spécifié elle vaut alpha.",
+        "misconceptions": "La valeur-p n'est ni la probabilité que H0 soit vraie ni une mesure de taille d'effet. Une valeur-p minuscule issue d'un très grand échantillon peut accompagner un effet scientifiquement négligeable.",
+        "summary": "Loi sous H0, région de rejet, statistique observée, valeur-p et dualité avec l'intervalle de confiance - tout bouge ensemble quand vous modifiez alpha, n et l'effet.",
+        "title": "Test d'hypothèse",
+        "warning": "Ne pas rejeter n'est pas une preuve que H0 est vraie : le test peut simplement manquer de puissance."
+      },
+      "lln": {
+        "intuition": "La moyenne annule le bruit indépendant. Chaque nouvelle observation déplace la moyenne courante moins que la précédente, car la moyenne de n nombres donne à chacun le poids 1/n. Ce qui survit à l'annulation est l'espérance.",
+        "math": "Loi faible : la moyenne empirique converge en probabilité vers mu, donc P(|mean_n - mu| > epsilon) tend vers 0. Loi forte : convergence presque sûre, la trajectoire entière se stabilise avec probabilité un. Les deux exigent une espérance finie.",
+        "misconceptions": "La loi ne dit pas que les écarts sont corrigés. Une série de tirages bas n'est pas compensée par des tirages hauts ; elle est diluée par le dénominateur croissant.",
+        "summary": "Observez les moyennes courantes se stabiliser vers l'espérance - et refuser de se stabiliser lorsque la variance de la population est infinie.",
+        "title": "Loi des grands nombres",
+        "warning": "Cette animation est une preuve de Monte-Carlo, pas une démonstration : un nombre fini de trajectoires finies n'établit pas un théorème asymptotique."
+      },
+      "mle": {
+        "intuition": "Le maximum de vraisemblance demande quelle valeur du paramètre aurait rendu les données observées les moins surprenantes. Quand l'échantillon grandit, la log-vraisemblance devient très pointue, et un pic aigu signifie exactement une petite erreur type.",
+        "math": "Le score est la dérivée de la log-vraisemblance ; l'annuler donne l'estimateur. L'information observée est l'opposé de la dérivée seconde à l'optimum et la variance asymptotique en est l'inverse : sqrt(n)(theta_chapeau - theta) tend vers N(0, 1/I(theta)).",
+        "misconceptions": "La vraisemblance n'est pas une loi de probabilité sur le paramètre : c'est une fonction du paramètre à données fixées, et son aire ne vaut pas un.",
+        "summary": "La surface de vraisemblance, le score qui s'annule à l'optimum, la courbure qui devient l'information, et l'estimateur des moments à côté.",
+        "title": "Maximum de vraisemblance",
+        "warning": "La normalité asymptotique exige des conditions de régularité. Le laboratoire inclut un cas frontière où l'optimum est au bord de l'espace des paramètres."
+      },
+      "multiple_testing": {
+        "intuition": "Chaque test au niveau 0,05 s'autorise 5% de fausses alertes. Vingt tests indépendants sur du bruit pur produisent en moyenne une « découverte ». Les corrections protègent soit contre toute erreur, soit sur la part attendue d'erreurs parmi les découvertes.",
+        "math": "Le taux d'erreur par famille est P(au moins un rejet à tort) ; Bonferroni compare chaque valeur-p à alpha/m et Holm applique une version séquentielle uniformément plus puissante. Le taux de fausses découvertes est E[fausses découvertes / découvertes] ; Benjamini-Hochberg le contrôle en comparant la k-ième valeur ordonnée à k*alpha/m.",
+        "misconceptions": "Contrôler le taux de fausses découvertes n'est pas une version affaiblie de la même garantie : c'est une autre question, qui tolère volontairement des faux positifs pour gagner en puissance.",
+        "summary": "Lancez de nombreux tests d'un coup, voyez les faux positifs s'accumuler, puis comparez Bonferroni, Holm et Benjamini-Hochberg sur les mêmes valeurs-p.",
+        "title": "Tests multiples",
+        "warning": "La simulation montre aussi le rapport sélectif : choisir les comparaisons à publier après avoir vu les résultats invalide toutes ces corrections."
+      },
+      "neyman_pearson": {
+        "intuition": "Parmi toutes les régions de rejet de même taille, on veut celle qui capte le plus de probabilité sous l'alternative. Trier les résultats selon leur vraisemblance relative sous H1 puis remplir la région gloutonnement est exactement ce que prescrit le lemme.",
+        "math": "Pour H0 simple : theta = theta_0 contre H1 simple : theta = theta_1, le test qui rejette lorsque L(theta_1)/L(theta_0) > k, avec k tel que la taille vaille alpha, est le plus puissant au niveau alpha.",
+        "misconceptions": "Le lemme porte sur deux hypothèses *simples*. Pour des alternatives composites, un test uniformément le plus puissant n'existe que sous une structure supplémentaire.",
+        "summary": "Déplacez le seuil du rapport de vraisemblance et voyez pourquoi ordonner l'espace des échantillons par ce rapport produit le test le plus puissant à taille donnée.",
+        "title": "Lemme de Neyman-Pearson",
+        "warning": "Le panneau de dérivation est un véritable argument symbolique ; l'image de la région de rejet l'illustre sans constituer la démonstration."
+      },
+      "power": {
+        "intuition": "Sous H0 la statistique suit une loi ; sous l'alternative elle suit une loi décalée. Alpha est la queue de la première au-delà de la valeur critique ; la puissance est la queue de la seconde au-delà de la même valeur. Tout le reste ne fait que déplacer ces deux courbes.",
+        "math": "Pour un test z unilatéral à un échantillon, puissance = 1 - Phi(z_(1-alpha) - d sqrt(n)) où d est la taille d'effet standardisée. La puissance croît avec la racine de n : diviser l'erreur type par deux coûte quatre fois l'échantillon.",
+        "misconceptions": "La puissance n'est pas « 1 moins la valeur-p ». Elle se calcule avant de voir les données, sous une alternative supposée ; la « puissance observée » n'apporte rien.",
+        "summary": "Deux distributions qui se recouvrent, quatre aires colorées et un message : la puissance est ce que vous obtenez pour l'alpha dépensé, l'effet existant et l'échantillon abordable.",
+        "title": "Taille et puissance",
+        "warning": "Abaisser alpha pour être « plus rigoureux » abaisse toujours la puissance. Aucun réglage ne fait baisser les deux risques à n et effet fixés."
+      },
+      "sampling_distributions": {
+        "intuition": "Une statistique calculée sur un échantillon est elle-même aléatoire, car un autre échantillon aurait donné un autre nombre. La loi d'échantillonnage est la loi de ce nombre sur tous les échantillons possibles ; l'erreur type en est simplement l'écart-type.",
+        "math": "Pour la moyenne d'un échantillon i.i.d., E[moyenne] = mu et Var(moyenne) = sigma^2 / n. Le tirage sans remise dans une population finie de taille N multiplie la variance par la correction (N - n) / (N - 1).",
+        "misconceptions": "L'erreur type n'est pas l'écart-type des données : elle décrit le déplacement de la *statistique* d'un échantillon à l'autre et diminue avec n, contrairement à la dispersion des données.",
+        "summary": "Choisissez une population, une statistique, un plan de sondage et une taille d'échantillon, puis construisez la loi d'échantillonnage par tirages répétés - ou exhaustivement pour une petite population finie.",
+        "title": "Constructeur de lois d'échantillonnage",
+        "warning": "La loi d'échantillonnage empirique repose sur un nombre fini de répétitions et reste bruitée ; la courbe théorique superposée est l'objet exact."
+      }
+    },
+    "math": {
+      "optimization": {
+        "summary": "Courbure, conditions du premier ordre et multiplicateurs de Lagrange, visuellement. Catalogué, pas encore implémenté.",
+        "title": "Gradients, hessiennes et optimisation sous contrainte"
+      },
+      "projection": {
+        "intuition": "La projection répond à : quelle part de ce vecteur puis-je construire à partir de ces directions ? Ce qui reste ne peut pas être construit à partir d'elles, et c'est précisément pourquoi il leur est perpendiculaire.",
+        "math": "La projection de y sur l'espace engendré par a vaut (a'y / a'a) a. Pour une matrice X de directions, elle devient X(X'X)^-1 X' y, et le résidu vérifie identiquement X'(y - Py) = 0.",
+        "misconceptions": "L'orthogonalité concerne le produit scalaire, pas l'angle visuel d'un graphique déformé. Vérifiez toujours l'échelle des axes.",
+        "summary": "Déplacez un vecteur, observez sa projection sur une droite ou un plan, et voyez le résidu rester perpendiculaire quoi que vous fassiez.",
+        "title": "Vecteurs, sous-espace engendré et projection orthogonale",
+        "warning": "Quand les directions sont presque parallèles, la projection reste exacte mais les coefficients qui la produisent deviennent extrêmement sensibles : la racine géométrique de la multicolinéarité."
+      }
+    },
+    "ml": {
+      "bias_variance": {
+        "intuition": "Un modèle rigide donne toujours la même mauvaise réponse ; un modèle flexible en donne une différente à chaque fois. Le biais est la distance entre l'ajustement moyen et la vérité ; la variance mesure l'écart des ajustements individuels à cette moyenne.",
+        "math": "E[(y - f_chapeau(x))^2] = Biais^2 + Variance + sigma^2. Le dernier terme est le bruit de y, irréductible. Augmenter la flexibilité réduit le premier et augmente le second : le total est en U.",
+        "misconceptions": "L'erreur d'entraînement n'estime pas l'erreur de test : elle décroît avec la complexité et peut atteindre zéro sur un modèle qui généralise très mal.",
+        "summary": "Ajustez le même modèle flexible sur de nombreux échantillons d'entraînement, observez la dispersion des ajustements, et décomposez l'erreur attendue en biais, variance et bruit irréductible.",
+        "title": "Compromis biais-variance",
+        "warning": "La décomposition exige la vraie fonction, que seule une simulation fournit. Sur données réelles on estime l'erreur totale, pas ses trois composantes."
+      },
+      "classification_threshold": {
+        "intuition": "Un classifieur ne produit pas une classe mais un score. Le seuil est une décision ajoutée par-dessus, et chaque seuil échange fausses alertes contre cas manqués. La courbe ROC est le registre de tous ces arbitrages.",
+        "math": "Le taux de vrais positifs vaut TP/(TP + FN) et celui de faux positifs FP/(FP + TN) ; la courbe ROC trace l'un contre l'autre. L'AUC est la probabilité qu'un positif tiré au hasard obtienne un score supérieur à un négatif. Avec des coûts c_FP et c_FN et une prévalence p, le seuil optimal vérifie cote = c_FP (1 - p) / (c_FN p).",
+        "misconceptions": "L'exactitude est presque vide de sens en cas de déséquilibre : avec 1% de prévalence, prédire toujours « négatif » donne 99%.",
+        "summary": "Déplacez un seuil et voyez matrice de confusion, précision, rappel, point sur la courbe ROC et coût attendu bouger ensemble.",
+        "title": "Seuils de classification, ROC et calibration",
+        "warning": "L'AUC ignore le seuil et la calibration : un modèle peut avoir une excellente AUC et des probabilités totalement fausses."
+      },
+      "cross_validation": {
+        "summary": "Estimation de l'erreur de généralisation et fuites de prétraitement. Catalogué, pas encore implémenté.",
+        "title": "Validation croisée et fuite de données"
+      },
+      "gradient_descent": {
+        "intuition": "Le gradient pointe vers le haut : avancer à son opposé descend. Reste la longueur du pas : trop petit on n'arrive jamais, trop grand on saute par-dessus la vallée et on finit plus haut qu'au départ.",
+        "math": "La mise à jour est b <- b - eta * gradient(L(b)). Pour une perte quadratique de valeurs propres dans [m, M], la méthode converge seulement si eta < 2/M, et la vitesse dépend du conditionnement M/m.",
+        "misconceptions": "Un petit gradient ne signifie pas une bonne solution : points selles et plateaux ont un gradient presque nul sans être des minima.",
+        "summary": "Regardez l'optimiseur parcourir une surface de perte pas à pas, puis cassez-le : augmentez le taux d'apprentissage jusqu'à l'oscillation et la divergence, ou placez-le dans une vallée non convexe.",
+        "title": "Descente de gradient",
+        "warning": "La trajectoire affichée est déterministe. La descente stochastique ajoute du bruit qui aide à s'échapper mais empêche la convergence exacte."
+      },
+      "regularization": {
+        "intuition": "La régression pénalisée cherche le meilleur ajustement respectant un budget. Le budget ridge est une boule lisse : la solution ne touche presque jamais un axe. Celui du lasso est un losange dont les coins sont sur les axes, et une ellipse allongée touche volontiers un coin.",
+        "math": "Ridge minimise ||y - Xb||^2 + lambda ||b||^2, de forme close b = (X'X + lambda I)^-1 X'y ; le lasso remplace la pénalité par lambda ||b||_1 et n'a pas de forme close. En régresseurs orthonormés, ridge multiplie par 1/(1 + lambda), le lasso applique un seuillage doux.",
+        "misconceptions": "La régularisation ne soigne pas la confusion : elle réduit la variance au prix d'un biais, ce qui aide la prédiction et nuit à l'estimation causale sans biais.",
+        "summary": "Les contours elliptiques de la perte des moindres carrés rencontrant une contrainte circulaire ou en losange - l'image qui explique pourquoi le lasso produit des zéros exacts et pas la ridge.",
+        "title": "Ridge, lasso et géométrie du rétrécissement",
+        "warning": "Les pénalités ne sont pas invariantes d'échelle. Standardisez les régresseurs, sinon une variable en unités différentes sera pénalisée différemment sans raison."
+      }
+    },
+    "multivariate": {
+      "clustering": {
+        "intuition": "La classification ne découvre pas des groupes : elle impose une partition et indique si elle paraît nette. Donnez un nuage uniforme à k-means avec k = 4 et il renverra quatre groupes bien propres.",
+        "math": "K-means minimise la somme des carrés intra-classe en alternant affectation et mise à jour des centres ; il converge vers un optimum local dépendant de l'initialisation. La silhouette compare la distance intra-classe moyenne à la distance au groupe le plus proche.",
+        "misconceptions": "Le coude de la courbe d'inertie n'est pas un test : l'inertie décroît par construction à chaque groupe ajouté.",
+        "summary": "K-means et classification hiérarchique sur le même nuage, avec les diagnostics du coude et de la silhouette, et les cas où les deux trouvent avec assurance une structure inexistante.",
+        "title": "Classification automatique",
+        "warning": "K-means suppose des groupes sphériques de tailles voisines. Les structures allongées ou imbriquées sont mal découpées quels que soient les diagnostics."
+      },
+      "pca": {
+        "intuition": "L'ACP cherche la direction dans laquelle le nuage est le plus long, car c'est là que les points diffèrent le plus. La projection sur cet axe conserve autant de dispersion qu'une seule direction le permet.",
+        "math": "La première composante est le vecteur unitaire w maximisant w' S w, où S est la covariance empirique ; la solution est le vecteur propre de plus grande valeur propre, et cette valeur propre est la variance captée. Maximiser la variance retenue et minimiser l'erreur de reconstruction sont le même problème.",
+        "misconceptions": "Les composantes ne sont pas les variables d'origine et n'ont généralement pas de sens substantiel : une composante est un mélange pondéré.",
+        "summary": "Un nuage de points pivotant, ses axes principaux, la variance captée par chacun et la reconstruction obtenue en ne gardant que le premier - avec une géométrie exacte.",
+        "title": "Analyse en composantes principales",
+        "warning": "L'ACP n'est pas invariante d'échelle. Standardiser d'abord revient à analyser la matrice de corrélation, ce qui est une autre question."
+      }
+    },
+    "panel": {
+      "dynamic_gmm": {
+        "summary": "Biais de Nickell, Arellano-Bond et prolifération d'instruments. Catalogué, pas encore implémenté.",
+        "title": "Panels dynamiques et GMM en système"
+      },
+      "fixed_vs_random": {
+        "intuition": "Chaque unité porte une caractéristique permanente jamais observée. Si elle est étrangère à x, on peut la traiter comme du bruit et gagner en efficacité. Si elle bouge avec x, la traiter comme du bruit revient à attribuer son influence à x.",
+        "math": "La transformation intra soustrait la moyenne propre de chaque unité et élimine exactement alpha_i. Les effets aléatoires appliquent un centrage partiel de poids theta = 1 - sqrt(sigma_e^2 / (T sigma_alpha^2 + sigma_e^2)) ; efficaces si Cov(alpha_i, x_it) = 0, non convergents sinon. Hausman compare les deux.",
+        "misconceptions": "Les effets fixes ne contrôlent pas tout : ils retirent seulement ce qui est constant dans l'unité ; tout facteur inobservé variable dans le temps biaise encore.",
+        "summary": "Augmentez la corrélation entre l'effet individuel et le régresseur et regardez les MCO groupés et les effets aléatoires se briser pendant que les effets fixes restent justes.",
+        "title": "Effets fixes contre effets aléatoires",
+        "warning": "Les effets fixes ne peuvent pas estimer le coefficient d'une variable constante au sein de l'unité : la transformation intra l'annihile."
+      }
+    },
+    "probability": {
+      "approximations": {
+        "intuition": "Une approximation remplace une loi exacte difficile par une loi limite plus simple. L'important n'est pas que les deux courbes se ressemblent, mais l'ampleur de l'erreur là où vous calculez vraiment des probabilités, c'est-à-dire dans les queues.",
+        "math": "L'approximation normale de la binomiale applique le théorème central limite à une somme de Bernoulli ; la correction de continuité remplace P(X <= k) par P(Z <= (k + 0.5 - np) / sqrt(np(1-p))). La limite de Poisson fait tendre n vers l'infini et p vers zéro à np fixé.",
+        "misconceptions": "Les règles empiriques comme np > 5 sont des conventions, pas des théorèmes. Le laboratoire affiche l'erreur maximale réelle.",
+        "summary": "Binomiale vers Normale, Binomiale vers Poisson, Poisson vers Normale et Student vers Normale - avec l'erreur d'approximation tracée, et pas seulement deux courbes superposées.",
+        "title": "Approximations de distributions",
+        "warning": "La qualité de l'approximation est la plus mauvaise précisément là où l'on teste, dans la queue lointaine. Regardez toujours la courbe d'erreur."
+      },
+      "bivariate": {
+        "intuition": "La loi conjointe est le tableau ou la surface complète. Une marge replie une dimension en la sommant ou l'intégrant ; une conditionnelle découpe une tranche à une valeur de l'autre variable puis la renormalise.",
+        "math": "f_X(x) = intégrale de f(x, y) dy ; f(y | x) = f(x, y) / f_X(x) ; Cov(X, Y) = E[XY] - E[X]E[Y]. L'indépendance signifie f(x, y) = f_X(x) f_Y(y) pour tout couple, ce qui est strictement plus fort qu'une covariance nulle.",
+        "misconceptions": "Une covariance nulle n'implique pas l'indépendance. Le laboratoire propose un cas de corrélation exactement nulle avec dépendance fonctionnelle complète.",
+        "summary": "Construisez une loi conjointe de deux variables, puis lisez ses marges, ses lois conditionnelles, sa covariance et la façon précise dont l'indépendance peut échouer.",
+        "title": "Variables aléatoires bivariées",
+        "warning": "La corrélation ne mesure que la co-variation linéaire. Une relation déterministe non linéaire peut afficher une corrélation nulle."
+      },
+      "distributions": {
+        "intuition": "Une loi est une règle qui attribue une probabilité aux valeurs. La densité montre où la masse se concentre, la fonction de répartition accumule cette masse de gauche à droite, et le quantile lit la même courbe à l'envers. Trois vues du même objet.",
+        "math": "Pour une variable continue, F(x) = P(X <= x) est l'intégrale de f(t) de -infini à x, et la fonction quantile est l'inverse de F. Dans le cas discret l'intégrale devient une somme sur le support.",
+        "misconceptions": "Une densité élevée n'est pas une probabilité : pour une variable continue P(X = x) = 0 en tout point, et f(x) peut même dépasser 1.",
+        "summary": "Déplacez les paramètres de 22 lois discrètes et continues et observez la densité, la fonction de répartition, les quantiles, les moments et un échantillon réel réagir ensemble.",
+        "title": "Explorateur de distributions",
+        "warning": "L'histogramme échantillonné est un tirage fini. Il fluctue autour de la courbe théorique ; un écart à petit n est du bruit d'échantillonnage, pas une formule fausse."
+      }
+    },
+    "regression": {
+      "fwl": {
+        "intuition": "Un coefficient de régression multiple n'est pas « l'effet de x » : c'est l'effet de la part de x que rien d'autre n'explique, sur la part de y que rien d'autre n'explique. L'élimination partielle rend cette phrase littérale.",
+        "math": "Avec X = [X1, X2], le sous-vecteur beta1 issu de la régression de y sur X égale le coefficient de la régression de M2 y sur M2 X1, où M2 = I - X2(X2'X2)^-1 X2'. Les résidus sont identiques.",
+        "misconceptions": "L'élimination partielle est statistique, pas causale : contrôler un collisionneur ou un médiateur change aussi le coefficient, mais en l'aggravant.",
+        "summary": "Résidualisez y et x sur les contrôles, régressez les résidus l'un sur l'autre, et constatez que le coefficient coïncide avec la régression multiple à la précision machine.",
+        "title": "Théorème de Frisch-Waugh-Lovell",
+        "warning": "Le graphique de variable ajoutée montre exactement la variation qui identifie le coefficient. Si ce nuage est presque vertical, le coefficient repose sur très peu d'information."
+      },
+      "gauss_markov": {
+        "summary": "Un panneau par hypothèse classique avec cas valide, violation légère et sévère. Catalogué, pas encore implémenté.",
+        "title": "Centre de contrôle des hypothèses de Gauss-Markov"
+      },
+      "multicollinearity": {
+        "intuition": "Quand deux régresseurs bougent ensemble, les données ne peuvent pas dire lequel mérite le crédit. Les MCO trouvent toujours le meilleur plan, mais celui-ci peut basculer le long de la crête de quasi-colinéarité presque sans coût : les coefficients oscillent, l'ajustement bouge à peine.",
+        "math": "Var(beta_j_chapeau) = sigma^2 / (SST_j (1 - R_j^2)), où R_j^2 provient de la régression de x_j sur les autres. Le facteur d'inflation de la variance vaut 1/(1 - R_j^2) : une corrélation de 0,99 multiplie la variance par environ cinquante.",
+        "misconceptions": "La multicolinéarité ne biaise pas les estimations : elles restent sans biais et convergentes ; seule leur variance explose. C'est un problème de précision, pas de validité.",
+        "summary": "Poussez la corrélation entre deux régresseurs vers un et observez des coefficients instables alors que les prévisions restent parfaitement fiables.",
+        "title": "Multicolinéarité",
+        "warning": "Retirer un régresseur colinéaire « pour corriger le VIF » peut créer un biais de variable omise : on échange un problème de précision contre un problème d'identification."
+      },
+      "ols_geometry": {
+        "intuition": "Les moindres carrés ne concernent pas vraiment une droite passant par des points : il s'agit du point le plus proche de y dans l'espace atteignable par X. Le plus court chemin d'un point à un plan est perpendiculaire, et c'est tout le contenu des équations normales.",
+        "math": "La matrice de projection P = X(X'X)^-1 X' envoie y sur ses valeurs ajustées et M = I - P produit le résidu. P et M sont symétriques et idempotentes, PM = 0 et X'e = 0 exactement : les équations normales écrites comme condition d'orthogonalité.",
+        "misconceptions": "L'orthogonalité des résidus n'est pas un fait empirique à tester : elle tient par construction. Un résidu corrélé à un régresseur signifie que ce régresseur n'était pas dans le modèle.",
+        "summary": "Voyez y, l'espace des colonnes de X, le vecteur ajusté et le résidu en trois dimensions - et vérifiez que le résidu rencontre le plan à exactement quatre-vingt-dix degrés.",
+        "title": "Les MCO comme projection orthogonale",
+        "warning": "L'image n'est exacte que dans les dimensions représentables ; l'énoncé algébrique X'e = 0 vaut en toute dimension. C'est le panneau de démonstration qui porte l'argument."
+      },
+      "restricted": {
+        "intuition": "Une régression libre explore tout l'espace des coefficients ; une contrainte confine la recherche à une droite ou un plan. L'ajustement ne peut que se dégrader, et le test F demande s'il s'est dégradé plus que le bruit ne l'expliquerait.",
+        "math": "b_R = b + (X'X)^-1 R'[R(X'X)^-1 R']^-1 (r - Rb), et F = [(SSR_R - SSR_U)/q] / [SSR_U/(n - k)] sous H0 avec q contraintes. Le test de Chow est exactement ce test F avec les muettes de rupture contraintes à zéro.",
+        "misconceptions": "Ne pas rejeter une contrainte ne prouve pas qu'elle tient : en petit échantillon, un écart économiquement important peut passer inaperçu.",
+        "summary": "Imposez R beta = r, voyez l'optimum contraint sur la surface des coefficients, mesurez la perte d'ajustement et testez la contrainte - puis réutilisez la même machinerie pour les variables muettes et une rupture à la Chow.",
+        "title": "Régression contrainte et changement structurel",
+        "warning": "Imposer une contrainte fausse introduit un biais ; en imposer une vraie réduit la variance. Le laboratoire montre explicitement les deux faces."
+      },
+      "simple_linear": {
+        "intuition": "Les moindres carrés choisissent la droite qui minimise la somme des distances verticales au carré. Cette seule règle explique tout : pourquoi un point éloigné fait pivoter la droite, pourquoi une vraie relation courbe ajustée par une droite laisse des résidus structurés, et pourquoi un x plus dispersé rend la pente plus précise.",
+        "math": "beta1_chapeau = Cov(x, y) / Var(x) et beta0_chapeau = ybarre - beta1_chapeau xbarre. Sous les hypothèses classiques Var(beta1_chapeau) = sigma^2 / (n Var(x)) : la précision augmente avec n, avec une variance d'erreur plus faible et avec la dispersion de x.",
+        "misconceptions": "Un R-carré élevé ne signifie ni modèle correct, ni causalité, ni prédiction valide hors de la plage observée de x. Le laboratoire propose un cas à R-carré supérieur à 0,9 avec une forme fonctionnelle mal spécifiée.",
+        "summary": "Un nuage de points, une vingtaine de contrôles : signe de la pente, forme fonctionnelle, loi des erreurs, hétéroscédasticité, valeurs aberrantes, levier, erreur de mesure, variables omises et endogénéité - chacun avec son préréglage.",
+        "title": "Explorateur de scénarios de régression simple",
+        "warning": "Extrapoler la droite au-delà de la plage de x est une hypothèse, pas une estimation. La bande de prévision s'élargit pour une raison."
+      }
+    },
+    "spatial": {
+      "autocorrelation": {
+        "summary": "Matrices de poids, I de Moran et effets de débordement. Catalogué, pas encore implémenté.",
+        "title": "Autocorrélation spatiale"
+      }
+    },
+    "timeseries": {
+      "ardl": {
+        "summary": "Multiplicateurs de court et long terme via un constructeur de réponse dynamique. Catalogué, pas encore implémenté.",
+        "title": "Retards échelonnés et ARDL"
+      },
+      "arma": {
+        "intuition": "L'autocorrélation montre ce qui survit d'aujourd'hui dans le futur ; la version partielle retire ce qu'expliquent déjà les retards intermédiaires. Un processus AR laisse une longue queue d'ACF et une coupure nette de PACF ; un MA fait l'inverse.",
+        "math": "AR(p) est stationnaire si les racines de 1 - phi_1 z - ... - phi_p z^p sont hors du cercle unité ; MA(q) est inversible sous la condition analogue. L'ACF d'un MA(q) est exactement nulle au-delà du retard q, la PACF d'un AR(p) au-delà de p.",
+        "misconceptions": "Les ACF et PACF empiriques sont des estimations à erreur type non négligeable : un pic juste hors de la bande au retard 7 est généralement du bruit.",
+        "summary": "Réglez les coefficients AR et MA, lisez les ACF et PACF théoriques et empiriques, et suivez la boucle identification-estimation-diagnostic sur une série que vous construisez.",
+        "title": "Modélisation ARMA et Box-Jenkins",
+        "warning": "Les critères d'information comparent des modèles ajustés au même échantillon. La différenciation change l'échantillon : les AIC en niveau et en différence ne sont pas comparables."
+      },
+      "cointegration": {
+        "intuition": "Chaque série erre sans limite, mais leur distance non. Quelque chose ramène la paire dès qu'elles s'écartent, et le terme de correction d'erreur mesure la part de l'écart de la période précédente refermée cette période.",
+        "math": "Si y et x sont I(1) et y - beta x est I(0), le théorème de représentation de Granger donne : delta y_t = alpha (y_(t-1) - beta x_(t-1)) + termes de court terme + e_t, avec alpha négatif pour la stabilité. Engle-Granger teste le résidu de la régression en niveaux.",
+        "misconceptions": "Un R-carré élevé entre deux séries intégrées n'est pas une preuve de cointégration : le préréglage de régression fallacieuse produit un R-carré supérieur à 0,8 à partir de deux marches aléatoires indépendantes.",
+        "summary": "Deux séries erratiques liées par un écart stationnaire : relation de long terme, vitesse d'ajustement, et ce qui se passe quand le lien disparaît.",
+        "title": "Cointégration et correction d'erreur",
+        "warning": "Un coefficient d'ajustement positif signifie un système divergent. Si votre estimation est positive, c'est en général la spécification qui est en cause."
+      },
+      "garch": {
+        "intuition": "Les rendements financiers sont presque imprévisibles en niveau mais très prévisibles en amplitude : une journée violente en précède souvent une autre. GARCH encode exactement cela.",
+        "math": "GARCH(1,1) pose sigma2_t = omega + alpha e2_(t-1) + beta sigma2_(t-1). La persistance vaut alpha + beta ; la variance inconditionnelle omega/(1 - alpha - beta) n'existe que si cette somme est inférieure à un. Même avec des innovations normales, la loi inconditionnelle a des queues plus épaisses.",
+        "misconceptions": "Le regroupement de volatilité n'équivaut pas à des rendements prévisibles : la moyenne conditionnelle peut être nulle alors que la variance conditionnelle est très prévisible.",
+        "summary": "Générez des rendements dont la variance dépend du passé, observez l'alternance des régimes calmes et agités, et voyez persistance, effet de levier et queues épaisses émerger de trois paramètres.",
+        "title": "ARCH, GARCH et regroupement de volatilité",
+        "warning": "Une persistance estimée à 0,999 est un signal d'alerte : près de la frontière, la variance inconditionnelle n'est plus définie et les prévisions longues perdent leur sens."
+      },
+      "stationarity": {
+        "intuition": "Une série stationnaire est ramenée vers sa moyenne : les chocs s'estompent. Une série à racine unitaire n'a pas ce rappel : chaque choc s'ajoute au niveau de façon permanente et la variance croît sans borne. Deux telles séries paraîtront liées même si elles sont indépendantes.",
+        "math": "Pour y_t = rho y_(t-1) + e_t avec |rho| < 1, Var(y_t) tend vers sigma^2/(1 - rho^2). À rho = 1 la variance vaut t*sigma^2 et l'autocorrélation décroît si lentement qu'elle ressemble à une tendance.",
+        "misconceptions": "Une série qui tend n'est pas automatiquement à racine unitaire. Une tendance déterministe plus bruit stationnaire tend aussi, avec des propriétés totalement différentes ; les deux cas sont fournis.",
+        "summary": "Faites glisser le coefficient autorégressif de zéro à 0,95 puis exactement à un et au-delà : trajectoire, variance, autocorrélation et régression fallacieuse apparaissent ensemble.",
+        "title": "Stationnarité et racines unitaires",
+        "warning": "La loi de Dickey-Fuller n'est pas la normale standard. Utiliser les valeurs critiques usuelles de t pour tester rho = 1 rejette beaucoup trop souvent."
+      },
+      "var": {
+        "intuition": "Un VAR laisse chaque variable dépendre du passé récent de toutes les variables. Une réponse impulsionnelle retrace l'effet d'un choc ponctuel sur les périodes suivantes ; la décomposition demande quelle part de l'incertitude de prévision chaque choc explique.",
+        "math": "Pour un VAR(1) stable, y_t = A y_(t-1) + e_t admet la forme moyenne mobile y_t = somme de A^h e_(t-h), donc la réponse à l'horizon h vaut A^h. La stabilité exige que toutes les valeurs propres de A soient dans le cercle unité. Les réponses orthogonalisées utilisent un facteur de Cholesky.",
+        "misconceptions": "La causalité de Granger est une antériorité prédictive, pas une causalité : une variable peut « causer » une autre simplement parce qu'elle réagit plus vite à un choc commun.",
+        "summary": "Un VAR bivarié dont vous contrôlez chaque coefficient, avec réponses impulsionnelles, décomposition de la variance d'erreur de prévision et le problème d'ordonnancement rendu visible.",
+        "title": "VAR, réponses impulsionnelles et causalité de Granger",
+        "warning": "L'identification de Cholesky impose une structure récursive que vous avez choisie. Changez l'ordre et les réponses d'impact changent : c'est une hypothèse, pas un résultat."
+      }
+    },
+    "xai": {
+      "partial_dependence": {
+        "summary": "Comportement global du modèle et courbes d'espérance conditionnelle individuelle. Catalogué, pas encore implémenté.",
+        "title": "Dépendance partielle et ICE"
+      },
+      "shap": {
+        "intuition": "Si une prédiction est un gain et les variables des joueurs qui ont coopéré, combien mérite chacun ? La réponse de Shapley est la contribution moyenne d'une variable rejoignant toutes les coalitions possibles des autres.",
+        "math": "phi_j = somme sur les sous-ensembles S ne contenant pas j de [|S|!(p - |S| - 1)!/p!] * (f(S union {j}) - f(S)). L'efficacité est exacte : référence + somme des phi_j = f(x).",
+        "misconceptions": "Une valeur SHAP n'est pas un effet causal : elle attribue la prédiction d'un *modèle*, et une variable peut recevoir beaucoup simplement en servant de proxy.",
+        "summary": "Partez de la prédiction de référence, ajoutez les variables une à une dans tous les ordres, et voyez les contributions se sommer exactement à la prédiction de cette observation.",
+        "title": "Explications additives de Shapley",
+        "warning": "Avec des variables corrélées, la version à espérance marginale évalue le modèle sur des combinaisons inexistantes : l'attribution parle du modèle, pas du monde."
+      }
+    }
+  }
+}

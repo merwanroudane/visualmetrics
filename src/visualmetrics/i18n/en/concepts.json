@@ -1,0 +1,466 @@
+{
+  "concepts": {
+    "ai": {
+      "attention": {
+        "intuition": "Attention is soft lookup. Each position asks a question (its query), every position advertises what it offers (its key), the match decides how much to listen, and the answer is a weighted average of what those positions actually contain (their values).",
+        "math": "Attention(Q, K, V) = softmax(QK' / sqrt(d_k)) V. The scaling by sqrt(d_k) keeps the dot products from growing with dimension and pushing the softmax into a near one-hot regime with vanishing gradients.",
+        "misconceptions": "Attention weights are not explanations. High attention to a token does not establish that the token caused the output; different weight patterns can produce identical predictions.",
+        "summary": "A transparent toy attention head: queries, keys and values you can read, a similarity matrix, the softmax that turns it into weights, and the weighted mixture that comes out.",
+        "title": "Attention",
+        "warning": "This is a deliberately small hand-built head, not a pretrained model. It shows the mechanism exactly and says nothing about what a large model has actually learned."
+      },
+      "tokenization": {
+        "summary": "How text becomes vectors, and what a context window costs. Catalogued, not implemented yet.",
+        "title": "Tokenization and embeddings"
+      }
+    },
+    "causal": {
+      "dag": {
+        "intuition": "A path transmits association unless something blocks it. A chain or a fork is open until you condition on the middle node; a collider is closed until you condition on it, at which point conditioning *creates* association that was not there before.",
+        "math": "The back-door criterion: a set Z identifies the effect of D on Y if Z blocks every path from D to Y with an arrow into D, and Z contains no descendant of D. Conditioning on a collider or its descendant opens a path and violates the criterion.",
+        "misconceptions": "'Add more controls' is not a strategy. Conditioning on a mediator removes part of the effect you want; conditioning on a collider manufactures bias out of nothing.",
+        "summary": "Build a directed graph, mark treatment and outcome, condition on a variable and watch paths open and close - with the regression estimate updating alongside the graph.",
+        "title": "Causal graphs: confounders, colliders and bad controls",
+        "warning": "The graph encodes assumptions you supplied. It shows what would be identified *if* the graph is right, and no amount of data can verify the graph itself."
+      },
+      "did": {
+        "intuition": "The control group is not there to match the treated group's level; it is there to supply the change the treated group would have experienced anyway. Subtracting that common change is what leaves the treatment effect behind.",
+        "math": "With two periods and two groups, DiD = (Ybar_treated_post - Ybar_treated_pre) - (Ybar_control_post - Ybar_control_pre). It equals the ATT under parallel trends and no anticipation. The event-study version estimates one coefficient per relative period, with the period before treatment normalized to zero.",
+        "misconceptions": "Parallel pre-treatment trends are neither necessary nor sufficient for the identifying assumption, which is about counterfactual post-treatment trends and is fundamentally untestable.",
+        "summary": "Treated and control trajectories, the constructed counterfactual, the event-study coefficients - and the pre-trend, anticipation and staggered-adoption cases where the design fails.",
+        "title": "Difference-in-differences",
+        "warning": "With staggered adoption and heterogeneous effects, two-way fixed effects uses already-treated units as controls and can produce an estimate with the wrong sign. The lab includes that case explicitly."
+      },
+      "dml": {
+        "summary": "Orthogonalized estimation of heterogeneous effects. Catalogued, not implemented yet.",
+        "title": "Double machine learning and causal forests"
+      },
+      "potential_outcomes": {
+        "intuition": "Every unit has an outcome under treatment and an outcome without it; you only ever see one. The missing one is the counterfactual, and every causal method is a strategy for filling it in credibly.",
+        "math": "ATE = E[Y(1) - Y(0)] and ATT = E[Y(1) - Y(0) | D = 1]. The naive comparison decomposes as ATT + (E[Y(0) | D = 1] - E[Y(0) | D = 0]), the second term being selection bias. Randomization sets that term to zero by design.",
+        "misconceptions": "Controlling for observed covariates removes selection bias only if the covariates capture *all* of the confounding. There is no statistical test that can confirm this from the data alone.",
+        "summary": "See both potential outcomes for every unit, the one that is actually observed, and how selection turns a difference in means into something that is not the treatment effect.",
+        "title": "Potential outcomes",
+        "warning": "The lab can show both potential outcomes because it generated them. That view is never available with real data, which is exactly why identifying assumptions are unavoidable."
+      },
+      "rdd": {
+        "intuition": "Just below and just above the cutoff, units are essentially alike except that one group received the treatment. Any jump in the outcome exactly at the boundary is hard to attribute to anything else - provided nobody could choose which side to be on.",
+        "math": "The sharp RD estimand is lim(x -> c+) E[Y | X = x] - lim(x -> c-) E[Y | X = x], which equals the average treatment effect at the cutoff under continuity of potential outcomes in X. The fuzzy design divides that jump by the jump in treatment probability, making it a local instrumental-variables estimator.",
+        "misconceptions": "The estimate is local to the cutoff. It says nothing about units far from it, and a global polynomial fit that seems to extend the conclusion is usually a modelling artefact.",
+        "summary": "A cutoff that decides treatment, two local fits meeting at the boundary, and the bandwidth, functional form and manipulation choices that decide whether the jump is real.",
+        "title": "Regression discontinuity",
+        "warning": "A density jump at the cutoff means units sorted themselves across it, and the design collapses. The manipulation preset shows exactly what that looks like."
+      },
+      "synthetic_control": {
+        "summary": "A weighted combination of donors as counterfactual. Catalogued, not implemented yet.",
+        "title": "Synthetic control"
+      }
+    },
+    "deep_learning": {
+      "backpropagation": {
+        "intuition": "Backpropagation is the chain rule applied with bookkeeping. Each edge knows only how its own output responds to its own input; multiplying those local sensitivities along a path tells you how the final loss responds to a weight buried deep in the network.",
+        "math": "For a composition L(f(g(w))), dL/dw = L'(f) * f'(g) * g'(w). In a layered network this becomes delta_l = (W_(l+1)' delta_(l+1)) * activation'(z_l), and the gradient with respect to a weight is delta_l times the incoming activation.",
+        "misconceptions": "Backpropagation is not a learning algorithm. It computes gradients; the actual learning is done by the optimizer that consumes them.",
+        "summary": "A small network drawn as a computational graph: forward values light up left to right, local derivatives appear on each edge, and gradients multiply their way back.",
+        "title": "Backpropagation",
+        "warning": "Multiplying many derivatives smaller than one makes gradients vanish and larger than one makes them explode. Switch the activation to sigmoid and add layers to watch the first happen."
+      }
+    },
+    "descriptive": {
+      "explorer": {
+        "intuition": "Every summary throws information away. The mean and standard deviation throw away shape; the median and interquartile range throw away the tails but survive contamination. Seeing five views of one sample makes the trade-off concrete.",
+        "math": "Skewness is the third standardized moment and kurtosis the fourth. A single extreme observation shifts the mean by (x - mean) / n but leaves the median essentially untouched.",
+        "misconceptions": "A bell-shaped histogram is not evidence of normality, and a symmetric boxplot can hide bimodality that the density immediately reveals.",
+        "summary": "Histogram, density, ECDF, boxplot and violin of the same sample side by side, with robust and non-robust summaries reacting to outliers you add yourself.",
+        "title": "Exploratory data explorer",
+        "warning": "Histogram bin width is a choice, not a property of the data. The same sample can look unimodal or bimodal depending on the binning."
+      }
+    },
+    "econometrics": {
+      "autocorrelation": {
+        "intuition": "When errors are correlated over time, consecutive observations repeat information instead of adding new information. The regression behaves as if it had a smaller effective sample, so the classical standard error is too small and t statistics are too large.",
+        "math": "With AR(1) errors of coefficient rho, the classical variance formula understates the true variance by roughly a factor of (1 + rho)/(1 - rho) for a persistent regressor. Durbin-Watson is approximately 2(1 - rho_hat); Newey-West adds weighted autocovariances up to a chosen lag.",
+        "misconceptions": "A Durbin-Watson statistic near 2 does not clear the model. It only looks at first-order correlation and is invalid when a lagged dependent variable is present - which is exactly why Breusch-Godfrey exists.",
+        "summary": "Set the AR(1) coefficient of the errors, read Durbin-Watson and Breusch-Godfrey, then compare classical, Newey-West HAC and feasible GLS inference.",
+        "title": "Serial correlation: diagnosis and remedy",
+        "warning": "Serial correlation combined with a lagged dependent variable does bias the coefficients, not just the standard errors. That case is included and clearly separated from the pure-inference case."
+      },
+      "endogeneity_iv": {
+        "intuition": "Ordinary least squares attributes to x every co-movement it shares with y, including co-movement caused by something unobserved. An instrument isolates the part of x that is pushed around by something unrelated to the error, and only that part is used to identify the effect.",
+        "math": "OLS has plim(b) = beta + Cov(x, u)/Var(x). Two-stage least squares projects x onto the instruments and uses the fitted values, giving plim = beta + Cov(z, u)/Cov(z, x): the numerator is zero if the instrument is exogenous, but the denominator shrinks towards zero when it is weak.",
+        "misconceptions": "A statistically significant first stage is not enough. Weak instruments make 2SLS biased towards OLS in finite samples, and its confidence intervals badly under-cover.",
+        "summary": "Correlate the regressor with the error, watch OLS drift away from the truth, then repair it with an instrument - and see what happens when the instrument is weak or invalid.",
+        "title": "Endogeneity and instrumental variables",
+        "warning": "An instrument's exogeneity cannot be tested when the model is exactly identified. The over-identification test shown here is only available with more instruments than endogenous regressors, and it tests joint validity, not each instrument."
+      },
+      "gmm": {
+        "summary": "Moment conditions, weighting matrices and the J statistic. Catalogued, not implemented yet.",
+        "title": "Generalized method of moments"
+      },
+      "heteroskedasticity": {
+        "intuition": "Least squares still finds the right line when the error variance changes with x - each point is still centred on the truth. What breaks is the formula for the standard error, which assumed every observation was equally noisy.",
+        "math": "Under heteroskedasticity Var(b) = (X'X)^-1 X' Omega X (X'X)^-1 rather than sigma^2 (X'X)^-1. White's estimator replaces Omega by the diagonal of squared residuals; weighted least squares instead divides each observation by its own standard deviation and restores efficiency.",
+        "misconceptions": "Heteroskedasticity does not bias the coefficients. Reporting 'biased estimates because of heteroskedasticity' confuses a variance problem with an exogeneity problem.",
+        "summary": "Grow the fan-shaped residual pattern gradually, run Breusch-Pagan and White, then compare classical, robust and weighted standard errors on the same data.",
+        "title": "Heteroskedasticity: diagnosis and remedy",
+        "warning": "Robust standard errors fix inference, not efficiency. If you know the variance structure, weighted least squares gives genuinely tighter estimates - and if you guess it wrong, it can be worse than doing nothing."
+      },
+      "logit_probit": {
+        "intuition": "A linear probability model draws a straight line through zeros and ones, so it eventually predicts probabilities outside [0, 1]. Logit and probit squeeze that line through an S-shaped function, which keeps predictions inside the interval and makes the effect of x depend on where you stand on the curve.",
+        "math": "Logit assumes P(y = 1 | x) = 1/(1 + exp(-x'b)) and probit uses the normal CDF. The marginal effect of x_j is b_j * f(x'b), so it is largest near a predicted probability of one half. Logit coefficients are log odds ratios; exponentiating gives the odds ratio directly.",
+        "misconceptions": "Logit and probit coefficients are not comparable across models or samples, because they are scaled by an error variance that is normalized differently. Compare marginal effects, not raw coefficients.",
+        "summary": "Fit the same binary data three ways, compare the fitted probability curves, and turn coefficients into marginal effects and odds ratios that people can actually interpret.",
+        "title": "Binary outcomes: LPM, logit and probit",
+        "warning": "The linear probability model is not simply wrong. Its marginal effects are often close to the average marginal effects of logit, and it survives fixed effects better - but its predictions and its standard errors need care."
+      },
+      "measurement_error": {
+        "summary": "Attenuation bias when a regressor is measured imperfectly. Catalogued, not implemented yet.",
+        "title": "Measurement error and errors in variables"
+      },
+      "omitted_variable_bias": {
+        "intuition": "If something that affects y also moves with x and is left out, the estimated slope is asked to carry two jobs at once: the direct effect of x and the indirect path running through the omitted variable. The estimate is the sum of the two.",
+        "math": "If the true model is y = b0 + b1 x + b2 z + u and z is omitted, then plim(b1_hat) = b1 + b2 * delta, where delta is the slope of the auxiliary regression of z on x. The direction of the bias is the product of two signs and can be predicted before estimating anything.",
+        "misconceptions": "Adding more controls is not automatically safer. Controlling for a variable on the causal pathway, or for a collider, creates bias where there was none.",
+        "summary": "Watch a coefficient move as a confounder is removed from the model, and check the movement against the exact bias formula term by term.",
+        "title": "Omitted-variable bias",
+        "warning": "The lab computes the exact bias because it knows the true data-generating process. With real data you cannot compute it - you can only reason about its sign and plausible size."
+      },
+      "quantile_regression": {
+        "summary": "Effects that differ across the conditional distribution, via the check function. Catalogued, not implemented yet.",
+        "title": "Quantile regression"
+      },
+      "simultaneous_equations": {
+        "intuition": "When two variables are decided together, neither equation can be estimated as if the other side were fixed. The reduced form expresses each endogenous variable in terms of the exogenous ones only, and identification asks whether the structural parameters can be recovered from it.",
+        "math": "The order condition requires at least as many excluded exogenous variables as right-hand-side endogenous variables in each equation. 3SLS adds cross-equation error correlation to 2SLS; SUR is the special case with no endogenous regressors, where efficiency gains come purely from correlated errors and different regressor sets.",
+        "misconceptions": "The order condition is necessary, not sufficient. A model can satisfy it and still fail the rank condition, in which case the structural parameters are not identified at all.",
+        "summary": "A structural system where y and x determine each other: see simultaneity bias, the order condition, the reduced form, and OLS against 2SLS, 3SLS and SUR.",
+        "title": "Simultaneous equations and systems",
+        "warning": "System estimators are more efficient only if every equation is correctly specified. One misspecified equation contaminates the whole system - which equation-by-equation estimation would have contained."
+      }
+    },
+    "inference": {
+      "bayesian_updating": {
+        "intuition": "Bayesian updating is pointwise multiplication followed by rescaling. Where the prior and the likelihood agree, the product stays high; where they disagree, it collapses. Data accumulate as repeated multiplications, so the prior's influence fades.",
+        "math": "posterior(theta | x) proportional to likelihood(x | theta) * prior(theta). With a Beta(a, b) prior and s successes in n Bernoulli trials, the posterior is Beta(a + s, b + n - s): the prior acts exactly like a + b - 2 pseudo-observations.",
+        "misconceptions": "A credible interval is not a confidence interval. A 95% credible interval does carry a 95% posterior probability - but only relative to the prior you chose.",
+        "summary": "Add observations one at a time and watch the prior multiply by the likelihood and renormalize into the posterior, with credible intervals that mean what people wrongly think confidence intervals mean.",
+        "title": "Bayesian updating",
+        "warning": "With few observations the posterior is dominated by the prior. Use the prior-sensitivity control before drawing a substantive conclusion."
+      },
+      "bootstrap": {
+        "intuition": "You cannot draw new samples from the population, but the sample itself is your best available estimate of that population. Resampling from it with replacement mimics the sampling process and reproduces the variability of the statistic surprisingly well.",
+        "math": "The percentile interval takes the alpha/2 and 1 - alpha/2 quantiles of the bootstrap replicates. The basic (or 'reverse percentile') interval reflects them around the observed statistic: [2*t_hat - q_(1-alpha/2), 2*t_hat - q_(alpha/2)].",
+        "misconceptions": "The bootstrap does not create information. It estimates the sampling distribution using the data you already have; with n = 8 it inherits every weakness of those eight numbers.",
+        "summary": "Resample the sample, rebuild the statistic thousands of times, and compare the bootstrap distribution with the true sampling distribution you can only see in a simulation.",
+        "title": "Bootstrap",
+        "warning": "The bootstrap fails for statistics that depend on extreme order statistics, such as the sample maximum. That failure case is included as a counterexample."
+      },
+      "clt": {
+        "intuition": "The law of large numbers says where the average lands. The central limit theorem describes the *shape* of the remaining error once you magnify it by the square root of n. Averaging destroys the parent's idiosyncrasies and leaves only its mean and variance.",
+        "math": "If the observations are independent and identically distributed with finite variance sigma^2, then sqrt(n) (mean_n - mu) / sigma converges in distribution to a standard normal. Convergence is in distribution only: it is a statement about probabilities, not about the realized path.",
+        "misconceptions": "The central limit theorem does not say the data become normal. The parent distribution is unchanged - it is the sampling distribution of the standardized average that approaches normality.",
+        "summary": "Standardized sums of almost any parent distribution drift towards the same bell shape - unless a condition of the theorem quietly fails.",
+        "title": "Central limit theorem",
+        "warning": "With a heavy-tailed or extremely skewed parent, n = 30 is nowhere near enough. Try the lognormal and Cauchy presets to see the rule of thumb fail."
+      },
+      "confidence_intervals": {
+        "intuition": "A confidence interval is a random object built from a random sample. The confidence level is a property of the *procedure* across repeated samples, not a probability attached to the one interval in front of you.",
+        "math": "For a normal mean with unknown variance, the interval is xbar +/- t_(1 - alpha/2, n - 1) * s / sqrt(n). Its coverage is exact under normality and only approximate otherwise; the lab reports the realized coverage with its simulation standard error.",
+        "misconceptions": "'There is a 95% probability that mu lies in [2.1, 4.7]' is wrong under the frequentist definition. Once computed, the interval either contains mu or it does not; 95% describes the long-run success rate of the recipe.",
+        "summary": "Generate hundreds of samples, draw the interval each one produces, and count how often the fixed true parameter is actually captured.",
+        "title": "Confidence interval coverage",
+        "warning": "Coverage can fall well below the nominal level with small samples, skewed populations or the naive proportion interval. Those cases are included on purpose."
+      },
+      "convergence_modes": {
+        "summary": "Convergence in probability, almost surely and in distribution, plus Slutsky and the continuous mapping theorem. Catalogued, not implemented yet.",
+        "title": "Modes of convergence"
+      },
+      "cramer_rao": {
+        "intuition": "Information measures how sharply the likelihood distinguishes nearby parameter values. Flat likelihood, little information, wide sampling distribution. Information adds up across independent observations, which is why the bound falls like 1/n.",
+        "math": "I_n(theta) = n I_1(theta) for an i.i.d. sample, and any unbiased estimator satisfies Var(theta_hat) >= 1 / I_n(theta). An estimator attaining the bound is efficient; the maximum-likelihood estimator attains it asymptotically under regularity conditions.",
+        "misconceptions": "The bound constrains unbiased estimators. A biased estimator can have smaller mean squared error than the Cramer-Rao floor, which is exactly what shrinkage exploits.",
+        "summary": "Accumulate information observation by observation, watch the variance floor descend, and compare an efficient estimator with one that misses the bound.",
+        "title": "Fisher information and the Cramer-Rao bound",
+        "warning": "The bound assumes the support of the distribution does not depend on the parameter. It genuinely fails for a uniform distribution on [0, theta]."
+      },
+      "hypothesis_testing": {
+        "intuition": "A test asks a single question: is what I observed surprising *if the null were true*? The null distribution answers 'how would this statistic behave under H0', the critical value marks how surprising is too surprising, and the p-value measures how far into the tail the observation actually landed.",
+        "math": "The p-value is P(|T| >= |t_obs| | H0), a probability computed under the null. The size of the test is the probability of rejecting when the null is true; with a correctly specified test that probability equals alpha.",
+        "misconceptions": "The p-value is not the probability that H0 is true, and it is not a measure of effect size. A tiny p-value from a huge sample can accompany a scientifically trivial effect.",
+        "summary": "The null distribution, the rejection region, the observed statistic, the p-value and the duality with confidence intervals - all moving together as you change alpha, n and the effect.",
+        "title": "Hypothesis testing",
+        "warning": "Failing to reject is not evidence that H0 is true. It may simply mean the test had too little power to detect the effect that exists."
+      },
+      "lln": {
+        "intuition": "Averaging cancels independent noise. Each new observation moves the running mean by less than the previous one, because the mean of n numbers gives each observation weight 1/n. What survives the cancellation is the expectation.",
+        "math": "Weak law: the sample mean converges in probability to mu, so P(|mean_n - mu| > epsilon) tends to 0 for every epsilon > 0. Strong law: the sample mean converges almost surely, so the entire path settles with probability one. Both require a finite expectation.",
+        "misconceptions": "The law of large numbers does not say that deviations get corrected. A run of low draws is not compensated by later high draws; it is diluted by the growing denominator.",
+        "summary": "Watch running sample averages settle towards the expectation - and watch them refuse to settle when the population variance is infinite.",
+        "title": "Law of large numbers",
+        "warning": "This animation is Monte Carlo evidence, not a proof. It shows a finite number of finite paths and cannot establish an asymptotic theorem."
+      },
+      "mle": {
+        "intuition": "Maximum likelihood asks which parameter value would have made the data you actually observed least surprising. As the sample grows, the log-likelihood becomes sharply peaked, and a sharp peak is precisely what a small standard error means.",
+        "math": "The score is the derivative of the log-likelihood; setting it to zero gives the estimator. The observed information is minus the second derivative at the optimum, and the asymptotic variance is its inverse: sqrt(n)(theta_hat - theta) converges to N(0, 1/I(theta)).",
+        "misconceptions": "The likelihood is not a probability distribution over the parameter. It is a function of the parameter for fixed data, and its area does not integrate to one.",
+        "summary": "The likelihood surface, the score that vanishes at the optimum, the curvature that becomes the information, and the method-of-moments estimator standing next to it.",
+        "title": "Maximum likelihood",
+        "warning": "Asymptotic normality of the estimator requires regularity conditions. The lab includes a boundary case where the optimum sits at the edge of the parameter space and the usual theory does not apply."
+      },
+      "multiple_testing": {
+        "intuition": "Each test at level 0.05 is allowed a 5% false-alarm rate. Run twenty independent tests on pure noise and you should expect one 'discovery'. Corrections either protect against making any error at all, or control the expected share of errors among the discoveries.",
+        "math": "Family-wise error rate is P(at least one false rejection); Bonferroni compares each p-value with alpha/m and Holm applies a step-down version that is uniformly more powerful. The false discovery rate is E[false discoveries / total discoveries]; Benjamini-Hochberg controls it by comparing the k-th ordered p-value with k*alpha/m.",
+        "misconceptions": "Controlling the false discovery rate is not a weaker version of the same guarantee. It answers a different question and deliberately tolerates some false positives to gain power.",
+        "summary": "Run many tests at once, watch false positives accumulate, then compare Bonferroni, Holm and Benjamini-Hochberg on the same set of p-values.",
+        "title": "Multiple testing",
+        "warning": "The simulation shows selective reporting too: choosing which comparisons to report after seeing the results invalidates every correction shown here."
+      },
+      "neyman_pearson": {
+        "intuition": "Among all the rejection regions with the same size, you want the one that captures the most probability under the alternative. Sorting outcomes by how much more likely they are under H1 than under H0 and filling the region greedily is exactly what the lemma prescribes.",
+        "math": "For simple H0: theta = theta_0 against simple H1: theta = theta_1, the test that rejects when L(theta_1)/L(theta_0) > k, with k chosen so the size equals alpha, is most powerful at level alpha. Any other region of the same size has power no larger.",
+        "misconceptions": "The lemma applies to two *simple* hypotheses. For composite alternatives a uniformly most powerful test exists only under extra structure such as a monotone likelihood ratio.",
+        "summary": "Move the likelihood-ratio threshold and watch why ordering the sample space by the likelihood ratio produces the most powerful test of a given size.",
+        "title": "Neyman-Pearson lemma",
+        "warning": "The derivation panel is a genuine symbolic argument; the accompanying rejection-region picture illustrates it but does not constitute the proof."
+      },
+      "power": {
+        "intuition": "Under H0 the statistic follows one distribution; under the alternative it follows a shifted one. Alpha is the tail of the first beyond the critical value; power is the tail of the second beyond the same value. Everything else - n, effect size, variance, one- versus two-sided - only moves those two curves relative to the line.",
+        "math": "For a one-sample z test with a one-sided alternative, power = 1 - Phi(z_(1-alpha) - d sqrt(n)) where d is the standardized effect size. Power rises with the square root of n, which is why halving the standard error costs four times the sample.",
+        "misconceptions": "Power is not '1 - p-value'. It is computed before seeing the data, under an assumed alternative, and 'observed power' calculated from the realized p-value adds no information.",
+        "summary": "Two overlapping distributions, four coloured areas and one message: power is what you get for the alpha you spend, the effect that exists and the sample you can afford.",
+        "title": "Size and power",
+        "warning": "Lowering alpha to be 'more rigorous' always lowers power. There is no setting in which both error rates fall while n and the effect stay fixed."
+      },
+      "sampling_distributions": {
+        "intuition": "A statistic computed from a sample is itself random, because a different sample would have produced a different number. The sampling distribution is the distribution of that number across all the samples you could have drawn. The standard error is simply its standard deviation.",
+        "math": "For the sample mean of an i.i.d. sample, E[mean] = mu and Var(mean) = sigma^2 / n. Sampling without replacement from a finite population of size N multiplies the variance by the finite-population correction (N - n) / (N - 1).",
+        "misconceptions": "The standard error is not the standard deviation of the data. It describes how much the *statistic* would move across repeated samples, and it shrinks with n while the data spread does not.",
+        "summary": "Choose a population, a statistic, a sampling scheme and a sample size, then build the sampling distribution by repeated sampling - or exhaustively for a small finite population.",
+        "title": "Sampling distribution builder",
+        "warning": "The empirical sampling distribution is built from a finite number of repetitions, so it is itself noisy. The overlaid theoretical curve is the exact object."
+      }
+    },
+    "math": {
+      "optimization": {
+        "summary": "Curvature, first-order conditions and Lagrange multipliers, visually. Catalogued, not implemented yet.",
+        "title": "Gradients, Hessians and constrained optimization"
+      },
+      "projection": {
+        "intuition": "Projection answers 'what part of this vector can I build out of those directions?' Whatever is left over cannot be built from them at all, which is exactly why it is perpendicular to every one of them.",
+        "math": "The projection of y onto the span of a is (a'y / a'a) a. For a matrix X of directions it becomes X(X'X)^-1 X' y, and the residual y - Py satisfies X'(y - Py) = 0 identically.",
+        "misconceptions": "Orthogonality is about the inner product, not about the visual angle in a distorted plot. Always check the axis scaling before judging a right angle by eye.",
+        "summary": "Drag a vector, watch its projection onto a line or plane, and see the residual stay perpendicular no matter what you do.",
+        "title": "Vectors, span and orthogonal projection",
+        "warning": "When the directions are nearly parallel, the projection is still exact but the coefficients that produce it are extremely sensitive - the geometric root of multicollinearity."
+      }
+    },
+    "ml": {
+      "bias_variance": {
+        "intuition": "A rigid model gives you the same wrong answer every time; a flexible one gives you a different answer every time. Bias is the distance from the average fit to the truth; variance is how far individual fits stray from that average. Neither alone tells you which model to pick.",
+        "math": "E[(y - f_hat(x))^2] = Bias(f_hat(x))^2 + Var(f_hat(x)) + sigma^2. The last term is the noise in y and cannot be reduced by any model. Increasing flexibility reduces the first term and increases the second, so the total is U-shaped in complexity.",
+        "misconceptions": "Training error is not an estimate of test error. It falls monotonically with complexity and will happily reach zero on a model that generalizes terribly.",
+        "summary": "Fit the same flexible model to many different training samples, watch the fits scatter, and decompose the expected error into bias, variance and irreducible noise.",
+        "title": "Bias-variance trade-off",
+        "warning": "The decomposition needs the true function, which only a simulation can provide. On real data you can estimate the total error but not split it into these three parts."
+      },
+      "classification_threshold": {
+        "intuition": "A classifier does not output a class; it outputs a score. The threshold is a business decision layered on top of it, and every threshold trades false alarms against missed cases. The ROC curve is simply the record of all those trades.",
+        "math": "The true-positive rate is TP/(TP + FN) and the false-positive rate FP/(FP + TN); the ROC curve plots one against the other as the threshold sweeps. AUC is the probability that a randomly chosen positive scores above a randomly chosen negative. With costs c_FP and c_FN and prevalence p, the optimal threshold satisfies odds = c_FP (1 - p) / (c_FN p).",
+        "misconceptions": "Accuracy is close to meaningless under class imbalance. A test with 1% prevalence reaches 99% accuracy by predicting 'negative' every single time.",
+        "summary": "Slide one threshold and watch the confusion matrix, precision, recall, the point on the ROC curve and the expected cost all move together.",
+        "title": "Classification thresholds, ROC and calibration",
+        "warning": "AUC is threshold-free and calibration-free: a model can have excellent AUC and wildly wrong probabilities. The calibration panel shows exactly that case."
+      },
+      "cross_validation": {
+        "summary": "K-fold estimation of generalization error and how preprocessing leaks. Catalogued, not implemented yet.",
+        "title": "Cross-validation and data leakage"
+      },
+      "gradient_descent": {
+        "intuition": "The gradient points uphill, so stepping against it goes down. The only question is how far to step: too small and you never arrive, too large and you jump across the valley and end up higher than you started.",
+        "math": "The update is b <- b - eta * gradient(L(b)). For a quadratic loss with Hessian eigenvalues in [m, M], the method converges only if eta < 2/M, and the convergence rate is governed by the condition number M/m - which is why badly scaled features converge slowly.",
+        "misconceptions": "A small gradient does not mean a good solution. Saddle points and flat plateaus both have near-zero gradients and neither is a minimum.",
+        "summary": "Watch the optimizer walk a loss surface step by step, then break it: raise the learning rate until it oscillates and diverges, or drop it into a non-convex valley.",
+        "title": "Gradient descent",
+        "warning": "The path shown is deterministic. Stochastic gradient descent adds noise that can help escape a poor region but also prevents exact convergence - toggle the stochastic mode to see the difference."
+      },
+      "regularization": {
+        "intuition": "Penalized regression looks for the best fit that stays inside a budget. Ridge's budget region is a smooth ball, so the solution almost never touches an axis. Lasso's is a diamond with corners sitting exactly on the axes, and corners are where an elongated ellipse tends to make contact.",
+        "math": "Ridge minimizes ||y - Xb||^2 + lambda ||b||^2 with the closed form b = (X'X + lambda I)^-1 X'y; lasso replaces the penalty by lambda ||b||_1 and has no closed form. For orthonormal regressors, ridge scales each coefficient by 1/(1 + lambda) while lasso applies soft thresholding.",
+        "misconceptions": "Regularization is not a cure for confounding. It reduces variance at the cost of bias, which helps prediction and actively harms unbiased causal estimation.",
+        "summary": "The elliptical contours of the least-squares loss meeting a circular or diamond constraint - the picture that explains why lasso produces exact zeros and ridge does not.",
+        "title": "Ridge, lasso and the geometry of shrinkage",
+        "warning": "Penalties are not scale invariant. Standardize the regressors first, or a variable measured in different units will be penalized differently for no substantive reason."
+      }
+    },
+    "multivariate": {
+      "clustering": {
+        "intuition": "Clustering does not discover groups; it imposes a partition and reports how tidy it looks. Give a uniform cloud to k-means with k = 4 and it will return four neat clusters with no hesitation at all.",
+        "math": "K-means minimizes the within-cluster sum of squares, alternating assignment and centroid updates. It converges to a local optimum that depends on the initialization; the silhouette of a point compares its average within-cluster distance with the distance to the nearest other cluster.",
+        "misconceptions": "The elbow in the inertia curve is not a test. Inertia falls with every extra cluster by construction, and the 'elbow' is often a matter of interpretation.",
+        "summary": "K-means and hierarchical clustering on the same cloud, with the elbow and silhouette diagnostics and the cases where both confidently find structure that is not there.",
+        "title": "Clustering",
+        "warning": "K-means assumes roughly spherical, similarly sized clusters. Elongated or nested structures are split incorrectly no matter how good the diagnostics look."
+      },
+      "pca": {
+        "intuition": "PCA looks for the direction in which the cloud is longest, because that is the direction along which points differ most. Projecting onto it keeps as much of the spread as any single direction can, and what is lost is exactly the perpendicular spread.",
+        "math": "The first principal component is the unit vector w maximizing w' S w, where S is the sample covariance matrix; the solution is the eigenvector of S with the largest eigenvalue, and that eigenvalue is the variance captured. Maximizing retained variance and minimizing squared reconstruction error are the same problem.",
+        "misconceptions": "Principal components are not the original variables and usually have no substantive meaning. A component is a weighted mixture, and naming it requires judgement, not arithmetic.",
+        "summary": "A rotating point cloud, its principal axes, the variance each one captures and the reconstruction you get by keeping only the first - with the geometry made exact.",
+        "title": "Principal component analysis",
+        "warning": "PCA is not scale invariant. Change the units of one variable and the components change; standardizing first means you are analysing the correlation matrix rather than the covariance matrix, which is a different question."
+      }
+    },
+    "panel": {
+      "dynamic_gmm": {
+        "summary": "Nickell bias, Arellano-Bond and instrument proliferation. Catalogued, not implemented yet.",
+        "title": "Dynamic panels and system GMM"
+      },
+      "fixed_vs_random": {
+        "intuition": "Each unit carries a permanent characteristic you never observe. If it is unrelated to x, you can treat it as noise and gain efficiency. If it moves with x, treating it as noise means attributing its influence to x, and only a transformation that removes it entirely will recover the true slope.",
+        "math": "The within transformation subtracts each unit's own mean, eliminating alpha_i exactly. Random effects instead applies quasi-demeaning with weight theta = 1 - sqrt(sigma_e^2 / (T sigma_alpha^2 + sigma_e^2)); it is efficient when Cov(alpha_i, x_it) = 0 and inconsistent otherwise. The Hausman statistic compares the two.",
+        "misconceptions": "Fixed effects does not control for everything. It removes only what is constant within the unit; anything time-varying and unobserved still biases the estimate.",
+        "summary": "Turn the correlation between the unit effect and the regressor from zero upwards and watch pooled OLS and random effects break while fixed effects stays on target.",
+        "title": "Fixed versus random effects",
+        "warning": "Fixed effects cannot estimate the coefficient of a variable that never changes within a unit. The within transformation annihilates it completely."
+      }
+    },
+    "probability": {
+      "approximations": {
+        "intuition": "An approximation replaces a hard exact distribution with an easier limiting one. What matters is not that the two curves look similar, but how large the error is at the probabilities you actually care about, which are usually in the tails.",
+        "math": "The Normal approximation to the Binomial applies the central limit theorem to a sum of Bernoulli variables; the continuity correction replaces P(X <= k) by P(Z <= (k + 0.5 - np) / sqrt(np(1-p))). The Poisson limit takes n to infinity and p to zero with np fixed.",
+        "misconceptions": "Rules of thumb such as np > 5 are conventions, not theorems. The lab shows the actual maximum error so you can judge for yourself.",
+        "summary": "Binomial to Normal, Binomial to Poisson, Poisson to Normal and Student t to Normal - with the approximation error plotted, not just the two curves side by side.",
+        "title": "Distribution approximations",
+        "warning": "Approximation quality is worst exactly where testing usually happens - the far tail. Always inspect the error curve, not only the overlaid densities."
+      },
+      "bivariate": {
+        "intuition": "The joint distribution is the full table or surface. A marginal collapses one dimension by summing or integrating it away; a conditional slices the joint at one value of the other variable and renormalizes the slice so it sums to one.",
+        "math": "f_X(x) = integral f(x, y) dy;  f(y | x) = f(x, y) / f_X(x);  Cov(X, Y) = E[XY] - E[X]E[Y]. Independence means f(x, y) = f_X(x) f_Y(y) for every pair, which is strictly stronger than zero covariance.",
+        "misconceptions": "Zero covariance does not imply independence. The lab includes a case with exactly zero correlation and complete functional dependence.",
+        "summary": "Build a joint distribution of two variables, then read its marginals, its conditionals, its covariance and the exact sense in which independence can fail.",
+        "title": "Bivariate random variables",
+        "warning": "Correlation only measures linear co-movement. A perfectly deterministic non-linear relationship can show a correlation of zero."
+      },
+      "distributions": {
+        "intuition": "A distribution is a rule that assigns probability to values. The density says where mass is concentrated; the cumulative function accumulates that mass from left to right; a quantile reads the same curve backwards. These three views are the same object seen from three angles.",
+        "math": "For a continuous variable, F(x) = P(X <= x) = integral of f(t) from -infinity to x, and the quantile function is the inverse of F. For a discrete variable the integral becomes a sum over the support.",
+        "misconceptions": "A high density value is not a probability: for a continuous variable, P(X = x) = 0 for every single point, and f(x) can even exceed 1.",
+        "summary": "Move the parameters of 22 discrete and continuous distributions and watch the PMF/PDF, the CDF, the quantiles, the moments and a real sample respond together.",
+        "title": "Distribution explorer",
+        "warning": "The sampled histogram is a finite draw. It fluctuates around the theoretical curve, and disagreement at small n is sampling noise rather than a wrong formula."
+      }
+    },
+    "regression": {
+      "fwl": {
+        "intuition": "A multiple-regression coefficient is not 'the effect of x'. It is the effect of the part of x that nothing else in the model explains, on the part of y that nothing else explains. Partialling out makes that sentence literal.",
+        "math": "With X = [X1, X2], the sub-vector beta1 from regressing y on X equals the coefficient from regressing M2 y on M2 X1, where M2 = I - X2(X2'X2)^-1 X2'. The residuals of both regressions are identical as well.",
+        "misconceptions": "Partialling out is a statistical operation, not a causal one. Controlling for a collider or a mediator changes the coefficient too - and makes it worse, not better.",
+        "summary": "Residualize y and x on the controls, run a one-variable regression on the leftovers, and confirm the coefficient matches the multiple regression to machine precision.",
+        "title": "Frisch-Waugh-Lovell",
+        "warning": "The added-variable plot shows exactly the variation that identifies the coefficient. If that residual scatter is nearly a vertical blob, the coefficient rests on very little information."
+      },
+      "gauss_markov": {
+        "summary": "One panel per classical assumption with valid, mild and severe violations side by side. Catalogued, not implemented yet.",
+        "title": "Gauss-Markov assumption control centre"
+      },
+      "multicollinearity": {
+        "intuition": "When two regressors move together, the data cannot tell which of them deserves the credit. Least squares still finds the best-fitting plane, but the plane can be tilted along the ridge of near-collinearity almost for free, so individual coefficients swing while the fit barely changes.",
+        "math": "Var(beta_j_hat) = sigma^2 / (SST_j (1 - R_j^2)), where R_j^2 is from regressing x_j on the other regressors. The variance inflation factor is 1/(1 - R_j^2), so a correlation of 0.99 between two regressors inflates the variance about fifty-fold.",
+        "misconceptions": "Multicollinearity does not bias the estimates. They remain unbiased and consistent; only their variance explodes, so this is a precision problem, not a validity problem.",
+        "summary": "Turn the correlation between two regressors up towards one and watch coefficients become unstable while predictions stay perfectly reliable.",
+        "title": "Multicollinearity",
+        "warning": "Dropping a collinear regressor 'to fix the VIF' can create omitted-variable bias. You would be trading a precision problem for an identification problem."
+      },
+      "ols_geometry": {
+        "intuition": "Least squares is not really about a line through points; it is about finding the closest point to y inside the space that X can reach. The shortest route from a point to a plane is perpendicular, which is the whole content of the normal equations.",
+        "math": "The projection matrix P = X(X'X)^-1 X' sends y to its fitted values, and M = I - P produces the residual. P and M are symmetric and idempotent, PM = 0, and X'e = 0 exactly - which is the normal-equation system written as an orthogonality condition.",
+        "misconceptions": "Residual orthogonality is not an empirical finding to be tested. It holds by construction whenever the model includes the relevant columns; a residual that correlates with a regressor means the regressor was not in the model.",
+        "summary": "See y, the column space of X, the fitted vector and the residual in three dimensions - and verify that the residual meets the plane at exactly ninety degrees.",
+        "title": "OLS as an orthogonal projection",
+        "warning": "The picture is exact only in the low dimensions we can draw. The algebraic statement X'e = 0 holds in any dimension - that is why the proof panel, not the picture, carries the argument."
+      },
+      "restricted": {
+        "intuition": "An unrestricted regression searches the whole coefficient space; a restriction confines the search to a line or a plane inside it. The fit can only get worse, and the F test asks whether it got worse by more than sampling noise would explain.",
+        "math": "b_R = b + (X'X)^-1 R'[R(X'X)^-1 R']^-1 (r - Rb), and F = [(SSR_R - SSR_U)/q] / [SSR_U/(n - k)] under the null with q restrictions. A Chow test for a structural break is exactly this F test with the break dummies restricted to zero.",
+        "misconceptions": "Failing to reject a restriction is not proof that it holds. With a small sample, an economically important departure from the restriction can easily go undetected.",
+        "summary": "Impose R beta = r, see the constrained optimum on the coefficient surface, measure the loss of fit and test the restriction - then use the same machinery for dummy variables and a Chow-style break.",
+        "title": "Restricted regression and structural change",
+        "warning": "Imposing a false restriction introduces bias. Imposing a true one reduces variance. The lab lets you see both sides of that trade explicitly."
+      },
+      "simple_linear": {
+        "intuition": "Least squares picks the line that minimizes the total squared vertical distance to the points. That single rule explains everything the lab shows: why one far-away point can rotate the line, why a curved truth fitted with a straight line leaves patterned residuals, and why a wider spread of x makes the slope easier to pin down.",
+        "math": "beta1_hat = Cov(x, y) / Var(x) and beta0_hat = ybar - beta1_hat xbar. Under the classical assumptions Var(beta1_hat) = sigma^2 / (n Var(x)), so precision improves with the sample size, with a smaller error variance and with more spread in x.",
+        "misconceptions": "A high R-squared does not mean the model is correct, causal, or useful for prediction outside the observed range of x. The lab includes a case with R-squared above 0.9 and a badly misspecified functional form.",
+        "summary": "One scatter plot, twenty-odd controls: slope sign, functional form, error distribution, heteroskedasticity, outliers, leverage, measurement error, omitted variables and endogeneity - each with its own preset.",
+        "title": "Simple regression scenario explorer",
+        "warning": "Extrapolating a fitted line beyond the range of x that generated it is an assumption, not an estimate. The prediction band widens for a reason."
+      }
+    },
+    "spatial": {
+      "autocorrelation": {
+        "summary": "Weight matrices, Moran's I and spatial spillovers. Catalogued, not implemented yet.",
+        "title": "Spatial autocorrelation"
+      }
+    },
+    "timeseries": {
+      "ardl": {
+        "summary": "Short-run and long-run multipliers from a dynamic response builder. Catalogued, not implemented yet.",
+        "title": "Distributed lags and ARDL"
+      },
+      "arma": {
+        "intuition": "The autocorrelation function shows how much of today survives in the future; the partial version strips out what is already explained by the intermediate lags. An AR process leaves a long ACF tail and a sharp PACF cut; an MA process does the opposite. That asymmetry is the whole identification idea.",
+        "math": "AR(p) is stationary when the roots of 1 - phi_1 z - ... - phi_p z^p lie outside the unit circle; MA(q) is invertible under the analogous condition on the MA polynomial. The ACF of MA(q) is exactly zero beyond lag q, and the PACF of AR(p) is exactly zero beyond lag p.",
+        "misconceptions": "Sample ACF and PACF are estimates with sizeable standard errors. A spike just outside the confidence band at lag 7 is usually noise, not a seasonal structure.",
+        "summary": "Set AR and MA coefficients, read the theoretical and sample ACF and PACF, and follow the identification-estimation-diagnostic loop on a series you built yourself.",
+        "title": "ARMA modelling and Box-Jenkins",
+        "warning": "Information criteria compare models fitted to the same sample. Differencing changes the sample, so AIC values for a model in levels and a model in differences are not comparable."
+      },
+      "cointegration": {
+        "intuition": "Each series alone wanders without limit, but their distance from each other does not. Something pulls the pair back whenever they drift apart, and the error-correction term measures how much of last period's gap is closed this period.",
+        "math": "If y and x are I(1) and y - beta x is I(0), the Granger representation theorem gives an error-correction form: delta y_t = alpha (y_(t-1) - beta x_(t-1)) + short-run terms + e_t, with alpha negative for stability. Engle-Granger tests the residual of the levels regression for a unit root, using critical values that account for the estimated beta.",
+        "misconceptions": "A high R-squared between two integrated series is not evidence of cointegration. The spurious-regression preset produces R-squared above 0.8 from two completely independent random walks.",
+        "summary": "Two wandering series tied by a stationary spread: see the long-run relation, the adjustment speed and what happens when the link is removed.",
+        "title": "Cointegration and error correction",
+        "warning": "A positive adjustment coefficient means the system is pushed apart rather than pulled together. If your estimate is positive, the specification, not the economy, is usually the problem."
+      },
+      "garch": {
+        "intuition": "Financial returns are close to unpredictable in level but very predictable in magnitude: a violent day is usually followed by another violent day. GARCH encodes exactly that, letting today's variance depend on yesterday's shock and yesterday's variance.",
+        "math": "GARCH(1,1) sets sigma2_t = omega + alpha e2_(t-1) + beta sigma2_(t-1). Persistence is alpha + beta; the unconditional variance omega/(1 - alpha - beta) exists only when that sum is below one. Even with normal innovations, the unconditional distribution of returns has fatter tails than the normal.",
+        "misconceptions": "Volatility clustering is not the same as predictable returns. The conditional mean can be exactly zero while the conditional variance is highly forecastable.",
+        "summary": "Generate returns whose variance depends on the past, watch calm and turbulent regimes alternate, and see persistence, leverage and heavy tails emerge from three parameters.",
+        "title": "ARCH, GARCH and volatility clustering",
+        "warning": "An estimated persistence of 0.999 is a warning sign, not a triumph. Near the boundary the unconditional variance is effectively undefined and forecasts at long horizons stop being meaningful."
+      },
+      "stationarity": {
+        "intuition": "A stationary series is pulled back towards its mean, so shocks fade. A unit-root series has no such pull: every shock is added to the level permanently, and the variance grows without bound. Two such series will look related to each other even when they are completely independent.",
+        "math": "For y_t = rho y_(t-1) + e_t with |rho| < 1, Var(y_t) converges to sigma^2/(1 - rho^2). At rho = 1 the variance is t*sigma^2, growing linearly, and the autocorrelation function decays so slowly that it looks like a trend rather than dependence.",
+        "misconceptions": "A trending series is not automatically a unit-root series. A deterministic trend plus stationary noise trends too but has completely different forecasting and inference properties - both cases are provided here.",
+        "summary": "Slide the autoregressive coefficient from zero through 0.95 to exactly one and beyond: watch the path, the variance, the autocorrelation function and a spurious regression appear together.",
+        "title": "Stationarity and unit roots",
+        "warning": "The Dickey-Fuller distribution is not the standard normal. Using ordinary t critical values to test rho = 1 rejects far too often, which is exactly why the special table exists."
+      },
+      "var": {
+        "intuition": "A VAR lets every variable depend on the recent past of every variable, including itself. An impulse response traces what a one-off shock does over the following periods, and the variance decomposition asks how much of the forecast uncertainty at each horizon each shock is responsible for.",
+        "math": "For a stable VAR(1), y_t = A y_(t-1) + e_t has the moving-average form y_t = sum A^h e_(t-h), so the impulse response at horizon h is simply A^h. Stability requires every eigenvalue of A to lie inside the unit circle. Orthogonalized responses use a Cholesky factor, which is why the variable ordering matters.",
+        "misconceptions": "Granger causality is predictive precedence, not causation. A variable can Granger-cause another purely because it reacts faster to a common shock.",
+        "summary": "A bivariate VAR you control coefficient by coefficient, with impulse-response functions, forecast-error variance decomposition and the ordering problem made visible.",
+        "title": "VAR, impulse responses and Granger causality",
+        "warning": "Cholesky identification imposes a recursive structure you chose. Swap the ordering in the lab and the impact responses change - that is an identifying assumption, not a finding."
+      }
+    },
+    "xai": {
+      "partial_dependence": {
+        "summary": "Global model behaviour and individual conditional expectation curves. Catalogued, not implemented yet.",
+        "title": "Partial dependence and ICE"
+      },
+      "shap": {
+        "intuition": "If a prediction is a payout and features are players who cooperated to produce it, how much does each deserve? Shapley's answer is the average contribution a feature makes when joined to every possible coalition of the others.",
+        "math": "phi_j = sum over subsets S not containing j of [|S|!(p - |S| - 1)!/p!] * (f(S union {j}) - f(S)). The values satisfy efficiency exactly: baseline + sum of phi_j = f(x) for the observation being explained.",
+        "misconceptions": "A SHAP value is not a causal effect. It attributes a *model's* prediction, so a feature can receive a large value purely because it proxies for something the model was never shown.",
+        "summary": "Start at the baseline prediction, add features one at a time in every order, and watch the contributions add up exactly to the prediction for this observation.",
+        "title": "Shapley additive explanations",
+        "warning": "With correlated features, marginal-expectation SHAP evaluates the model on combinations that never occur in reality. The attribution is then a statement about the model, not about the world."
+      }
+    }
+  }
+}

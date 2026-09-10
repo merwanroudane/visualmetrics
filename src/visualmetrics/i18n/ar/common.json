@@ -1,0 +1,347 @@
+{
+  "app": {
+    "name": "VisualMetrics",
+    "tagline": "شاهد النظرية. غيّر الفرضيات. افهم النموذج.",
+    "subtitle": "مختبر بصري تفاعلي للإحصاء والاقتصاد القياسي والذكاء الاصطناعي",
+    "loading": "جارٍ التحميل…"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "explore": "استكشاف المفاهيم",
+    "paths": "مسارات التعلم",
+    "proofs": "البراهين البصرية",
+    "labs_statistics": "مختبرات إحصائية",
+    "labs_econometrics": "مختبرات الاقتصاد القياسي",
+    "labs_causal": "مختبرات الاستدلال السببي",
+    "labs_ai": "مختبرات الذكاء الاصطناعي",
+    "compare": "مقارنة الطرق",
+    "datasets": "مجموعات البيانات",
+    "instructor": "وضع الأستاذ",
+    "favorites": "المفضلة",
+    "recent": "الأخيرة",
+    "glossary": "المسرد",
+    "references": "المراجع",
+    "settings": "الإعدادات",
+    "search_placeholder": "ابحث عن مفهوم بالعربية أو الإنجليزية أو الفرنسية…"
+  },
+  "domains": {
+    "mathematical_foundations": "الأسس الرياضية",
+    "probability_random_variables": "الاحتمالات والمتغيرات العشوائية",
+    "descriptive_statistics": "الإحصاء الوصفي",
+    "inferential_statistics": "الإحصاء الاستدلالي",
+    "regression_linear_models": "الانحدار والنماذج الخطية",
+    "econometrics": "الاقتصاد القياسي",
+    "time_series_econometrics": "اقتصاد قياسي للسلاسل الزمنية",
+    "panel_data_econometrics": "اقتصاد قياسي لبيانات البانل",
+    "causal_inference": "الاستدلال السببي",
+    "multivariate_statistics": "الإحصاء متعدد المتغيرات",
+    "spatial_econometrics": "الاقتصاد القياسي المكاني",
+    "machine_learning": "تعلّم الآلة",
+    "deep_learning": "التعلّم العميق",
+    "modern_ai": "الذكاء الاصطناعي الحديث",
+    "explainable_ai": "الذكاء الاصطناعي القابل للتفسير"
+  },
+  "tabs": {
+    "overview": "نظرة عامة",
+    "intuition": "الحدس",
+    "visualize": "التمثيل البصري",
+    "animate": "الرسوم المتحركة",
+    "experiment": "التجريب",
+    "compare": "المقارنة",
+    "assumptions": "الفرضيات",
+    "math": "الرياضيات",
+    "proof": "البرهان / الاشتقاق",
+    "simulation": "المحاكاة",
+    "diagnostics": "التشخيص",
+    "misconceptions": "أخطاء شائعة",
+    "code": "الشيفرة",
+    "data": "البيانات",
+    "quiz": "اختبار",
+    "references": "المراجع",
+    "warning": "تنبيه"
+  },
+  "modes": {
+    "learn": "تعلّم",
+    "visualize": "شاهد",
+    "animate": "حرّك",
+    "experiment": "جرّب",
+    "compare": "قارن",
+    "prove": "برهن",
+    "derive": "اشتق",
+    "simulate": "حاكِ",
+    "diagnose": "شخّص",
+    "counterexample": "مثال مضاد",
+    "quiz": "اختبار",
+    "code": "شيفرة",
+    "data": "بيانات",
+    "references": "مراجع"
+  },
+  "levels": {
+    "beginner": "مبتدئ",
+    "intermediate": "متوسط",
+    "advanced": "متقدم",
+    "phd": "دكتوراه / باحث",
+    "label": "المستوى"
+  },
+  "evidence": {
+    "label": "نوع الدليل",
+    "formal_proof": {
+      "label": "برهان صوري",
+      "caveat": "حجة رياضية كاملة، وليست صورة عنها."
+    },
+    "symbolic_derivation": {
+      "label": "اشتقاق رمزي",
+      "caveat": "كل خطوة جبرية معروضة ويمكن التحقق منها."
+    },
+    "geometric_proof": {
+      "label": "برهان هندسي",
+      "caveat": "الهندسة دقيقة: العلاقة المرسومة هي النظرية نفسها."
+    },
+    "visual_derivation": {
+      "label": "اشتقاق بصري",
+      "caveat": "عرض بصري أمين لاشتقاق صحيح، وليس بديلاً عنه."
+    },
+    "visual_intuition": {
+      "label": "حدس بصري",
+      "caveat": "حدس فقط. يوضّح لماذا تبدو النتيجة معقولة، ولا يبرهن شيئاً."
+    },
+    "simulation": {
+      "label": "محاكاة",
+      "caveat": "دليل مونت كارلو منتهٍ. المحاكاة ليست برهاناً لنظرية أبداً."
+    },
+    "numerical_demonstration": {
+      "label": "توضيح عددي",
+      "caveat": "حساب دقيق لقيم الوسائط المعروضة فقط."
+    },
+    "counterexample": {
+      "label": "مثال مضاد",
+      "caveat": "مثال مضاد واحد صحيح يكفي لدحض ادعاء كلي."
+    },
+    "empirical_example": {
+      "label": "مثال تطبيقي",
+      "caveat": "البيانات الحقيقية توضّح ولا تتحقق من نظرية."
+    }
+  },
+  "themes": {
+    "label": "السمة",
+    "light": "فاتحة",
+    "dark": "داكنة",
+    "high_contrast": "تباين عالٍ",
+    "classroom": "قاعة الدرس",
+    "publication": "للنشر",
+    "colorblind": "ملائمة لعمى الألوان",
+    "custom": "مخصصة"
+  },
+  "terminology": {
+    "label": "المصطلحات",
+    "translated": "مترجمة فقط",
+    "bilingual": "مصطلحات ثنائية اللغة",
+    "english_technical": "المصطلحات التقنية بالإنجليزية"
+  },
+  "language": {
+    "label": "اللغة",
+    "en": "الإنجليزية",
+    "ar": "العربية",
+    "fr": "الفرنسية"
+  },
+  "actions": {
+    "play": "تشغيل",
+    "pause": "إيقاف مؤقت",
+    "restart": "إعادة",
+    "previous_step": "الخطوة السابقة",
+    "next_step": "الخطوة التالية",
+    "step_mode": "خطوة بخطوة",
+    "speed": "السرعة",
+    "reset": "استرجاع",
+    "randomize": "سيناريو عشوائي",
+    "apply": "تطبيق",
+    "export": "تصدير",
+    "show_code": "أظهر شيفرة بايثون",
+    "copy": "نسخ",
+    "download": "تنزيل",
+    "favourite": "أضف إلى المفضلة",
+    "share": "مشاركة الإعداد",
+    "open": "فتح",
+    "close": "إغلاق",
+    "run": "تشغيل",
+    "compare": "مقارنة",
+    "presentation": "وضع العرض",
+    "fullscreen": "ملء الشاشة",
+    "clear_cache": "مسح الذاكرة المؤقتة"
+  },
+  "ui": {
+    "concept": "المفهوم",
+    "scenario": "السيناريو",
+    "scenarios": "السيناريوهات",
+    "controls": "أدوات التحكم",
+    "parameters": "الوسائط",
+    "results": "النتائج",
+    "metrics": "القراءة العددية",
+    "evidence": "الدليل",
+    "seed": "بذرة العشوائية",
+    "backend": "المحرك الحسابي",
+    "prerequisites": "تعلّم أولاً",
+    "next_concepts": "ما يأتي بعد ذلك",
+    "related": "مفاهيم ذات صلة",
+    "confused_with": "كثيراً ما يُخلط مع",
+    "references": "المراجع",
+    "dgp": "عملية توليد البيانات",
+    "assumption_status": "حالة الفرضيات",
+    "holds": "متحققة",
+    "violated": "منتهَكة",
+    "value": "القيمة",
+    "reference_value": "المرجع",
+    "true_value": "القيمة الحقيقية",
+    "estimate": "التقدير",
+    "no_results": "لم يطابق أي مفهوم بحثك.",
+    "planned_notice": "هذا المفهوم مُدرج في الفهرس للشفافية لكنه غير مُنفَّذ بعد.",
+    "planned_badge": "مخطط",
+    "experimental_badge": "تجريبي",
+    "stable_badge": "مستقر",
+    "reduced_motion": "تقليل الحركة",
+    "advanced_controls": "أدوات متقدمة",
+    "purpose": "الغرض",
+    "what_you_see": "ما تشاهده",
+    "what_changed": "ما الذي تغيّر",
+    "why": "لماذا تغيّر",
+    "interpretation": "كيف تقرأ النتيجة",
+    "conclusion": "ما يمكنك استنتاجه",
+    "warning": "انتبه",
+    "summary": "الخلاصة",
+    "active_assumptions": "الفرضيات السارية",
+    "violated_assumptions": "فرضيات منتهَكة عمداً",
+    "simulation_note": "دليل مونت كارلو بـ {reps} تكرار (مع الخطأ المعياري للمحاكاة).",
+    "precision_preset": "الدقة",
+    "catalogue_size": "{implemented} مختبراً منفَّذاً من أصل {total} مفهوماً مُفهرساً"
+  },
+  "assumptions": {
+    "linearity": "الخطية في الوسائط",
+    "random_sampling": "المعاينة العشوائية",
+    "no_perfect_collinearity": "غياب الازدواج الخطي التام",
+    "exogeneity": "توقع شرطي معدوم للخطأ (الخارجية)",
+    "homoskedasticity": "تجانس التباين",
+    "no_autocorrelation": "غياب الارتباط الذاتي",
+    "normal_errors": "توزيع طبيعي للأخطاء",
+    "independence": "استقلال المشاهدات",
+    "identical_distribution": "تطابق توزيع المشاهدات",
+    "finite_variance": "تباين مجتمعي منتهٍ",
+    "correct_functional_form": "الشكل الدالي الصحيح",
+    "instrument_relevance": "ملاءمة الأداة",
+    "instrument_exogeneity": "خارجية الأداة (قيد الاستبعاد)",
+    "parallel_trends": "الاتجاهات المتوازية",
+    "no_anticipation": "غياب التوقع المسبق للمعالجة",
+    "homogeneous_effects": "تجانس أثر المعالجة",
+    "exchangeability": "قابلية التبادل (غياب المُربِكات غير المقيسة)",
+    "positivity": "الإيجابية / التداخل",
+    "sutva": "فرضية SUTVA (لا تداخل بين الوحدات)",
+    "no_manipulation": "غياب التلاعب بمتغير التخصيص",
+    "random_effects": "استقلال الآثار عن المتغيرات المفسِّرة",
+    "stationarity": "السكون",
+    "regularity": "شروط الانتظام للنتيجة المقاربة"
+  },
+  "controls": {
+    "seed": { "label": "بذرة العشوائية", "help": "تثبّت السحب العشوائي حتى تكون الصورة قابلة للتكرار." },
+    "n": { "label": "حجم العينة (n)", "help": "عدد المشاهدات في كل عينة." },
+    "alpha": { "label": "مستوى المعنوية (alpha)", "help": "احتمال رفض فرضية عدم صحيحة." },
+    "effect_size": { "label": "حجم الأثر", "help": "المسافة المعيارية بين فرضية العدم والبديلة." },
+    "noise": { "label": "الضجيج (انحراف الخطأ)", "help": "الانحراف المعياري لحد الخطأ غير المشاهد." },
+    "reps": { "label": "عدد التكرارات", "help": "عدد تكرارات مونت كارلو." },
+    "beta0": { "label": "الحد الثابت (beta0)", "help": "قيمة y عندما يساوي x صفراً." },
+    "beta1": { "label": "الميل (beta1)", "help": "تغيّر y عند تغيّر x بوحدة واحدة." },
+    "confidence_level": { "label": "مستوى الثقة", "help": "التغطية طويلة الأجل التي يستهدفها الإجراء." },
+    "distribution": { "label": "التوزيع", "help": "عائلة المتغير العشوائي." },
+    "functional_form": { "label": "الشكل الدالي", "help": "شكل العلاقة الحقيقية بين x و y." },
+    "correlation": { "label": "الارتباط", "help": "التبعية الخطية بين المتغيرين." }
+  },
+  "scenarios": {
+    "label": "السيناريو",
+    "canonical": { "label": "الحالة المرجعية" },
+    "categories": {
+      "canonical": "الحالة المرجعية",
+      "positive": "اتجاه موجب",
+      "negative": "اتجاه سالب",
+      "null": "لا أثر",
+      "weak": "إشارة ضعيفة",
+      "strong": "إشارة قوية",
+      "boundary": "حالة حدّية",
+      "violation": "فرضية منتهَكة",
+      "counterexample": "مثال مضاد",
+      "sensitivity": "الحساسية",
+      "small_sample": "عينة صغيرة",
+      "large_sample": "عينة كبيرة",
+      "high_noise": "ضجيج مرتفع",
+      "low_noise": "ضجيج منخفض",
+      "robustness": "حصين مقابل غير حصين",
+      "misspecification": "سوء تحديد",
+      "real_data": "بيانات حقيقية",
+      "compare_methods": "مقارنة الطرق"
+    }
+  },
+  "paths": {
+    "foundations_of_inference": {
+      "title": "أسس الاستدلال الإحصائي",
+      "summary": "من توزيع احتمالي إلى تقلب المعاينة والمجالات والاختبارات والقوة."
+    },
+    "estimation_theory": {
+      "title": "نظرية التقدير",
+      "summary": "طريقة العزوم والإمكان الأعظم والمعلومة وحدود الكفاءة وإعادة المعاينة."
+    },
+    "regression_from_scratch": {
+      "title": "الانحدار من الصفر",
+      "summary": "هندسة الإسقاط والمربعات الصغرى والتجزئة واستقرار المعاملات."
+    },
+    "diagnostics_and_remedies": {
+      "title": "التشخيص والمعالجة",
+      "summary": "اكتشف الفرضية المنتهَكة، وقِس الضرر، وطبّق العلاج، وشاهد ما لا يعالجه."
+    },
+    "identification_and_causality": {
+      "title": "التحديد والسببية",
+      "summary": "من تحيز المتغير المحذوف إلى الرسوم السببية والأدوات والتصاميم شبه التجريبية."
+    },
+    "time_series_econometrics": {
+      "title": "اقتصاد قياسي للسلاسل الزمنية",
+      "summary": "السكون ونمذجة ARMA والتكامل المشترك وديناميكيات VAR والتقلب."
+    },
+    "machine_learning_essentials": {
+      "title": "أساسيات تعلّم الآلة",
+      "summary": "التعميم والتنظيم والعتبات والتحسين وخفض الأبعاد."
+    },
+    "from_gradients_to_transformers": {
+      "title": "من التدرجات إلى المحوّلات",
+      "summary": "الانحدار التدريجي والانتشار العكسي والانتباه والتفسير البَعدي."
+    }
+  },
+  "quiz": {
+    "title": "اختبر فهمك",
+    "check": "تحقق من الإجابة",
+    "correct": "إجابة صحيحة",
+    "incorrect": "ليست دقيقة",
+    "explanation": "التفسير",
+    "next_question": "السؤال التالي",
+    "score": "النتيجة: {score} / {total}",
+    "no_grading": "هذا الاختبار تكويني فقط وليس تقييماً بدرجات."
+  },
+  "export": {
+    "png": "صورة PNG",
+    "svg": "متجه SVG",
+    "html": "HTML تفاعلي",
+    "json": "حالة المختبر (JSON)",
+    "python": "سكربت بايثون",
+    "csv": "ملخص المحاكاة (CSV)",
+    "markdown": "ملخص Markdown",
+    "done": "تم التصدير إلى {path}",
+    "metadata_note": "تتضمن الملفات المصدَّرة المفهوم والوسائط والبذرة وإصدار الحزمة."
+  },
+  "doctor": {
+    "title": "فحص بيئة VisualMetrics",
+    "core": "الأساس",
+    "ok": "سليم",
+    "missing": "غير متوفر",
+    "install_hint": "للتثبيت: {command}",
+    "optional_note": "غياب الإضافات الاختيارية يعطّل الميزات التي تحتاجها فقط."
+  },
+  "presentation": {
+    "title": "وضع العرض",
+    "hint": "استخدم أسهم لوحة المفاتيح للتنقل بين الخطوات، واضغط Escape للخروج."
+  }
+}

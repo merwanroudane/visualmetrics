@@ -1,0 +1,1 @@
+"""VisualMetrics catalog package."""

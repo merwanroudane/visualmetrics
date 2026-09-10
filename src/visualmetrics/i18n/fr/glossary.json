@@ -1,0 +1,212 @@
+{
+  "glossary": {
+    "attention_mechanism": {
+      "definition": "Recherche pondérée où chaque position combine des valeurs selon la similarité requête-clé.",
+      "term": "Attention"
+    },
+    "autocorrelation": {
+      "definition": "Corrélation entre les erreurs ou observations d'un processus à des dates différentes.",
+      "term": "Autocorrélation"
+    },
+    "backpropagation": {
+      "definition": "Application de la règle de la chaîne dans un graphe de calcul pour obtenir les gradients de chaque paramètre.",
+      "term": "Rétropropagation"
+    },
+    "bias_variance_tradeoff": {
+      "definition": "Décomposition de l'erreur de prédiction attendue en biais au carré, variance et bruit irréductible.",
+      "term": "Compromis biais-variance"
+    },
+    "bootstrap": {
+      "definition": "Estimer la loi d'échantillonnage d'une statistique en rééchantillonnant l'échantillon observé avec remise.",
+      "term": "Bootstrap"
+    },
+    "calibration": {
+      "definition": "Accord entre les probabilités prédites et les fréquences observées.",
+      "term": "Calibration"
+    },
+    "central_limit_theorem": {
+      "definition": "Les sommes standardisées de variables indépendantes à variance finie convergent en loi vers la normale.",
+      "term": "Théorème central limite"
+    },
+    "cointegration": {
+      "definition": "Deux séries intégrées ou plus partageant une combinaison linéaire stationnaire, c'est-à-dire une relation d'équilibre de long terme.",
+      "term": "Cointégration"
+    },
+    "collider": {
+      "definition": "Variable causée par deux autres ; conditionner dessus crée une association entre elles.",
+      "term": "Collisionneur"
+    },
+    "confidence_interval": {
+      "definition": "Intervalle aléatoire dont la construction capture le vrai paramètre dans une proportion annoncée d'échantillons répétés.",
+      "term": "Intervalle de confiance"
+    },
+    "confounder": {
+      "definition": "Cause commune du traitement et du résultat, créant une association sans causalité.",
+      "term": "Facteur de confusion"
+    },
+    "consistency": {
+      "definition": "Un estimateur est convergent lorsqu'il tend en probabilité vers le vrai paramètre.",
+      "term": "Convergence (consistance)"
+    },
+    "cramer_rao_bound": {
+      "definition": "Plus petite variance atteignable par un estimateur sans biais, égale à l'inverse de l'information de Fisher.",
+      "term": "Borne de Cramer-Rao"
+    },
+    "difference_in_differences": {
+      "definition": "Comparer l'évolution temporelle d'un groupe traité à celle d'un groupe non traité.",
+      "term": "Différences de différences"
+    },
+    "endogeneity": {
+      "definition": "Corrélation entre un régresseur et le terme d'erreur, rendant les moindres carrés non convergents.",
+      "term": "Endogénéité"
+    },
+    "exogeneity": {
+      "definition": "Hypothèse selon laquelle le terme d'erreur est d'espérance nulle conditionnellement aux régresseurs.",
+      "term": "Exogénéité"
+    },
+    "false_discovery_rate": {
+      "definition": "Proportion attendue de faux positifs parmi les hypothèses rejetées.",
+      "term": "Taux de fausses découvertes"
+    },
+    "fisher_information": {
+      "definition": "Courbure attendue de la log-vraisemblance ; elle borne la précision d'estimation d'un paramètre.",
+      "term": "Information de Fisher"
+    },
+    "fixed_effects": {
+      "definition": "Estimateur de panel qui élimine toute caractéristique invariante de l'unité en soustrayant les moyennes individuelles.",
+      "term": "Effets fixes"
+    },
+    "gradient_descent": {
+      "definition": "Optimiseur itératif qui avance répétitivement à l'opposé du gradient de la perte.",
+      "term": "Descente de gradient"
+    },
+    "granger_causality": {
+      "definition": "Antériorité prédictive : le passé d'une série améliore la prévision d'une autre. Ce n'est pas de la causalité.",
+      "term": "Causalité de Granger"
+    },
+    "heteroskedasticity": {
+      "definition": "Variance de l'erreur qui varie selon les observations, invalidant la formule classique d'erreur type.",
+      "term": "Hétéroscédasticité"
+    },
+    "impulse_response": {
+      "definition": "Trajectoire de la réponse d'une variable à un choc ponctuel dans un système dynamique.",
+      "term": "Fonction de réponse impulsionnelle"
+    },
+    "instrumental_variable": {
+      "definition": "Variable qui déplace le régresseur endogène mais n'affecte le résultat qu'à travers lui.",
+      "term": "Variable instrumentale"
+    },
+    "law_of_large_numbers": {
+      "definition": "La moyenne empirique de tirages indépendants converge vers l'espérance quand l'échantillon grandit.",
+      "term": "Loi des grands nombres"
+    },
+    "maximum_likelihood": {
+      "definition": "Choisir la valeur du paramètre rendant l'échantillon observé le plus probable sous le modèle supposé.",
+      "term": "Maximum de vraisemblance"
+    },
+    "mediator": {
+      "definition": "Variable située sur le chemin causal du traitement au résultat ; la contrôler retire une partie de l'effet.",
+      "term": "Médiateur"
+    },
+    "multicollinearity": {
+      "definition": "Quasi-dépendance linéaire entre régresseurs, qui gonfle la variance des coefficients sans les biaiser.",
+      "term": "Multicolinéarité"
+    },
+    "omitted_variable_bias": {
+      "definition": "Distorsion d'un coefficient causée par l'oubli d'une variable qui influence le résultat et corrèle avec le régresseur.",
+      "term": "Biais de variable omise"
+    },
+    "ordinary_least_squares": {
+      "definition": "Estimateur qui minimise la somme des carrés des résidus dans un modèle linéaire.",
+      "term": "Moindres carrés ordinaires"
+    },
+    "orthogonal_projection": {
+      "definition": "Point le plus proche d'un vecteur dans un sous-espace ; le résidu lui est perpendiculaire.",
+      "term": "Projection orthogonale"
+    },
+    "p_value": {
+      "definition": "Probabilité, calculée sous l'hypothèse nulle, d'obtenir une statistique au moins aussi extrême que celle observée.",
+      "term": "Valeur-p"
+    },
+    "parallel_trends": {
+      "definition": "Hypothèse d'identification selon laquelle traités et témoins auraient évolué de concert sans traitement.",
+      "term": "Tendances parallèles"
+    },
+    "posterior_distribution": {
+      "definition": "Loi mise à jour d'un paramètre après combinaison de l'a priori et de la vraisemblance observée.",
+      "term": "Loi a posteriori"
+    },
+    "potential_outcome": {
+      "definition": "Résultat qu'une unité aurait sous un traitement donné ; un seul est observé.",
+      "term": "Résultat potentiel"
+    },
+    "principal_component": {
+      "definition": "Direction de variance maximale, donnée par un vecteur propre de la matrice de covariance.",
+      "term": "Composante principale"
+    },
+    "r_squared": {
+      "definition": "Part de la variance de la variable dépendante expliquée par le modèle ajusté.",
+      "term": "R-carré"
+    },
+    "random_effects": {
+      "definition": "Estimateur de panel traitant les effets individuels comme aléatoires et non corrélés aux régresseurs.",
+      "term": "Effets aléatoires"
+    },
+    "regression_discontinuity": {
+      "definition": "Utiliser une règle de seuil d'assignation pour comparer les unités juste au-dessus et juste en dessous.",
+      "term": "Régression sur discontinuité"
+    },
+    "regularization": {
+      "definition": "Ajouter une pénalité sur la taille des coefficients pour échanger un peu de biais contre une forte baisse de variance.",
+      "term": "Régularisation"
+    },
+    "residual": {
+      "definition": "Différence entre une valeur observée et la valeur ajustée par le modèle.",
+      "term": "Résidu"
+    },
+    "roc_curve": {
+      "definition": "Ensemble des couples taux de vrais et faux positifs obtenus en faisant varier le seuil.",
+      "term": "Courbe ROC"
+    },
+    "sampling_distribution": {
+      "definition": "Loi d'une statistique sur l'ensemble des échantillons qui auraient pu être tirés.",
+      "term": "Loi d'échantillonnage"
+    },
+    "shapley_value": {
+      "definition": "Contribution marginale moyenne d'une variable à une prédiction sur tous les ordres possibles.",
+      "term": "Valeur de Shapley"
+    },
+    "standard_error": {
+      "definition": "Écart-type de la loi d'échantillonnage d'une statistique.",
+      "term": "Erreur type"
+    },
+    "stationarity": {
+      "definition": "Série dont la moyenne, la variance et les autocovariances ne changent pas dans le temps.",
+      "term": "Stationnarité"
+    },
+    "statistical_power": {
+      "definition": "Probabilité qu'un test rejette l'hypothèse nulle lorsqu'une alternative donnée est vraie.",
+      "term": "Puissance statistique"
+    },
+    "type_i_error": {
+      "definition": "Rejeter une hypothèse nulle qui est en réalité vraie ; sa probabilité est la taille du test.",
+      "term": "Erreur de type I"
+    },
+    "type_ii_error": {
+      "definition": "Ne pas rejeter une hypothèse nulle fausse ; sa probabilité vaut un moins la puissance.",
+      "term": "Erreur de type II"
+    },
+    "unbiasedness": {
+      "definition": "Un estimateur est sans biais lorsque son espérance égale le paramètre estimé.",
+      "term": "Absence de biais"
+    },
+    "unit_root": {
+      "definition": "Racine autorégressive égale à un : les chocs s'accumulent définitivement et la variance croît sans borne.",
+      "term": "Racine unitaire"
+    },
+    "volatility_clustering": {
+      "definition": "Tendance des fortes variations de prix à être suivies d'autres fortes variations, de signe quelconque.",
+      "term": "Regroupement de volatilité"
+    }
+  }
+}

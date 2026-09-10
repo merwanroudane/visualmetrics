@@ -1,0 +1,73 @@
+{
+  "proofs": {
+    "ui": {
+      "claim": "النص المراد إثباته",
+      "intuition": "بلغة بسيطة",
+      "assumptions": "الفرضيات المعتمدة",
+      "assumption_essential": "أساسية",
+      "assumption_relaxable": "يمكن تخفيفها",
+      "if_violated": "إذا اختلّت هذه الفرضية",
+      "steps": "الخطوات",
+      "why": "لماذا هذه الخطوة مشروعة",
+      "uses": "تستند إلى",
+      "conclusion": "الخلاصة",
+      "limitations": "ما لا يثبته هذا البرهان",
+      "qed": "وهو المطلوب إثباته",
+      "prerequisites": "المتطلبات السابقة",
+      "references": "المراجع",
+      "checks": "تحققات عددية",
+      "checks_note": "تؤكد هذه التحققات أن الشيفرة تنفّذ المتطابقة المبرهنة تنفيذاً صحيحاً. وهي بيانات عددية لا براهين على المبرهنة: فالمبرهنة مثبتة أصلاً، ولا يمكن لأي حساب منتهٍ أن يثبتها.",
+      "check_passed": "ناجح",
+      "check_failed": "فاشل",
+      "related_labs": "استكشف ذلك في المختبر",
+      "step_of": "الخطوة {current} من {total}",
+      "previous": "الخطوة السابقة",
+      "next": "الخطوة التالية",
+      "play": "تشغيل تلقائي",
+      "pause": "إيقاف مؤقت",
+      "reset": "إعادة البرهان من البداية",
+      "show_algebra": "إظهار الجبر",
+      "hide_algebra": "إخفاء الجبر",
+      "show_geometry": "إظهار الشروح الهندسية",
+      "hide_geometry": "إخفاء الشروح الهندسية",
+      "explain_step": "اشرح هذه الخطوة",
+      "export": "تصدير البرهان"
+    },
+    "step_kind": {
+      "setup": "التمهيد",
+      "assumption": "فرضية",
+      "definition": "تعريف",
+      "algebra": "جبر",
+      "geometry": "هندسة",
+      "calculus": "تفاضل وتكامل",
+      "probability": "احتمال",
+      "substitution": "تعويض",
+      "key_insight": "الفكرة المحورية",
+      "conclusion": "استنتاج"
+    },
+    "visual_action": {
+      "none": "لا رسم لهذه الخطوة",
+      "draw_vector": "ارسم المتجه",
+      "draw_subspace": "ارسم الفضاء الجزئي",
+      "project_onto_subspace": "اسقط على الفضاء الجزئي",
+      "mark_right_angle": "علّم الزاوية القائمة",
+      "decompose_vector": "فكّك المتجه إلى جزأين",
+      "highlight_triangle": "أبرز المثلث القائم",
+      "draw_constraint_set": "ارسم مجموعة القيود",
+      "draw_level_curves": "ارسم منحنيات المستوى",
+      "mark_tangency": "علّم نقطة التماس",
+      "mark_corner": "علّم الرأس",
+      "shade_region": "ظلّل المنطقة",
+      "shade_tail": "ظلّل الذيل",
+      "compare_regions": "قارن بين المنطقتين",
+      "rotate_axes": "دوّر إلى المحاور الجديدة",
+      "trace_path": "تتبّع المسار",
+      "highlight_term": "أبرز هذا الحد",
+      "unfold_chain": "افرد سلسلة الاشتقاق"
+    }
+  },
+  "errors": {
+    "proof_unknown": "لا يوجد برهان مسجّل تحت المعرّف «{proof_id}».",
+    "proof_planned": "البرهان «{proof_id}» مدرج في الفهرس لكنه لم يُكتب بعد. يُعرض بوصفه مخطّطاً له بدل إخفائه، حتى لا يبالغ الفهرس أبداً في وصف ما هو متاح فعلاً."
+  }
+}
