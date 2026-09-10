@@ -381,12 +381,16 @@ class AttentionLab(LabBase):
         go = P.require_plotly()
         for col, (a, b) in enumerate(((unscaled_std, scaled_std),
                                       (unscaled_max, scaled_max)), start=1):
+            # Dash and marker as well as colour: the two curves must stay
+            # distinguishable without colour vision.
             fig.add_trace(go.Scatter(x=dims, y=a, mode="lines+markers",
-                                     line={"color": ctx.color("negative")},
+                                     line={"color": ctx.color("negative"), "dash": "dash"},
+                                     marker={"symbol": "x"},
                                      name=ctx.t("labs.att.trace.unscaled", "no scaling"),
                                      showlegend=col == 1), row=1, col=col)
             fig.add_trace(go.Scatter(x=dims, y=b, mode="lines+markers",
-                                     line={"color": ctx.color("positive")},
+                                     line={"color": ctx.color("positive"), "dash": "solid"},
+                                     marker={"symbol": "circle"},
                                      name=ctx.t("labs.att.trace.scaled",
                                                 "divided by sqrt(d_k)"),
                                      showlegend=col == 1), row=1, col=col)
