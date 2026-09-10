@@ -14,6 +14,7 @@
     "proof_unavailable": "Aucune démonstration n'est implémentée pour ce concept ; seule l'intuition ou la simulation est disponible.",
     "export": "L'export a échoué.",
     "translation": "Une clé de traduction est manquante.",
-    "plugin": "Un plugin de concepts n'a pas pu être chargé."
+    "plugin": "Un plugin de concepts n'a pas pu être chargé.",
+    "concept_planned_short": "Catalogué mais pas encore réalisé - il figure ici pour que le catalogue ne surestime pas ce qui existe."
   }
 }

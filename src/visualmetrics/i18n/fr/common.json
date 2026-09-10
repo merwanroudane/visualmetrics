@@ -3,7 +3,8 @@
     "name": "VisualMetrics",
     "tagline": "Voir la théorie. Changer les hypothèses. Comprendre le modèle.",
     "subtitle": "Laboratoire visuel interactif de statistique, d'économétrie et d'IA",
-    "loading": "Chargement…"
+    "loading": "Chargement…",
+    "description": "Un laboratoire visuel interactif pour la statistique, l'économétrie, l'inférence causale et l'apprentissage automatique."
   },
   "nav": {
     "home": "Accueil",
@@ -22,7 +23,9 @@
     "glossary": "Glossaire",
     "references": "Références",
     "settings": "Paramètres",
-    "search_placeholder": "Rechercher un concept en français, anglais ou arabe…"
+    "search_placeholder": "Rechercher un concept en français, anglais ou arabe…",
+    "catalog": "Catalogue",
+    "doctor": "Environnement"
   },
   "domains": {
     "mathematical_foundations": "Fondements mathématiques",
@@ -58,7 +61,9 @@
     "data": "Données",
     "quiz": "Quiz",
     "references": "Références",
-    "warning": "Attention"
+    "warning": "Attention",
+    "counterexample": "Contre-exemple",
+    "interpretation": "Interprétation"
   },
   "modes": {
     "learn": "Apprendre",
@@ -167,7 +172,15 @@
     "compare": "Comparer",
     "presentation": "Mode présentation",
     "fullscreen": "Plein écran",
-    "clear_cache": "Vider le cache"
+    "clear_cache": "Vider le cache",
+    "first": "Première image",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "rerun": "Relancer avec ces réglages",
+    "new_seed": "Nouvelle graine",
+    "shortcuts": "Raccourcis clavier",
+    "reduced_motion": "Mouvement réduit",
+    "exit_presentation": "Quitter le mode présentation"
   },
   "ui": {
     "concept": "Concept",
@@ -212,7 +225,47 @@
     "violated_assumptions": "Hypothèses volontairement violées",
     "simulation_note": "Preuve de Monte-Carlo avec {reps} répétitions (erreur type de simulation affichée).",
     "precision_preset": "Précision",
-    "catalogue_size": "{implemented} laboratoires implémentés sur {total} concepts catalogués"
+    "catalogue_size": "{implemented} laboratoires implémentés sur {total} concepts catalogués",
+    "warnings": "Avertissements",
+    "planned": "Prévu",
+    "current": "Actuel",
+    "proofs": "Démonstrations",
+    "languages": "Langues",
+    "labs_built": "Laboratoires réalisés",
+    "catalogued": "Catalogués",
+    "definition": "Définition",
+    "not_available": "Ceci n'est pas disponible",
+    "run_failed": "Cette exécution n'a pas abouti",
+    "technical_detail": "Détail technique",
+    "no_comparison": "Aucune comparaison",
+    "all_domains": "Tous les domaines",
+    "all_levels": "Tous les niveaux",
+    "show_planned": "Afficher les prévus",
+    "search_placeholder": "Rechercher dans n'importe quelle langue",
+    "catalog_count": "{implemented} réalisés, {planned} prévus",
+    "see_it": "À voir : {concept} / {scenario}",
+    "link_copied": "Lien copié : {url}",
+    "frame_of": "Image {current} sur {total}",
+    "animation_summary": "En résumé",
+    "animation_unexplained": "Cette animation ne porte aucune explication par image ; elle n'est donc pas jouée.",
+    "violated_here": "Mise en défaut dans cette image : {items}",
+    "reduced_motion_note": "Le mouvement réduit est activé : avancez les images vous-même ; chaque image montre la même preuve que l'animation.",
+    "reduced_motion_blocked": "La lecture automatique est désactivée car le mouvement réduit est activé.",
+    "honesty_title": "Ce que signifient les badges",
+    "honesty_body": "Chaque figure et chaque animation annonce le type de preuve qu'elle apporte. Une simulation est étiquetée comme telle et jamais comme une démonstration, et chaque démonstration dit ce qu'elle n'établit pas.",
+    "glossary_note": "Chaque terme en trois langues, pour passer de l'une à l'autre sans perdre le fil.",
+    "quantity": "Quantité",
+    "expected": "Attendu",
+    "note": "Note",
+    "no_content": "Cette exécution n'a produit aucun contenu.",
+    "code_parity": "Voici le code Python exact qui reproduit les figures ci-dessus.",
+    "frame": "#",
+    "frame_commentary": "Commentaire image par image",
+    "assumptions_hold": "Hypothèses en vigueur",
+    "how_to_read": "Comment le lire",
+    "what_to_conclude": "Ce qu'il faut conclure",
+    "caution": "Attention",
+    "objectives": "Ce qu'il faut en retenir"
   },
   "assumptions": {
     "linearity": "Linéarité dans les paramètres",
@@ -237,25 +290,65 @@
     "no_manipulation": "Absence de manipulation de la variable d'assignation",
     "random_effects": "Effets non corrélés aux régresseurs",
     "stationarity": "Stationnarité",
-    "regularity": "Conditions de régularité du résultat asymptotique"
+    "regularity": "Conditions de régularité du résultat asymptotique",
+    "holds": "vérifiée",
+    "violated": "violée"
   },
   "controls": {
-    "seed": { "label": "Graine aléatoire", "help": "Fixe les tirages aléatoires pour rendre l'image reproductible." },
-    "n": { "label": "Taille d'échantillon (n)", "help": "Nombre d'observations dans chaque échantillon." },
-    "alpha": { "label": "Seuil de signification (alpha)", "help": "Probabilité de rejeter une hypothèse nulle vraie." },
-    "effect_size": { "label": "Taille d'effet", "help": "Distance standardisée entre l'hypothèse nulle et l'alternative." },
-    "noise": { "label": "Bruit (écart-type de l'erreur)", "help": "Écart-type du terme d'erreur non observé." },
-    "reps": { "label": "Répétitions", "help": "Nombre de réplications de Monte-Carlo." },
-    "beta0": { "label": "Constante (beta0)", "help": "Valeur de y lorsque x vaut zéro." },
-    "beta1": { "label": "Pente (beta1)", "help": "Variation de y pour une variation d'une unité de x." },
-    "confidence_level": { "label": "Niveau de confiance", "help": "Couverture à long terme visée par la procédure." },
-    "distribution": { "label": "Distribution", "help": "Famille de la variable aléatoire." },
-    "functional_form": { "label": "Forme fonctionnelle", "help": "Forme de la vraie relation entre x et y." },
-    "correlation": { "label": "Corrélation", "help": "Dépendance linéaire entre les deux variables." }
+    "seed": {
+      "label": "Graine aléatoire",
+      "help": "Fixe les tirages aléatoires pour rendre l'image reproductible."
+    },
+    "n": {
+      "label": "Taille d'échantillon (n)",
+      "help": "Nombre d'observations dans chaque échantillon."
+    },
+    "alpha": {
+      "label": "Seuil de signification (alpha)",
+      "help": "Probabilité de rejeter une hypothèse nulle vraie."
+    },
+    "effect_size": {
+      "label": "Taille d'effet",
+      "help": "Distance standardisée entre l'hypothèse nulle et l'alternative."
+    },
+    "noise": {
+      "label": "Bruit (écart-type de l'erreur)",
+      "help": "Écart-type du terme d'erreur non observé."
+    },
+    "reps": {
+      "label": "Répétitions",
+      "help": "Nombre de réplications de Monte-Carlo."
+    },
+    "beta0": {
+      "label": "Constante (beta0)",
+      "help": "Valeur de y lorsque x vaut zéro."
+    },
+    "beta1": {
+      "label": "Pente (beta1)",
+      "help": "Variation de y pour une variation d'une unité de x."
+    },
+    "confidence_level": {
+      "label": "Niveau de confiance",
+      "help": "Couverture à long terme visée par la procédure."
+    },
+    "distribution": {
+      "label": "Distribution",
+      "help": "Famille de la variable aléatoire."
+    },
+    "functional_form": {
+      "label": "Forme fonctionnelle",
+      "help": "Forme de la vraie relation entre x et y."
+    },
+    "correlation": {
+      "label": "Corrélation",
+      "help": "Dépendance linéaire entre les deux variables."
+    }
   },
   "scenarios": {
     "label": "Scénario",
-    "canonical": { "label": "Cas de référence" },
+    "canonical": {
+      "label": "Cas de référence"
+    },
     "categories": {
       "canonical": "Cas de référence",
       "positive": "Direction positive",
@@ -275,6 +368,26 @@
       "misspecification": "Mauvaise spécification",
       "real_data": "Données réelles",
       "compare_methods": "Comparer les méthodes"
+    },
+    "category": {
+      "canonical": "Le cas standard",
+      "positive": "Effet présent",
+      "negative": "Aucun effet",
+      "null": "Sous l'hypothèse nulle",
+      "weak": "Signal faible",
+      "strong": "Signal fort",
+      "boundary": "À la limite",
+      "violation": "Hypothèse violée",
+      "counterexample": "Contre-exemple",
+      "sensitivity": "Sensibilité",
+      "small_sample": "Petit échantillon",
+      "large_sample": "Grand échantillon",
+      "high_noise": "Bruit élevé",
+      "low_noise": "Bruit faible",
+      "robustness": "Robustesse",
+      "misspecification": "Modèle mal spécifié",
+      "compare_methods": "Comparer les méthodes",
+      "real_data": "Données réelles"
     }
   },
   "paths": {
@@ -319,7 +432,11 @@
     "explanation": "Pourquoi",
     "next_question": "Question suivante",
     "score": "Score : {score} / {total}",
-    "no_grading": "Ce quiz est formatif uniquement, ce n'est pas une évaluation notée."
+    "no_grading": "Ce quiz est formatif uniquement, ce n'est pas une évaluation notée.",
+    "none": "Aucune question d'auto-évaluation pour ce concept pour l'instant.",
+    "caveat": "Une auto-évaluation, pas un examen : rien n'est noté ni enregistré, et chaque question explique sa réponse.",
+    "try_it": "Vérifiez-le dans le laboratoire",
+    "summary": "Afficher le résumé"
   },
   "export": {
     "png": "Image PNG",
@@ -330,7 +447,10 @@
     "csv": "Résumé de simulation (CSV)",
     "markdown": "Résumé Markdown",
     "done": "Exporté vers {path}",
-    "metadata_note": "Les exports incluent le concept, les paramètres, la graine et la version du paquet."
+    "metadata_note": "Les exports incluent le concept, les paramètres, la graine et la version du paquet.",
+    "note": "Chaque export emporte avec les figures le badge de preuve, les hypothèses et le commentaire image par image.",
+    "path": "Chemin du fichier",
+    "written": "Écrit dans {path}"
   },
   "doctor": {
     "title": "Vérification de l'environnement VisualMetrics",
@@ -338,10 +458,31 @@
     "ok": "OK",
     "missing": "Absent",
     "install_hint": "Installer avec : {command}",
-    "optional_note": "L'absence d'extras optionnels ne désactive que les fonctions concernées."
+    "optional_note": "L'absence d'extras optionnels ne désactive que les fonctions concernées.",
+    "extra_hint": "Installation : pip install \"visualmetrics[{extra}]\""
   },
   "presentation": {
     "title": "Mode présentation",
     "hint": "Les flèches du clavier changent d'étape. Échap pour quitter."
+  },
+  "shortcuts": {
+    "help": "Afficher cette liste",
+    "search": "Rechercher dans le catalogue",
+    "catalog": "Aller au catalogue",
+    "home": "Aller à l'accueil",
+    "proofs": "Aller aux démonstrations",
+    "next_step": "Image ou étape suivante",
+    "previous_step": "Image ou étape précédente",
+    "play_pause": "Lecture ou pause",
+    "rerun": "Relancer",
+    "new_seed": "Nouvelle graine",
+    "next_scenario": "Scénario suivant",
+    "toggle_code": "Afficher ou masquer le code",
+    "cycle_theme": "Thème suivant",
+    "cycle_language": "Langue suivante",
+    "toggle_motion": "Basculer le mouvement réduit",
+    "presentation": "Mode présentation",
+    "export": "Exporter",
+    "close": "Fermer"
   }
 }

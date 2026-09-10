@@ -65,6 +65,9 @@ __all__ = [
     "proof",
     "proofs_for",
     "list_proofs",
+    "objectives",
+    "misconceptions",
+    "quiz",
 ]
 
 
@@ -245,6 +248,32 @@ def list_proofs(*, written_only: bool = False) -> tuple[Any, ...]:
     from .proofs import list_proofs as _list
 
     return _list(written_only=written_only)
+
+
+def objectives(concept_id: str) -> tuple[Any, ...]:
+    """What a learner should be able to do after this lab, and how to check it."""
+    from .education.objectives import for_concept
+
+    return for_concept(concept_id)
+
+
+def misconceptions(concept_id: str) -> tuple[Any, ...]:
+    """The common wrong beliefs about a concept, each with its correction."""
+    from .education.misconceptions import for_concept
+
+    return for_concept(concept_id)
+
+
+def quiz(concept_id: str | None = None, *, count: int = 5, seed: int = 42,
+         level: str | None = None) -> Any:
+    """Draw a reproducible self-check quiz.
+
+    Not an assessment: nothing is graded or stored, and every question explains
+    its answer whichever option you pick.
+    """
+    from .education.quiz import build_quiz
+
+    return build_quiz(concept_id, count=count, seed=seed, level=level)
 
 
 def __getattr__(name: str) -> Any:

@@ -3,7 +3,8 @@
     "name": "VisualMetrics",
     "tagline": "See the theory. Change the assumptions. Understand the model.",
     "subtitle": "Interactive visual laboratory for statistics, econometrics and AI",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "description": "An interactive visual laboratory for statistics, econometrics, causal inference and machine learning."
   },
   "nav": {
     "home": "Home",
@@ -22,7 +23,9 @@
     "glossary": "Glossary",
     "references": "References",
     "settings": "Settings",
-    "search_placeholder": "Search a concept in English, Arabic or French…"
+    "search_placeholder": "Search a concept in English, Arabic or French…",
+    "catalog": "Catalogue",
+    "doctor": "Environment"
   },
   "domains": {
     "mathematical_foundations": "Mathematical foundations",
@@ -58,7 +61,9 @@
     "data": "Data",
     "quiz": "Quiz",
     "references": "References",
-    "warning": "Warning"
+    "warning": "Warning",
+    "counterexample": "Counterexample",
+    "interpretation": "Interpretation"
   },
   "modes": {
     "learn": "Learn",
@@ -167,7 +172,15 @@
     "compare": "Compare",
     "presentation": "Presentation mode",
     "fullscreen": "Full screen",
-    "clear_cache": "Clear cache"
+    "clear_cache": "Clear cache",
+    "first": "First frame",
+    "previous": "Previous",
+    "next": "Next",
+    "rerun": "Run with these settings",
+    "new_seed": "New seed",
+    "shortcuts": "Keyboard shortcuts",
+    "reduced_motion": "Reduced motion",
+    "exit_presentation": "Leave presentation mode"
   },
   "ui": {
     "concept": "Concept",
@@ -212,7 +225,47 @@
     "violated_assumptions": "Assumptions deliberately violated",
     "simulation_note": "Monte Carlo evidence with {reps} repetitions (simulation standard error shown).",
     "precision_preset": "Precision",
-    "catalogue_size": "{implemented} implemented labs out of {total} catalogued concepts"
+    "catalogue_size": "{implemented} implemented labs out of {total} catalogued concepts",
+    "warnings": "Warnings",
+    "planned": "Planned",
+    "current": "Current",
+    "proofs": "Proofs",
+    "languages": "Languages",
+    "labs_built": "Labs built",
+    "catalogued": "Catalogued",
+    "definition": "Definition",
+    "not_available": "This is not available",
+    "run_failed": "This run did not complete",
+    "technical_detail": "Technical detail",
+    "no_comparison": "No comparison",
+    "all_domains": "All domains",
+    "all_levels": "All levels",
+    "show_planned": "Show planned",
+    "search_placeholder": "Search in any language",
+    "catalog_count": "{implemented} built, {planned} planned",
+    "see_it": "See it: {concept} / {scenario}",
+    "link_copied": "Link copied: {url}",
+    "frame_of": "Frame {current} of {total}",
+    "animation_summary": "In summary",
+    "animation_unexplained": "This animation carries no per-frame explanation, so it is not played.",
+    "violated_here": "Violated in this frame: {items}",
+    "reduced_motion_note": "Reduced motion is on: advance the frames yourself; every frame shows the same evidence as the animation.",
+    "reduced_motion_blocked": "Autoplay is off because reduced motion is enabled.",
+    "honesty_title": "What the badges mean",
+    "honesty_body": "Every figure and animation says what kind of evidence it is. A simulation is labelled a simulation and never a proof, and every proof states what it does not establish.",
+    "glossary_note": "Every term in three languages, so a reader can move between them without losing the thread.",
+    "quantity": "Quantity",
+    "expected": "Expected",
+    "note": "Note",
+    "no_content": "This run produced no content.",
+    "code_parity": "This is the exact Python that reproduces the figures above.",
+    "frame": "#",
+    "frame_commentary": "Frame commentary",
+    "assumptions_hold": "Assumptions in force",
+    "how_to_read": "How to read it",
+    "what_to_conclude": "What to conclude",
+    "caution": "Careful",
+    "objectives": "What to take away"
   },
   "assumptions": {
     "linearity": "Linearity in parameters",
@@ -237,25 +290,65 @@
     "no_manipulation": "No manipulation of the running variable",
     "random_effects": "Effects uncorrelated with the regressors",
     "stationarity": "Stationarity",
-    "regularity": "Regularity conditions for the asymptotic result"
+    "regularity": "Regularity conditions for the asymptotic result",
+    "holds": "holds",
+    "violated": "violated"
   },
   "controls": {
-    "seed": { "label": "Seed", "help": "Fixes the random draws so the picture is reproducible." },
-    "n": { "label": "Sample size (n)", "help": "Number of observations in each sample." },
-    "alpha": { "label": "Significance level (alpha)", "help": "Probability of rejecting a true null hypothesis." },
-    "effect_size": { "label": "Effect size", "help": "Standardized distance between the null and the alternative." },
-    "noise": { "label": "Noise (sd of the error)", "help": "Standard deviation of the unobserved error term." },
-    "reps": { "label": "Repetitions", "help": "Number of Monte Carlo replications." },
-    "beta0": { "label": "Intercept (beta0)", "help": "Value of y when x equals zero." },
-    "beta1": { "label": "Slope (beta1)", "help": "Change in y for a one-unit change in x." },
-    "confidence_level": { "label": "Confidence level", "help": "Long-run coverage the procedure targets." },
-    "distribution": { "label": "Distribution", "help": "Family of the random variable." },
-    "functional_form": { "label": "Functional form", "help": "Shape of the true relationship between x and y." },
-    "correlation": { "label": "Correlation", "help": "Linear dependence between the two variables." }
+    "seed": {
+      "label": "Seed",
+      "help": "Fixes the random draws so the picture is reproducible."
+    },
+    "n": {
+      "label": "Sample size (n)",
+      "help": "Number of observations in each sample."
+    },
+    "alpha": {
+      "label": "Significance level (alpha)",
+      "help": "Probability of rejecting a true null hypothesis."
+    },
+    "effect_size": {
+      "label": "Effect size",
+      "help": "Standardized distance between the null and the alternative."
+    },
+    "noise": {
+      "label": "Noise (sd of the error)",
+      "help": "Standard deviation of the unobserved error term."
+    },
+    "reps": {
+      "label": "Repetitions",
+      "help": "Number of Monte Carlo replications."
+    },
+    "beta0": {
+      "label": "Intercept (beta0)",
+      "help": "Value of y when x equals zero."
+    },
+    "beta1": {
+      "label": "Slope (beta1)",
+      "help": "Change in y for a one-unit change in x."
+    },
+    "confidence_level": {
+      "label": "Confidence level",
+      "help": "Long-run coverage the procedure targets."
+    },
+    "distribution": {
+      "label": "Distribution",
+      "help": "Family of the random variable."
+    },
+    "functional_form": {
+      "label": "Functional form",
+      "help": "Shape of the true relationship between x and y."
+    },
+    "correlation": {
+      "label": "Correlation",
+      "help": "Linear dependence between the two variables."
+    }
   },
   "scenarios": {
     "label": "Scenario",
-    "canonical": { "label": "Canonical case" },
+    "canonical": {
+      "label": "Canonical case"
+    },
     "categories": {
       "canonical": "Textbook baseline",
       "positive": "Positive direction",
@@ -275,6 +368,26 @@
       "misspecification": "Misspecification",
       "real_data": "Real data",
       "compare_methods": "Compare methods"
+    },
+    "category": {
+      "canonical": "The standard case",
+      "positive": "Effect present",
+      "negative": "No effect",
+      "null": "Under the null",
+      "weak": "Weak signal",
+      "strong": "Strong signal",
+      "boundary": "At the boundary",
+      "violation": "Assumption violated",
+      "counterexample": "Counterexample",
+      "sensitivity": "Sensitivity",
+      "small_sample": "Small sample",
+      "large_sample": "Large sample",
+      "high_noise": "High noise",
+      "low_noise": "Low noise",
+      "robustness": "Robustness",
+      "misspecification": "Misspecified model",
+      "compare_methods": "Compare methods",
+      "real_data": "Real data"
     }
   },
   "paths": {
@@ -319,7 +432,11 @@
     "explanation": "Why",
     "next_question": "Next question",
     "score": "Score: {score} / {total}",
-    "no_grading": "This quiz is formative only. It is not a graded assessment."
+    "no_grading": "This quiz is formative only. It is not a graded assessment.",
+    "none": "No self-check questions for this concept yet.",
+    "caveat": "A self-check, not an assessment: nothing is graded or stored, and every question explains its answer.",
+    "try_it": "Check it in the lab",
+    "summary": "Show summary"
   },
   "export": {
     "png": "PNG image",
@@ -330,7 +447,10 @@
     "csv": "Simulation summary (CSV)",
     "markdown": "Markdown summary",
     "done": "Exported to {path}",
-    "metadata_note": "Exports include concept, parameters, seed and package version."
+    "metadata_note": "Exports include concept, parameters, seed and package version.",
+    "note": "Every export carries the evidence badge, the assumptions and the frame commentary with the figures.",
+    "path": "File path",
+    "written": "Written to {path}"
   },
   "doctor": {
     "title": "VisualMetrics environment check",
@@ -338,10 +458,31 @@
     "ok": "OK",
     "missing": "Missing",
     "install_hint": "Install with: {command}",
-    "optional_note": "Missing optional extras only disable the features that need them."
+    "optional_note": "Missing optional extras only disable the features that need them.",
+    "extra_hint": "Install with: pip install \"visualmetrics[{extra}]\""
   },
   "presentation": {
     "title": "Presentation mode",
     "hint": "Arrow keys move between steps. Press Escape to leave."
+  },
+  "shortcuts": {
+    "help": "Show this list",
+    "search": "Search the catalogue",
+    "catalog": "Go to the catalogue",
+    "home": "Go home",
+    "proofs": "Go to the proofs",
+    "next_step": "Next frame or step",
+    "previous_step": "Previous frame or step",
+    "play_pause": "Play or pause",
+    "rerun": "Run again",
+    "new_seed": "Draw a new seed",
+    "next_scenario": "Next scenario",
+    "toggle_code": "Show or hide the code",
+    "cycle_theme": "Next theme",
+    "cycle_language": "Next language",
+    "toggle_motion": "Toggle reduced motion",
+    "presentation": "Presentation mode",
+    "export": "Export",
+    "close": "Close"
   }
 }

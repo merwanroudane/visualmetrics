@@ -14,6 +14,7 @@
     "proof_unavailable": "No proof is implemented for this concept. Only intuition or simulation is available.",
     "export": "The export failed.",
     "translation": "A translation key is missing.",
-    "plugin": "A concept plugin could not be loaded."
+    "plugin": "A concept plugin could not be loaded.",
+    "concept_planned_short": "Catalogued but not built yet - it is listed so the catalogue does not overstate what exists."
   }
 }

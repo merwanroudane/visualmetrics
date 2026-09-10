@@ -162,7 +162,7 @@ class BackpropLab(LabBase):
         if history["losses"].size > 1:
             res.add_panel(ctx.panel(
                 "training", self._training_figure(ctx, history),
-                "labs.bp.figure.training", tab="simulate",
+                "labs.bp.figure.training", tab="simulation",
                 evidence=EvidenceType.NUMERICAL_DEMONSTRATION,
             ))
         if numeric is not None:
