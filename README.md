@@ -152,7 +152,8 @@ Three things to notice before you touch anything:
 |---|---|
 | **The evidence badge**, above the tabs | Says what kind of claim this figure makes — here `# Numerical demonstration`, with its caveat beside it. It is never decoration |
 | **The knowledge tabs** | Overview, Intuition, Visualize, Animate, Simulation, Compare, Assumptions, Mathematics, Interpretation, Common mistakes, Warnings, Code. A tab appears only when the lab has something to put in it |
-| **The scenarios panel**, on the left | Grouped by *what they are for*, not listed flat |
+| **The scenarios panel**, on the left | Grouped by *what they are for*, not listed flat. The list scrolls inside the panel while **Run stays pinned below it**, so the action is always one click away and the result never scrolls off screen to reach it |
+| **The numeric read-out**, under the figures | Every quantity the run produced, with the theoretical value beside it where theory supplies one |
 
 ### 3. Change the assumption
 
@@ -170,8 +171,10 @@ that only shows the happy path is rejected by the test suite.
 ![After changing the scenario](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-scenario.png)
 
 Pick one and the figures, the numbers, the assumptions and the warnings all
-re-compute. Below the controls you can set a seed, copy a link that reproduces
-exactly this view, or export the whole thing.
+re-compute — and the result scrolls into view, so you always see what changed.
+
+Under the result you can set a seed, draw a new one, copy a link that
+reproduces exactly this view, or export the whole thing.
 
 ### 4. Watch the animation explain itself
 
