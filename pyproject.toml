@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "visualmetrics"
-version = "0.1.1"
+version = "0.1.2"
 description = "Multilingual interactive visual laboratory for statistics, econometrics, causal inference and AI"
 readme = "README.md"
 requires-python = ">=3.11"
