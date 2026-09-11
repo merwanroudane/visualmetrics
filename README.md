@@ -1,33 +1,43 @@
-# VisualMetrics
+<div align="center">
 
-**See the theory. Change the assumptions. Understand the model.**
+<img src="https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/banner.png" alt="VisualMetrics" width="100%">
 
-An interactive visual laboratory for statistics, statistical inference,
-econometrics, causal inference, machine learning and modern AI — in English,
-Arabic and French.
+<br>
 
-[![PyPI](https://img.shields.io/pypi/v/visualmetrics?color=blue)](https://pypi.org/project/visualmetrics/)
-[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/merwanroudane/visualmetrics/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-1156%20passing-brightgreen)](https://github.com/merwanroudane/visualmetrics/tree/main/tests)
-[![Labs](https://img.shields.io/badge/labs-47-blueviolet)](#the-catalogue)
-[![Languages](https://img.shields.io/badge/languages-EN%20%7C%20AR%20%7C%20FR-orange)](#working-in-three-languages)
+An interactive visual laboratory for **statistics**, **statistical inference**,
+**econometrics**, **causal inference**, **machine learning** and **modern AI** —
+in **English**, **Arabic** and **French**.
 
-**Source code, issues and the full documentation live on GitHub:**
-**<https://github.com/merwanroudane/visualmetrics>**
-· [Documentation site](https://merwanroudane.github.io/visualmetrics/)
-· [Changelog](https://github.com/merwanroudane/visualmetrics/blob/main/CHANGELOG.md)
-· [Report a problem](https://github.com/merwanroudane/visualmetrics/issues)
+<br>
+
+[![PyPI](https://img.shields.io/pypi/v/visualmetrics?style=flat-square&color=1f6feb&label=pypi&logo=pypi&logoColor=white)](https://pypi.org/project/visualmetrics/)
+[![Downloads](https://img.shields.io/pypi/dm/visualmetrics?style=flat-square&color=1f6feb&label=installs)](https://pypi.org/project/visualmetrics/)
+[![Python](https://img.shields.io/pypi/pyversions/visualmetrics?style=flat-square&color=3776ab&logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-2da44e?style=flat-square)](https://github.com/merwanroudane/visualmetrics/blob/main/LICENSE)
+[![Tests](https://img.shields.io/badge/tests-1156%20passing-2da44e?style=flat-square)](https://github.com/merwanroudane/visualmetrics/tree/main/tests)
+[![Labs](https://img.shields.io/badge/labs-47-8250df?style=flat-square)](#the-catalogue)
+[![Languages](https://img.shields.io/badge/EN%20%7C%20AR%20%7C%20FR-trilingual-fb8500?style=flat-square)](#working-in-three-languages)
+
+**[Documentation](https://merwanroudane.github.io/visualmetrics/)**
+ · **[Install](#install)**
+ · **[How to use it](#how-to-use-it-step-by-step)**
+ · **[Changelog](https://github.com/merwanroudane/visualmetrics/blob/main/CHANGELOG.md)**
+ · **[Report a problem](https://github.com/merwanroudane/visualmetrics/issues)**
+
+</div>
 
 ---
 
-## See it in one minute
+<div align="center">
 
-![VisualMetrics walkthrough](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/demo.gif)
+### See it in one minute
 
-*A real recording: open the catalogue → search → open a lab → change the
-assumption → watch the animation explain itself frame by frame → read a proof →
-switch to Arabic.*
+<img src="https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/demo.gif" alt="VisualMetrics walkthrough" width="92%">
+
+*A real recording — the catalogue, a lab, changing the assumption, the animation
+explaining itself frame by frame, a proof, and the same lab in Arabic.*
+
+</div>
 
 ---
 

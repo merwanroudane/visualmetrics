@@ -1,5 +1,7 @@
 # VisualMetrics
 
+![VisualMetrics](../assets/banner.png)
+
 **See the theory. Change the assumptions. Understand the model.**
 
 An interactive visual laboratory for statistics, statistical inference,
