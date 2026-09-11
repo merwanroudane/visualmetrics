@@ -59,7 +59,7 @@ These requirements are authoritative and should shape all design and implementat
 
 ## 2.1 End-to-End Execution
 
-Development agents such as Claude Code must execute the complete requested scope in one continuous pass whenever technically possible.
+A development agent must execute the complete requested scope in one continuous pass whenever technically possible.
 
 **Do not use a gated workflow such as:**
 
@@ -5290,9 +5290,9 @@ When an AI coding agent works on this repository, it must follow these rules:
 
 ---
 
-# 90. MASTER PROMPT FOR CLAUDE CODE
+# 90. MASTER PROMPT FOR A CODING AGENT
 
-The following prompt is designed to be copied to Claude Code or another capable repository coding agent.
+The following prompt is designed to be copied to a capable repository coding agent.
 
 ```text
 You are the principal software architect, scientific Python engineer, econometrics/statistics developer, AI/ML developer, GUI engineer, visualization engineer, and technical documentation author for the VisualMetrics project.
