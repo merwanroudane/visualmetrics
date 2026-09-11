@@ -15,6 +15,13 @@ Arabic and French.
 
 </div>
 
+## See it in one minute
+
+![VisualMetrics walkthrough](../assets/demo.gif)
+
+*A real recording: the catalogue, a lab, changing the assumption, the animation
+explaining itself frame by frame, a proof, and the same lab in Arabic.*
+
 ## What makes it different
 
 Most teaching tools show you a picture. This one tells you what kind of thing

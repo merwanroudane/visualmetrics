@@ -19,6 +19,7 @@ from ..core.evidence import badge_for
 from ..core.exceptions import ExportError
 from ..i18n.rtl import direction
 from ..i18n.translator import get_translator
+from ..visuals.plotly.primitives import strip_plotly_transport
 from .images import export_figure, figure_to_json, json_dumps
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -124,7 +125,8 @@ def render_animation_html(
 
     payload = json_dumps(
         {
-            "figure": figure_to_json(animation.figure),
+            # The page provides its own controls, tied to the commentary.
+            "figure": figure_to_json(strip_plotly_transport(animation.figure)),
             "steps": steps,
             "labels": labels,
             "duration": int(animation.frame_duration_ms),

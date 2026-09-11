@@ -21,6 +21,7 @@ from typing import Any
 from nicegui import ui
 
 from ...core.evidence import badge_for
+from ...visuals.plotly.primitives import strip_plotly_transport
 
 __all__ = ["render_animation", "AnimationPlayer"]
 
@@ -86,7 +87,12 @@ class AnimationPlayer:
 
             with ui.row().classes("w-full items-start gap-4 no-wrap"):
                 with ui.column().classes("grow min-w-0"):
-                    self._figure = ui.plotly(animation.figure).classes("w-full")
+                    # The player owns the frames, so Plotly's own transport is
+                    # removed: using it would move the figure while the
+                    # commentary beside it stayed on the previous frame.
+                    self._figure = ui.plotly(
+                        strip_plotly_transport(animation.figure)
+                    ).classes("w-full")
                 with ui.column().classes("vm-surface p-3 gap-1").style(
                     "flex: 0 0 22rem; max-width: 22rem;"
                 ):
@@ -193,7 +199,7 @@ class AnimationPlayer:
     def _update_figure(self, step: Any) -> None:
         if self._figure is None:
             return
-        figure = self.animation.figure
+        figure = self._figure.figure
         frames = list(getattr(figure, "frames", []) or [])
         if not frames:
             return

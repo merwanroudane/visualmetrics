@@ -261,11 +261,16 @@ def build_frames(figure: Any, frames: list[Any], *, duration: int = 550,
     figure.update_layout(
         updatemenus=[
             {
+                # Right-aligned and above the plot area: a left-aligned set sat
+                # on top of the figure title. Every surface that shows this
+                # figure beside an explanation layer strips these buttons
+                # anyway - see strip_plotly_transport - because they would move
+                # the picture without moving the words.
                 "type": "buttons",
                 "direction": "left",
-                "x": 0.0,
+                "x": 1.0,
                 "y": 1.16,
-                "xanchor": "left",
+                "xanchor": "right",
                 "showactive": False,
                 "buttons": buttons,
             }

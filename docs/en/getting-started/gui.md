@@ -18,6 +18,8 @@ Then open <http://localhost:8080>.
 | `/paths` | Curated learning paths |
 | `/doctor` | What is installed, and what each gap disables |
 
+![A lab](../assets/screenshot-lab.png)
+
 ## Inside a lab
 
 The **left panel** holds the scenarios, grouped by what they are for, and the
@@ -35,6 +37,8 @@ Above them sits the **evidence badge** with its caveat, and any warning the run
 raised. That order is deliberate: you learn what kind of claim you are looking
 at before you look at it.
 
+![The animation player](../assets/screenshot-animation.png)
+
 ## Switching language, theme and level
 
 The header switches are available on every page and take effect **in place** -
@@ -51,6 +55,8 @@ switch to Arabic mid-explanation without losing the class's place.
   not only how much.
 - **Terminology**: translated, bilingual, or English technical terms in
   translated prose.
+
+![The same lab in Arabic](../assets/screenshot-arabic.png)
 
 ## Reduced motion and presentation mode
 

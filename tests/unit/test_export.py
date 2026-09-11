@@ -154,6 +154,22 @@ class TestAnimationExport:
         assert escape(animation.purpose[:30], quote=True) in html
         assert escape(animation.summary[:30], quote=True) in html
 
+    def test_plotly_own_transport_is_removed(self, result):
+        """The page drives the frames, so Plotly's buttons must not also be there.
+
+        Leaving them in would let a reader advance the picture while the
+        commentary beside it stayed on the previous frame - the exact
+        desynchronisation the explanation layer exists to prevent.
+        """
+        animation = result.animations[0]
+        assert animation.figure.layout.updatemenus, "this fixture should have them"
+
+        html = render_animation_html(animation)
+        payload = json.loads(html.split("const VM = ", 1)[1].split(chr(59) + chr(10), 1)[0])
+        assert not payload["figure"]["layout"].get("updatemenus")
+        assert payload["figure"]["frames"], "the frames themselves must survive"
+        assert animation.figure.layout.updatemenus, "the original must not be mutated"
+
     def test_export_writes_a_standalone_file(self, result, tmp_path):
         path = export_animation(result.animations[0], tmp_path / "anim.html")
         assert path.exists() and path.stat().st_size > 5000

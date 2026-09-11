@@ -15,6 +15,7 @@ from ...core.exceptions import MissingDependencyError
 from ..themes.palette import Theme, get_theme
 
 __all__ = [
+    "strip_plotly_transport",
     "require_plotly",
     "go",
     "new_figure",
@@ -507,3 +508,30 @@ def finalize(fig: Any, *, reduced_motion: bool = False) -> Any:
         fig.update_layout(transition={"duration": 0})
     fig.update_layout(hovermode="closest")
     return fig
+
+
+def strip_plotly_transport(figure: Any) -> Any:
+    """A copy of ``figure`` without Plotly's own play/pause buttons.
+
+    Any surface that shows an animation beside its explanation layer drives the
+    frames itself. Leaving Plotly's transport in place would let a reader
+    advance the picture while the commentary stayed behind, which is exactly
+    the desynchronisation the explanation layer exists to prevent.
+
+    The frame slider is kept: it moves through the same frames the player
+    knows about, and a scrubber with no autoplay cannot get out of step in the
+    same way.
+    """
+    import copy
+
+    if figure is None:
+        return figure
+    clone = copy.deepcopy(figure)
+    try:
+        # Direct assignment, not update_layout: Plotly merges list-valued
+        # layout properties element by element, so passing an empty list
+        # through update_layout leaves the existing buttons in place.
+        clone.layout.updatemenus = []
+    except Exception:
+        pass
+    return clone
