@@ -9,6 +9,7 @@ sending the visitor back to the start.
 
 from __future__ import annotations
 
+import json
 from collections.abc import Callable
 from typing import Any
 
@@ -23,18 +24,46 @@ __all__ = ["apply_session_style", "page_shell", "render_header", "shortcuts_dial
 
 
 def apply_session_style(session: Session) -> None:
-    """Push this session's theme, direction and motion preference into the page."""
-    ui.add_css(theme_css(
+    """Push this session's theme, direction and motion preference into the page.
+
+    The stylesheet is written into one element and *replaced* on every render.
+    Appending instead - which is what ``ui.add_css`` does - left the previous
+    language's rules in the document, so switching from Arabic back to English
+    kept the whole layout mirrored while the selector read "English".
+    """
+    css = theme_css(
         session.theme,
         language=session.language,
         reduced_motion=session.reduced_motion,
         presentation=session.presentation,
-    ))
-    direction = "rtl" if session.is_rtl else "ltr"
-    ui.add_head_html(
-        f'<script>document.documentElement.setAttribute("dir","{direction}");'
-        f'document.documentElement.setAttribute("lang","{session.language}");</script>'
     )
+    direction = "rtl" if session.is_rtl else "ltr"
+    script = (
+        "(() => {"
+        "  let tag = document.getElementById('vm-theme');"
+        "  if (!tag) {"
+        "    tag = document.createElement('style');"
+        "    tag.id = 'vm-theme';"
+        "    document.head.appendChild(tag);"
+        "  }"
+        f" tag.textContent = {json.dumps(css)};"
+        f" document.documentElement.setAttribute('dir', {json.dumps(direction)});"
+        f" document.documentElement.setAttribute('lang', {json.dumps(session.language)});"
+        "})();"
+    )
+
+    if not getattr(session, "_style_element_added", False):
+        # First build of this page: the client is not connected yet, so the
+        # stylesheet goes into the document head directly.
+        ui.add_head_html(f'<style id="vm-theme">{css}</style>')
+        ui.add_head_html(f"<script>{script}</script>")
+        session._style_element_added = True
+    else:
+        try:
+            ui.run_javascript(script)
+        except Exception:
+            pass
+
     ui.dark_mode(value=_is_dark(session.theme))
 
 

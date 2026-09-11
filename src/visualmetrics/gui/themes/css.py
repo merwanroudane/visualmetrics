@@ -94,6 +94,35 @@ body, .nicegui-content {{
   border-radius: 0; border-inline: none; border-top: none;
   backdrop-filter: blur(6px);
 }}
+.vm-controls {{
+  position: sticky;
+  top: 3.25rem;
+  /* header, page padding and a little breathing room */
+  max-height: calc(100vh - 6.5rem);
+  display: flex;
+  flex-direction: column;
+}}
+/* Scenarios and controls scroll; the actions below them do not, so the primary
+   action is reachable without scrolling past twenty sliders to find it. */
+.vm-controls-scroll {{
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}}
+.vm-controls-actions {{
+  flex: 0 0 auto;
+  padding-top: .5rem;
+  border-top: 1px solid var(--vm-line);
+  background: var(--vm-surface);
+}}
+@media (max-width: 900px) {{
+  /* Stacked on a narrow screen, where a sticky sidebar would eat the view. */
+  .vm-controls {{ position: static; max-height: none; }}
+  .vm-controls-scroll {{ overflow-y: visible; }}
+  .vm-lab-row {{ flex-wrap: wrap !important; }}
+  .vm-lab-row > * {{ flex: 1 1 100% !important; max-width: 100% !important; }}
+}}
 .vm-muted {{ color: var(--vm-muted); }}
 .vm-warning {{ color: var(--vm-warning); }}
 .vm-negative {{ color: var(--vm-negative); }}

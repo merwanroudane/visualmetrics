@@ -210,6 +210,42 @@ class TestThemes:
     def test_presentation_mode_hides_the_controls(self):
         assert ".vm-hide-in-presentation" in theme_css("light", presentation=True)
 
+    def test_the_control_panel_scrolls_inside_itself(self):
+        """A tall control panel must not stretch the page.
+
+        It once did, which pushed the Run button below the fold: reaching it
+        scrolled the result out of view, so pressing Run looked like it did
+        nothing at all.
+        """
+        css = theme_css("light")
+        assert ".vm-controls" in css
+        assert "position: sticky" in css
+        assert "max-height: calc(100vh" in css
+        assert ".vm-controls-scroll" in css
+        assert "overflow-y: auto" in css
+
+    def test_the_primary_action_is_not_inside_the_scrolling_area(self):
+        """Run stays put while the scenarios and controls scroll past it."""
+        css = theme_css("light")
+        actions = css.split(".vm-controls-actions")[1].split("}")[0]
+        assert "flex: 0 0 auto" in actions
+
+    def test_the_layout_stacks_on_a_narrow_screen(self):
+        css = theme_css("light")
+        assert "@media (max-width: 900px)" in css
+        assert "position: static" in css
+
+    def test_only_arabic_carries_right_to_left_rules(self):
+        """The stylesheet must not describe a direction it was not asked for.
+
+        The page replaces this stylesheet on every render rather than appending
+        to it; when it appended, switching back from Arabic left the whole
+        layout mirrored under an English label.
+        """
+        assert "direction: rtl" in theme_css("light", language="ar")
+        for language in ("en", "fr"):
+            assert "direction: rtl" not in theme_css("light", language=language)
+
 
 class TestAccessibility:
     def test_a_figure_always_has_a_text_alternative(self, view):

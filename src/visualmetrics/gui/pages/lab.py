@@ -54,13 +54,18 @@ def lab_page(concept_id: str, session: Session, rerender: Any) -> None:
         # below draws into the right one. NiceGUI places an element where it is
         # created, so an output container built outside this row would stay
         # outside it.
-        with ui.row().classes("w-full items-start gap-4 no-wrap"):
+        with ui.row().classes("vm-lab-row w-full items-start gap-4 no-wrap"):
+            # The panel scrolls inside itself. A lab with many scenarios and
+            # controls is far taller than the result, and letting it stretch the
+            # page put the Run button below the fold - so pressing Run appeared
+            # to do nothing, with the freshly drawn result sitting above the
+            # viewport.
             controls = ui.column().classes(
-                "vm-surface p-3 gap-2 vm-hide-in-presentation"
+                "vm-controls vm-surface p-3 gap-2 vm-hide-in-presentation"
             ).style("flex: 0 0 20rem; max-width: 20rem;")
-            output = ui.column().classes("grow min-w-0 gap-3")
+            output = ui.column().classes("grow min-w-0 gap-3").props('id="vm-output"')
 
-        def run() -> None:
+        def run(*, reveal: bool = False) -> None:
             state["stale"] = False
             output.clear()
             with output:
@@ -87,6 +92,8 @@ def lab_page(concept_id: str, session: Session, rerender: Any) -> None:
                         reduced_motion=session.reduced_motion,
                     )
                 _render_footer(session, spec, view, tr, run)
+            if reveal:
+                _scroll_to_result()
 
         def mark_stale() -> None:
             state["stale"] = True
@@ -106,14 +113,31 @@ def lab_page(concept_id: str, session: Session, rerender: Any) -> None:
             rerender()
 
         with controls:
-            render_control_panel(spec, session, on_parameter, on_scenario, on_reset)
-            ui.separator().classes("my-2")
-            run_button = ui.button(
-                tr.t("actions.run", "Run"), on_click=run
-            ).props("no-caps").classes("w-full vm-focusable")
-            _render_compare_picker(session, spec, tr, rerender)
+            with ui.column().classes("vm-controls-scroll w-full gap-2"):
+                render_control_panel(spec, session, on_parameter, on_scenario, on_reset)
+            with ui.column().classes("vm-controls-actions w-full gap-2"):
+                run_button = ui.button(
+                    tr.t("actions.run", "Run"), on_click=lambda: run(reveal=True)
+                ).props("no-caps").classes("w-full vm-focusable")
+                _render_compare_picker(session, spec, tr, rerender)
 
         run()
+
+
+def _scroll_to_result() -> None:
+    """Bring the result into view after an explicit run.
+
+    Without this, a reader who scrolled down to reach the button is left
+    looking at empty space beside the controls while the new result sits above
+    them.
+    """
+    try:
+        ui.run_javascript(
+            "const el = document.getElementById('vm-output');"
+            "if (el) el.scrollIntoView({behavior: 'auto', block: 'start'});"
+        )
+    except Exception:  # pragma: no cover - no client yet during the first build
+        pass
 
 
 def _load(concept_id: str) -> Any:
@@ -208,7 +232,7 @@ def _render_footer(session: Session, spec: Any, view: Any, tr: Any, run: Any) ->
             import random
 
             session.seed = random.randrange(1, 2**31)
-            run()
+            run(reveal=True)
 
         ui.button(
             tr.t("actions.new_seed", "New seed"), icon="casino", on_click=new_seed

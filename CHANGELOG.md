@@ -4,6 +4,32 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **Pressing Run appeared to do nothing.** A lab with many scenarios and
+  controls produced a panel far taller than the result beside it - 2,333px
+  against 717px in one case - and that panel stretched the page. Reaching the
+  Run button at its foot meant scrolling until the result had left the screen,
+  so a run that worked perfectly looked like it produced nothing. The panel now
+  scrolls inside itself with the action pinned below it, so Run is always
+  visible with the result beside it, and an explicit run brings the result into
+  view.
+- **Switching language left the layout mirrored.** The stylesheet was appended
+  on every render instead of replaced, so the Arabic right-to-left rules stayed
+  in the document after returning to English, and the direction attribute was
+  never updated at all. One stylesheet is now replaced in place.
+- Plotly's own play and pause buttons overlapped the figure title, and pressing
+  them advanced the picture while the commentary beside it stayed behind. They
+  are removed wherever an explanation layer provides its own controls.
+
+### Added
+
+- Browser-level regression tests for both layout failures. Neither was visible
+  to a unit test: they only appear once the page is laid out at a real viewport
+  size.
+
 ## [0.1.1] - 2026-09-11
 
 ### Fixed
