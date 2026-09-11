@@ -6,17 +6,24 @@ An interactive visual laboratory for statistics, statistical inference,
 econometrics, causal inference, machine learning and modern AI — in English,
 Arabic and French.
 
+[![PyPI](https://img.shields.io/pypi/v/visualmetrics?color=blue)](https://pypi.org/project/visualmetrics/)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-1155%20passing-brightgreen)](tests/)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/merwanroudane/visualmetrics/blob/main/LICENSE)
+[![Tests](https://img.shields.io/badge/tests-1156%20passing-brightgreen)](https://github.com/merwanroudane/visualmetrics/tree/main/tests)
 [![Labs](https://img.shields.io/badge/labs-47-blueviolet)](#the-catalogue)
 [![Languages](https://img.shields.io/badge/languages-EN%20%7C%20AR%20%7C%20FR-orange)](#working-in-three-languages)
+
+**Source code, issues and the full documentation live on GitHub:**
+**<https://github.com/merwanroudane/visualmetrics>**
+· [Documentation site](https://merwanroudane.github.io/visualmetrics/)
+· [Changelog](https://github.com/merwanroudane/visualmetrics/blob/main/CHANGELOG.md)
+· [Report a problem](https://github.com/merwanroudane/visualmetrics/issues)
 
 ---
 
 ## See it in one minute
 
-![VisualMetrics walkthrough](docs/assets/demo.gif)
+![VisualMetrics walkthrough](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/demo.gif)
 
 *A real recording: open the catalogue → search → open a lab → change the
 assumption → watch the animation explain itself frame by frame → read a proof →
@@ -126,7 +133,7 @@ Open <http://localhost:8080>. That is the whole setup.
 
 ### 1. Start at the catalogue
 
-![The catalogue](docs/assets/screenshot-catalog.png)
+![The catalogue](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-catalog.png)
 
 Every concept the package knows about — **47 built and 16 planned**. The
 planned ones are shown, marked, and refuse to open. Nothing is hidden to make
@@ -137,7 +144,7 @@ without diacritics. Filter by domain or by level.
 
 ### 2. Open a lab
 
-![A lab](docs/assets/screenshot-lab.png)
+![A lab](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-lab.png)
 
 Three things to notice before you touch anything:
 
@@ -149,7 +156,7 @@ Three things to notice before you touch anything:
 
 ### 3. Change the assumption
 
-![Scenario groups](docs/assets/screenshot-scenarios.png)
+![Scenario groups](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-scenarios.png)
 
 This is the point of the whole package. Scenarios are grouped as **the standard
 case**, **weak signal**, **strong signal**, **under the null**, **at the
@@ -160,7 +167,7 @@ methods** — and, in labs where a method can break, **assumption violated** and
 Every lab is required to offer at least one case where the method fails. A lab
 that only shows the happy path is rejected by the test suite.
 
-![After changing the scenario](docs/assets/screenshot-scenario.png)
+![After changing the scenario](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-scenario.png)
 
 Pick one and the figures, the numbers, the assumptions and the warnings all
 re-compute. Below the controls you can set a seed, copy a link that reproduces
@@ -168,7 +175,7 @@ exactly this view, or export the whole thing.
 
 ### 4. Watch the animation explain itself
 
-![The animation player](docs/assets/screenshot-animation.png)
+![The animation player](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-animation.png)
 
 **This is the feature the package exists for.** The figure is on the left; the
 commentary is beside it, not in a caption underneath, and it changes with every
@@ -189,7 +196,7 @@ silently — in the application and in every exporter.
 
 ### 5. Read the proof behind the lab
 
-![A proof](docs/assets/screenshot-proof.png)
+![A proof](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-proof.png)
 
 Labs that rest on a theorem link to it. A proof gives you:
 
@@ -207,7 +214,7 @@ labels it as a test of the code — never as evidence for the theorem.
 
 ### 6. Switch language mid-sentence
 
-![The same lab in Arabic](docs/assets/screenshot-arabic.png)
+![The same lab in Arabic](https://raw.githubusercontent.com/merwanroudane/visualmetrics/main/docs/assets/screenshot-arabic.png)
 
 The same lab, one click later. The layout mirrors, the tabs reverse, the
 scenario groups translate, and **you keep your figure, your parameters and your
@@ -360,7 +367,7 @@ test enforces it.
 | Deep learning | Modern AI |
 | Explainable AI | |
 
-The [full list](docs/en/catalogue/concepts.md) is generated from the registry,
+The [full list](https://github.com/merwanroudane/visualmetrics/blob/main/docs/en/catalogue/concepts.md) is generated from the registry,
 so it cannot drift from what is installed.
 
 ## Scenarios
@@ -456,7 +463,7 @@ rather than as missing, because the two have different fixes.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). The rules above are not negotiable and
+See [CONTRIBUTING.md](https://github.com/merwanroudane/visualmetrics/blob/main/CONTRIBUTING.md). The rules above are not negotiable and
 are enforced by tests. Where help is most useful:
 
 1. **Translating a lab.** ~2,400 `labs.*` keys are still English-only in Arabic
@@ -490,11 +497,11 @@ The interface needs no changes at all — it renders whatever the spec declares.
 }
 ```
 
-See [CITATION.cff](CITATION.cff).
+See [CITATION.cff](https://github.com/merwanroudane/visualmetrics/blob/main/CITATION.cff).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](https://github.com/merwanroudane/visualmetrics/blob/main/LICENSE).
 
 ## Contact
 

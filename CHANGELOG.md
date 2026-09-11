@@ -4,7 +4,30 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.1] - 2026-09-11
+
+### Fixed
+
+- The README used repository-relative paths for its screenshots and file links.
+  PyPI renders the description outside the repository, so those resolved to
+  nothing: the walkthrough images did not load and the links to `LICENSE`,
+  `CONTRIBUTING.md` and `CITATION.cff` returned 404. Every link is now absolute,
+  which renders correctly both on the project page and on GitHub.
+
+### Added
+
+- The project page now states the GitHub repository, the documentation site,
+  the changelog and the issue tracker in the description itself, not only in
+  the sidebar metadata.
+- A recorded walkthrough of the application, and a step-by-step guide built
+  around it.
+- Plotly's own play/pause buttons are removed from any animation shown beside
+  its explanation layer: using them advanced the figure while the commentary
+  stayed on the previous frame.
+
+## [0.1.0] - 2026-09-11
+
+First release.
 
 ### Added
 
@@ -74,10 +97,7 @@ Stated here rather than omitted:
   `labs.*` keys remain untranslated.
 - Loading your own data is not supported yet.
 - 16 catalogued concepts are marked `planned` and refuse to open.
-- The documentation site is not built.
 
-## [0.1.0] - unreleased
-
-First public release, once the gaps above are addressed or documented in place.
-
-[Unreleased]: https://github.com/merwanroudane/visualmetrics/compare/main...HEAD
+[Unreleased]: https://github.com/merwanroudane/visualmetrics/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/merwanroudane/visualmetrics/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/merwanroudane/visualmetrics/releases/tag/v0.1.0

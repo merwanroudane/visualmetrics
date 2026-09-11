@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 VERSION_INFO = tuple(int(part) for part in __version__.split(".")[:3])
